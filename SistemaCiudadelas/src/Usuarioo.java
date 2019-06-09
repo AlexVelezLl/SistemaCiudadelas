@@ -9,6 +9,7 @@
  * @author CORE i7 ULTIMATE
  */
 public class Usuarioo {
-    //Probando
+    private String userName;
+    private String Password;
     
 }
