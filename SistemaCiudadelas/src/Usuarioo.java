@@ -10,6 +10,13 @@
  */
 public class Usuarioo {
     private String userName;
-    private String Password;
+    private String password;
     
+    public String getUserName(){
+        return userName;
+    }
+    
+    public String getPassword(){
+        return password;
+    }
 }
