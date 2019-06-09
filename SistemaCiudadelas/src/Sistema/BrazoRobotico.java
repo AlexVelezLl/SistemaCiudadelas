@@ -10,5 +10,8 @@ package Sistema;
  * @author PC
  */
 public class BrazoRobotico {
+    //Ciudadela ciudadela
+    //Falta la creacion de la clase ciudadela
+    String[] recurso; //los recursos son las camaras y los elementos del brazo robotico
     
 }
