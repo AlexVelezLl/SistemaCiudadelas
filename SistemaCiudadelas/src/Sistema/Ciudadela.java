@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Sistema;
+import Simulacro.*;
 
 /**
  *
@@ -17,6 +18,6 @@ public class Ciudadela {
     //AdministradorCiudadela datosAdm falta creacion de esta clase
     private int NumeroCasas;
     //Residente residente; falta cracion de esta clase
-    private Ingreso ingreso;
+    private RegistroIngreso ingreso;
     
 }
