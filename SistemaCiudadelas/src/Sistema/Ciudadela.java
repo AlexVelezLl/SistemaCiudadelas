@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package Sistema;
+import Sesion.*;
 import Simulacro.*;
+import java.util.ArrayList;
+
 
 /**
  *
@@ -15,9 +18,74 @@ public class Ciudadela {
     private String RazonSocial;
     private String RUC;
     private String ubicacion;
-    //AdministradorCiudadela datosAdm falta creacion de esta clase
-    private int NumeroCasas;
-    //Residente residente; falta cracion de esta clase
-    private RegistroIngreso ingreso;
+    private AdministradorCiudadela adm;
+    private ArrayList<Casa> casas;
+    private ArrayList<Residente> residentes;
+    private ArrayList<RegistroIngreso> ingresos;
+    private PuntoAcceso puntoAcceso[]; 
+    
+    
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getRazonSocial() {
+        return RazonSocial;
+    }
+
+    public String getRUC() {
+        return RUC;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public AdministradorCiudadela getAdm() {
+        return adm;
+    }
+
+    public ArrayList<Casa> getCasas() {
+        return casas;
+    }
+
+    public ArrayList<Residente> getResidentes() {
+        return residentes;
+    }
+
+    public ArrayList<RegistroIngreso> getIngresos() {
+        return ingresos;
+    }
+
+    public String toString() {
+        return "Nombre de ciudadela: " + nombre + ", Razon Social: " + RazonSocial + ", RUC: " + RUC + ", ubicacion: " + ubicacion + ", Administrador de Ciudadela: " + adm + ", casas: " + casas + ", residentes: " + residentes + ", ingresos: " + ingresos;
+    }
+
+    public Ciudadela(){
+        
+    }
+
+    public Ciudadela(String nombre, String RazonSocial, String RUC, String ubicacion,AdministradorCiudadela admin){
+        this.nombre = nombre;
+        this.RazonSocial = RazonSocial;
+        this.RUC = RUC;
+        this.ubicacion = ubicacion;
+        residentes = new ArrayList(); 
+        casas = new ArrayList();
+        ingresos= new ArrayList();
+        puntoAcceso = new PuntoAcceso[2];
+        this.adm= adm; 
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
     
 }
