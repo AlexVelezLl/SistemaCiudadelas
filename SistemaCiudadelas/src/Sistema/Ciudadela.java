@@ -18,7 +18,7 @@ public class Ciudadela {
     private String RazonSocial;
     private String RUC;
     private String ubicacion;
-    private AdministradorCiudadela adm;
+    private AdministradorDeCiudadela adm;
     private ArrayList<Casa> casas;
     private ArrayList<Residente> residentes;
     private ArrayList<RegistroIngreso> ingresos;
@@ -41,7 +41,7 @@ public class Ciudadela {
         return ubicacion;
     }
 
-    public AdministradorCiudadela getAdm() {
+    public AdministradorDeCiudadela getAdm() {
         return adm;
     }
 
@@ -65,7 +65,7 @@ public class Ciudadela {
         
     }
 
-    public Ciudadela(String nombre, String RazonSocial, String RUC, String ubicacion,AdministradorCiudadela admin){
+    public Ciudadela(String nombre, String RazonSocial, String RUC, String ubicacion,AdministradorDeCiudadela admin){
         this.nombre = nombre;
         this.RazonSocial = RazonSocial;
         this.RUC = RUC;
@@ -74,7 +74,7 @@ public class Ciudadela {
         casas = new ArrayList();
         ingresos= new ArrayList();
         puntoAcceso = new PuntoAcceso[2];
-        this.adm= adm; 
+        this.adm= admin; 
         
     }
     
