@@ -65,8 +65,6 @@ public SistemaCiudadelas(){
     c1.getCasas().get(1).setResidente(resd2);
 
     }
-    
-    
-    
+  
     }
 
