@@ -28,6 +28,20 @@ public class CodigoAcceso {
     public void setUsed(boolean used) {
         this.used = used;
     }
+
+    public LocalDateTime getFechaIngreso() {
+        return fechaIngreso;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+    
+    
     
     
 }
