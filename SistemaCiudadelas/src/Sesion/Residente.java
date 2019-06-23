@@ -20,7 +20,7 @@ private String nombre;
     private Casa casa;
     private ArrayList<Visitante> visitantes;
     private ArrayList<String> vehiculos;
-    private ArrayList<String> codigosAcceso;
+    private ArrayList<CodigoAcceso> codigosAcceso;
 
     public String getNombre() {
         return nombre;
@@ -54,7 +54,7 @@ private String nombre;
         return vehiculos;
     }
 
-    public ArrayList<String> getCodigosAcceso() {
+    public ArrayList<CodigoAcceso> getCodigosAcceso() {
         return codigosAcceso;
     }
 
