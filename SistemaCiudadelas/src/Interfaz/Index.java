@@ -45,7 +45,7 @@ public class Index {
                             case "1":
                                 AdministradorDeSistema superAdmin;
                                 credenciales = inicio.preguntarCredenciales();
-                                superAdmin = inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"SuperAdmin");
+                                superAdmin = (AdministradorDeSistema)inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"SuperAdmin");
                                 if(superAdmin!= null){
                                     inicio.mostrarOpciones(superAdmin, sistCiud);
                                 }else{
@@ -55,7 +55,7 @@ public class Index {
                             case "2":
                                 AdministradorDeCiudadela ciudAdmin;
                                 credenciales = inicio.preguntarCredenciales();
-                                ciudAdmin = inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"CiudAdmin");
+                                ciudAdmin = (AdministradorDeCiudadela)inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"CiudAdmin");
                                 if(ciudAdmin!= null){
                                     inicio.mostrarOpciones(ciudAdmin, sistCiud);
                                 }else{
@@ -65,7 +65,7 @@ public class Index {
                             case "3":
                                 Residente residente;
                                 credenciales = inicio.preguntarCredenciales();
-                                residente = inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"Residente");
+                                residente = (Residente)inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"Residente");
                                 if(residente!= null){
                                     inicio.mostrarOpciones(residente, sistCiud);
                                 }else{
@@ -81,7 +81,7 @@ public class Index {
                     
                     break;
                 case "2"://Simulacro
-                    gar.iniciarSimulacro();
+                    gar.iniciarSimulacro(sistCiud.getCiudadelas());
                     break;
                 case "3"://Saliendo
                     System.out.println("Saliendo... Tenga un buen dia.");
