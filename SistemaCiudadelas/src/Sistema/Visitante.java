@@ -61,6 +61,9 @@ public class Visitante {
     public void setCodigoAcceso(CodigoAcceso codigoAcceso) {
         this.codigoAcceso = codigoAcceso;
     }
+      public String toString() {
+        return "nombre: " + nombre + ", id: " + id + ", correo: " + correo + ", residenteAVisitar: " + residenteAVisitar + ", codigoAcceso: " + codigoAcceso;
+    }
     
     
 }
