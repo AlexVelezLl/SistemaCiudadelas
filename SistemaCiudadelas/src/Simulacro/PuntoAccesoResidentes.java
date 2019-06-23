@@ -53,9 +53,4 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
         return false;
     }
     
-    public static void main (String[] args){
-        PuntoAccesoResidentes h = new PuntoAccesoResidentes();
-        h.comprobarAcceso();
-    }
-    
 }
