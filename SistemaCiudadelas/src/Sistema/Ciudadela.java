@@ -22,7 +22,7 @@ public class Ciudadela {
     private ArrayList<Casa> casas;
     private ArrayList<Residente> residentes;
     private ArrayList<RegistroIngreso> ingresos;
-    private PuntoAcceso puntoAcceso[]; 
+    private PuntoAcceso[] puntoAcceso; 
     
     
     public String getNombre() {
