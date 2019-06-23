@@ -57,6 +57,7 @@ public class InicioSesion {
     
     public void mostrarOpciones(AdministradorDeSistema superAdmin, SistemaCiudadelas sist){
         String opcionHacer;
+        System.out.println("Hola! "+superAdmin.getNombre()+" estas son las opciones que puedes realizar");
         do{
             System.out.println("Opciones: ");
             System.out.println("1)Registrar una nueva Ciudadela");
@@ -83,6 +84,7 @@ public class InicioSesion {
     
     public void mostrarOpciones(AdministradorDeCiudadela ciudAdmin, SistemaCiudadelas sist){
     String opcionHacer;
+    System.out.println("Hola! "+ciudAdmin.getNombre()+" estas son las opciones que puedes realizar");
         do{
             System.out.println("Opciones: ");
             System.out.println("1)Registrar una nuevo Residente");
@@ -109,6 +111,7 @@ public class InicioSesion {
     }
     public void mostrarOpciones(Residente residente,SistemaCiudadelas sist){
     String opcionHacer;
+    System.out.println("Hola! "+residente.getNombre()+" estas son las opciones que puedes realizar");
         do{
             System.out.println("Opciones: ");
             System.out.println("1)Registrar a un visitante");
