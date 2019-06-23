@@ -72,7 +72,7 @@ public class InicioSesion {
                 case "2":
                     superAdmin.generarReporteUso(sist.getCiudadelas());
                 case "3":
-                    superAdmin.cambiarCredenciales();
+                    superAdmin.cambiarCredenciales(sist.getUsuarios());
                 case "4":
                     System.out.println("Sesion Cerrada");
                 default:
@@ -98,7 +98,7 @@ public class InicioSesion {
                 case "2":
                     ciudAdmin.generarReporteVisitas(sist.getCiudadelas());
                 case "3":
-                    ciudAdmin.cambiarCredenciales();
+                    ciudAdmin.cambiarCredenciales(sist.getUsuarios());
                 case "4":
                     System.out.println("Sesion Cerrada");
                 default:
@@ -116,7 +116,8 @@ public class InicioSesion {
             System.out.println("3)Cambiar pin");
             System.out.println("4)Borrar visitante");
             System.out.println("5)Ver listado de visitantes");
-            System.out.println("6)Cerrar sesion");
+            System.out.println("6)Cambiar Credenciales");
+            System.out.println("7)Cerrar sesion");
             System.out.println("¿Que desea hacer?");
             opcionHacer = sc.nextLine();
             switch(opcionHacer){
@@ -132,11 +133,13 @@ public class InicioSesion {
                 case "5":
                     residente.verListadoDeVisitantes();
                 case "6":
+                    residente.cambiarCredenciales(sis.getUsuarios());
+                case "7":
                     System.out.println("Sesion cerrada");
                 default:
                     System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
-        }while(!opcionHacer.equals("6"));
+        }while(!opcionHacer.equals("7"));
         System.out.println("opcionHacer = " + opcionHacer);   
     }
 }
