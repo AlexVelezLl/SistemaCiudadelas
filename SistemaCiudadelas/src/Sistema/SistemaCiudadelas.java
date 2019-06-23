@@ -26,10 +26,16 @@ public SistemaCiudadelas(){
         return ciudadelas;
     }
 
+    public void setCiudadelas(ArrayList<Ciudadela> c){
+        ciudadelas = c;
+    }
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
     
+    public void setUsuarios(ArrayList<Usuario> users){
+        usuarios = users;
+    }
     public void agregarCiudadela(Ciudadela c){
         ciudadelas.add(c); 
     }
