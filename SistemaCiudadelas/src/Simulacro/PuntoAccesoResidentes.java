@@ -33,8 +33,8 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
                 pin = sc.nextLine();                
             }
             
-            for (Residente r: ciudadela.residentes){
-                if ((num_cedula).equals(r.id)&& pin.equals(r.pinAcceso)){
+            for (Residente r: ciudadela.getResidentes()){
+                if ((num_cedula).equals(r.getID())&& pin.equals(r.getPinAcceso())){
                     System.out.println("Acceso concedido");
                     return true;                   
                 }               
@@ -42,8 +42,8 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
         }else if (modoacceso.equals("vehiculo")) {
             System.out.println("Ingrese el numero de matricula del vehiculo: ");
             String matricula = sc.nextLine();
-            for (Residente r : ciudadela.residentes){              
-                if (r.matriculasVehiculos.contains(matricula)){
+            for (Residente r : ciudadela.getResidentes()){              
+                if (r.getVehiculos().contains(matricula)){
                     System.out.println("Acceso concedido");
                     return true;
                 }

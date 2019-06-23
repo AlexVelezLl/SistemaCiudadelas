@@ -9,6 +9,7 @@ package Simulacro;
     import java.time.LocalDateTime;
     import Sistema.Visitante;
     import Sesion.Residente;
+    import Sistema.CodigoAcceso;
 /**
  *
  * @author Alex Velez
@@ -57,16 +58,19 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
 
     public boolean comprobarCodigo(String codigoAcceso){
         for (Residente r: ciudadela.getResidentes()){
-            if (r.codigosAcceso.contains(codigoAcceso)) {
-                boolean valido = verificarHora(codigoAcceso.getfechaIngreso());
+            for (CodigoAcceso c: r.getCodigosAcceso()){
+                if (c.getCodigo().equals(codigoAcceso)) {
+                boolean valido = verificarHora(c.getFechaIngreso());
                 if (valido== true) {
-                    return true;                    
-                }                               
+                    return true;                     
+                }
+                }
             }
         }
-        
         return false;
     }
+    
+    
     @Override
     public boolean comprobarAcceso() {
         System.out.print("¡Bienvenido! ¿Tiene codigo acceso?: ");
@@ -83,10 +87,10 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
                 System.out.println("El residente no existe, ingrese nuevamente los datos: ");
                 residente = ObtenerResidente();
             }                
-            String email= residente.correo;
+            String email= residente.getCorreo();
             System.out.println("Se ha enviado un correo al Residente("+email+")");
             Visitante visitante= new Visitante(nombre,id,correo,residente);
-            residente.registrarVisitante();
+            residente.registrarVisitante(visitante);
             System.out.println("Su codigo de acceso es: "+ visitante.getCodigoAcceso().getCodigo());
             resp="si";
 
