@@ -10,6 +10,7 @@ import Sistema.Ciudadela;
  * @author Alex Velez
  */
 public abstract class PuntoAcceso {
-    private Ciudadela ciudadela;
+    protected Ciudadela ciudadela;
     public abstract boolean comprobarAcceso();
+    
 }
