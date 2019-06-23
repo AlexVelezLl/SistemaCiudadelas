@@ -8,19 +8,21 @@ import Sistema.*;
 import java.util.ArrayList;
 import Simulacro.RegistroIngreso;
 import Sistema.SistemaCiudadelas;
-import Java.util.Scanner;
+import java.util.Scanner;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 /**
  *
  * @author Alex Velez
  */
 public class AdministradorDeSistema extends Usuario{
     String nombre;
-    Scanner sc = new Scanner();
+    Scanner sc = new Scanner(System.in);
     public AdministradorDeSistema(){
         super("SuperAdmin","SuperAdmin");
         nombre = "Rocio Mera";
+    }
+    public String getNombre(){
+        return nombre;
     }
     public void generarReporteUso(ArrayList<Ciudadela> ciudadelas){
         String nombreCiud,razonSocial;
@@ -52,7 +54,6 @@ public class AdministradorDeSistema extends Usuario{
         String nombreC, razonSocial, RUC, ubicacion, nomAdmin, correoAdmin, idAdmin,yeari,monthi,dayi,yearf,monthf,dayf;
         String numManzanas, villasXManzana;
         LocalDateTime fInicioAdmin,fFinAdmin;
-        String[] credenciales;
         AdministradorDeCiudadela ciudAdmin;
         ArrayList<Usuario> users;
         System.out.println("Ingrese el nombre de la Ciudadela: ");
@@ -69,52 +70,11 @@ public class AdministradorDeSistema extends Usuario{
         correoAdmin = sc.nextLine();
         System.out.println("Ingrese el id del admin: ");
         idAdmin = sc.nextLine();
+        //Obetniendo fecha de inicio de administracion
         System.out.println("Ingrese la fecha de inicio de la administracion del Admin: ");
-        System.out.println("Año: ");
-        yeari = sc.nextLine();
-        while(!validar(yeari)){
-            System.out.println("Ingrese un Año valido: ");
-            yeari = sc.nextLine();
-        }
-        System.out.println("Mes: ");
-        monthi = sc.nextLine();
-        while(!validar(monthi)&&Integer.parseInt(monthi)<=12){
-            System.out.println("Ingrese un Año valido: ");
-            monthi = sc.nextLine();
-        }
-        System.out.println("Dia: ");
-        dayi = sc.nextLine();
-        while(!validar(dayi)&&Integer.parseInt(dayi)<=31){
-            System.out.println("Ingrese un mes valido: ");
-            dayi = sc.nextLine();
-        }
-        fInicioAdmin = LocalDateTime.of(Integer.parseInt(yeari),Integer.parseInt(monthi),Integer.parseInt(monthi),0,0);
-        System.out.println("Ingrese la fecha del fin de la administracion del Admin: ");
-        System.out.println("Año: ");
-        yearf = sc.nextLine();
-        while(!validar(yearf)){
-            System.out.println("Ingrese un Año valido: ");
-            yearf = sc.nextLine();
-        }
-        System.out.println("Mes: ");
-        monthf = sc.nextLine();
-        while(!validar(monthf)&&Integer.parseInt(monthf)<=12){
-            System.out.println("Ingrese un Año valido: ");
-            monthf = sc.nextLine();
-        }
-        System.out.println("Dia: ");
-        dayf = sc.nextLine();
-        while(!validar(dayf)&&Integer.parseInt(dayf)<=31){
-            System.out.println("Ingrese un mes valido: ");
-            dayf = sc.nextLine();
-        }
-        fFinAdmin = LocalDateTime.of(Integer.parseInt(yearf),Integer.parseInt(monthf),Integer.parseInt(monthf),0,0);
-        credenciales = generarCredenciales();
-        ciudAdmin=new AdministradorDeCiudadela(nomAdmin, idAdmin, correoAdmin, fInicioAdmin,fFinAdmin,credenciales);
-        users = sistema.getUsuarios();
-        Usuario u = ciudAdmin;
-        users.add(u);
-        sistema.setUsuarios(users);
+        fInicioAdmin = consultarFecha();
+        System.out.println("Ingrese la fecha de fin de la administracion del Admin: ");
+        fFinAdmin = consultarFecha();
         System.out.println("Ingrese el numero de manzanas que tiene la ciudadela: ");
         numManzanas = sc.nextLine();
         while(!validar(numManzanas)){
@@ -127,9 +87,15 @@ public class AdministradorDeSistema extends Usuario{
             System.out.println("Ingrese el numero de manzanas que tiene su ciudadela: ");
             villasXManzana = sc.nextLine();
         }
+        ciudAdmin=new AdministradorDeCiudadela(nomAdmin, idAdmin, correoAdmin, fInicioAdmin,fFinAdmin);
+        Usuario u = ciudAdmin;
         Ciudadela c = new Ciudadela(nombre, razonSocial, RUC, ubicacion,ciudAdmin,Integer.parseInt(numManzanas),Integer.parseInt(villasXManzana));
         ArrayList<Ciudadela> ciuds= sistema.getCiudadelas();
-        sistema.setCiudadelas(ciuds.add(c));
+        sistema.agregarCiudadela(c);
+        sistema.agregarUsuario(u);
+        System.out.println("Se ha registrado la ciudadela "+nombre+", y las credenciales del administrador de la ciudadela son: ");
+        System.out.println("Username: "+ciudAdmin.getUsername());
+        System.out.println("Password: "+ciudAdmin.getPassword());
     }
     private boolean validar(String cadena){
 	boolean a;
@@ -141,8 +107,23 @@ public class AdministradorDeSistema extends Usuario{
 	}
         return a && (Integer.parseInt(cadena)>0);
     }
-    private String[] generarCredenciales(){
-        String[] credenciales = new String[2];
-        return credenciales;
+    private LocalDateTime consultarFecha(){
+        String year, month, day;
+        LocalDateTime time;
+        do{
+            System.out.println("Año: ");
+            year = sc.nextLine();
+            System.out.println("Mes: ");
+            month = sc.nextLine();
+            System.out.println("Dia: ");
+            day= sc.nextLine();
+            try{
+                time = LocalDateTime.of(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day),0,0);
+            }catch(Exception e){
+                System.out.println("Usted ha ingresado una fecha invalida, por favor ingrese una fecha valida.");
+                time = null;
+            }
+        }while(time==null);
+        return time;
     }
 }
