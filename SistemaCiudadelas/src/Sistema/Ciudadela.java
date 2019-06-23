@@ -74,6 +74,8 @@ public class Ciudadela {
         casas = new ArrayList();
         ingresos= new ArrayList();
         puntoAcceso = new PuntoAcceso[2];
+        puntoAcceso[0]= new PuntoAccesoResidentes(); 
+        puntoAcceso[1]= new PuntoAccesoVisitantes();
         this.adm= admin; 
         
     }
