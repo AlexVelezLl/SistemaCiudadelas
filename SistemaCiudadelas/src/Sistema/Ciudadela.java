@@ -19,7 +19,7 @@ public class Ciudadela {
     private String RUC;
     private String ubicacion;
     private AdministradorDeCiudadela adm;
-    private ArrayList<Casa> casas;
+    private Casa[] casas;
     private ArrayList<Residente> residentes;
     private ArrayList<RegistroIngreso> ingresos;
     private PuntoAcceso[] puntosAcceso; 
@@ -47,7 +47,7 @@ public class Ciudadela {
         return adm;
     }
 
-    public ArrayList<Casa> getCasas() {
+    public Casa[] getCasas() {
         return casas;
     }
 
@@ -67,18 +67,25 @@ public class Ciudadela {
         
     }
 
-    public Ciudadela(String nombre, String RazonSocial, String RUC, String ubicacion,AdministradorDeCiudadela admin){
+    public Ciudadela(String nombre, String RazonSocial, String RUC, String ubicacion,AdministradorDeCiudadela admin,int numManzanas,int villasXManzana){
         this.nombre = nombre;
         this.RazonSocial = RazonSocial;
         this.RUC = RUC;
         this.ubicacion = ubicacion;
         residentes = new ArrayList(); 
-        casas = new ArrayList();
         ingresos= new ArrayList();
         puntosAcceso = new PuntoAcceso[2];
         puntosAcceso[0]= new PuntoAccesoResidentes(); 
         puntosAcceso[1]= new PuntoAccesoVisitantes();
         this.adm= admin; 
+        casas = new Casa[numManzanas*villasXManzana];
+        int num = 0;
+        for(int i=0;i<numManzanas;i++){
+            for(int j=0;j<villasXManzana;i++){
+                casas[num] =new Casa(Integer.toString(i),Integer.toString(j));
+                num++;
+            }
+        }
         
     }
     
