@@ -21,9 +21,12 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
     @Override
     public boolean comprobarAcceso() {
         String modoacceso;
-        System.out.print("El residente a entrar ¿es un peaton o un vehiculo?: ");
+        System.out.print("Que opcion desea hacer?");
+        System.out.println("1)Entrar como Peaton");
+        System.out.println("2)Entrar como vehiculo");
+        System.out.println("Otro: Salir");
         modoacceso = sc.nextLine();
-        if (modoacceso.equals("peaton")) {
+        if (modoacceso.equals("1")) {
             System.out.println("¡Bienvenido! Por favor ingrese su numero de cédula: ");
             String num_cedula = sc.nextLine();
             System.out.println("Ingrese su pin de acceso: ");
@@ -39,7 +42,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
                     return true;                   
                 }               
             }  
-        }else if (modoacceso.equals("vehiculo")) {
+        }else if (modoacceso.equals("2")) {
             System.out.println("Ingrese el numero de matricula del vehiculo: ");
             String matricula = sc.nextLine();
             for (Residente r : ciudadela.getResidentes()){              
