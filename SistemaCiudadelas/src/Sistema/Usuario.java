@@ -6,6 +6,7 @@
 package Sistema;
 import java.util.Scanner; 
 import java.util.ArrayList;
+import java.util.Random;
 /**
  *
  * @author Alex Velez
@@ -13,8 +14,25 @@ import java.util.ArrayList;
 public class Usuario {
     protected String username; 
     protected String password;
-
-    public Usuario(){
+    public Usuario(){}
+    public Usuario(ArrayList<Usuario>users){
+        ArrayList<String> usernames= new ArrayList<>();
+        for(Usuario user:users){//Obteniendo todos los usernames para comprobar si el que se genero ya existe
+            usernames.add(user.getUsername());
+        }
+        String credencial="";
+        do{
+            Random rnd=new Random();
+            for(int i=0;i<4;i++){
+                credencial +=(char)(rnd.nextInt(26)+65);
+            }
+            for(int i=0;i<4;i++){
+                credencial +=(int)(rnd.nextInt(9));
+            }
+            username = credencial;
+            password = credencial;
+            
+        }while(usernames.contains(credencial));
     }
     
     public Usuario(String username, String password) {
