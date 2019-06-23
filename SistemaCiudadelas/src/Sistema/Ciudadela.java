@@ -22,13 +22,15 @@ public class Ciudadela {
     private ArrayList<Casa> casas;
     private ArrayList<Residente> residentes;
     private ArrayList<RegistroIngreso> ingresos;
-    private PuntoAcceso[] puntoAcceso; 
+    private PuntoAcceso[] puntosAcceso; 
     
     
     public String getNombre() {
         return nombre;
     }
-
+    public PuntoAcceso[] getPuntosAcceso(){
+        return puntosAcceso;
+    }
     public String getRazonSocial() {
         return RazonSocial;
     }
@@ -73,9 +75,9 @@ public class Ciudadela {
         residentes = new ArrayList(); 
         casas = new ArrayList();
         ingresos= new ArrayList();
-        puntoAcceso = new PuntoAcceso[2];
-        puntoAcceso[0]= new PuntoAccesoResidentes(); 
-        puntoAcceso[1]= new PuntoAccesoVisitantes();
+        puntosAcceso = new PuntoAcceso[2];
+        puntosAcceso[0]= new PuntoAccesoResidentes(); 
+        puntosAcceso[1]= new PuntoAccesoVisitantes();
         this.adm= admin; 
         
     }
