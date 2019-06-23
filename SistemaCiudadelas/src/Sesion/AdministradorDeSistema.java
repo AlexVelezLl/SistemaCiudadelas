@@ -9,6 +9,6 @@ import Sistema.*;
  *
  * @author Alex Velez
  */
-public class AdministradorSistema extends Usuario{
+public class AdministradorDeSistema extends Usuario{
     
 }
