@@ -5,7 +5,6 @@
  */
 package Sistema;
 import java.util.Scanner; 
-import Sistema.SistemaCiudadelas;
 import java.util.ArrayList;
 /**
  *
