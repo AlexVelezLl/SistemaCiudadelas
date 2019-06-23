@@ -19,7 +19,7 @@ public class Ciudadela {
     private String RUC;
     private String ubicacion;
     private AdministradorDeCiudadela adm;
-    private Casa[] casas;
+    private ArrayList<Casa> casas;
     private ArrayList<Residente> residentes;
     private ArrayList<RegistroIngreso> ingresos;
     private PuntoAcceso[] puntosAcceso; 
@@ -47,7 +47,7 @@ public class Ciudadela {
         return adm;
     }
 
-    public Casa[] getCasas() {
+    public ArrayList <Casa> getCasas() {
         return casas;
     }
 
@@ -82,12 +82,11 @@ public class Ciudadela {
         puntosAcceso[0]= new PuntoAccesoResidentes(); 
         puntosAcceso[1]= new PuntoAccesoVisitantes();
         this.adm= admin; 
-        casas = new Casa[numManzanas*villasXManzana];
+        casas = new ArrayList<>();
         int num = 0;
         for(int i=0;i<numManzanas;i++){
             for(int j=0;j<villasXManzana;i++){
-                casas[num] =new Casa(Integer.toString(i),Integer.toString(j));
-                num++;
+                casas.add(new Casa(Integer.toString(i),Integer.toString(j)));
             }
         }
         
