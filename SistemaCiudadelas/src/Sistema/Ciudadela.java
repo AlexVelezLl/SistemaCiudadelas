@@ -58,7 +58,11 @@ public class Ciudadela {
     public ArrayList<RegistroIngreso> getIngresos() {
         return ingresos;
     }
-
+    
+    public void setIngresos(ArrayList<RegistroIngreso> ingresos){
+        this.ingresos = ingresos;
+        
+    }
     public String toString() {
         return "Nombre de ciudadela: " + nombre + ", Razon Social: " + RazonSocial + ", RUC: " + RUC + ", ubicacion: " + ubicacion + ", Administrador de Ciudadela: " + adm + ", casas: " + casas + ", residentes: " + residentes + ", ingresos: " + ingresos;
     }
