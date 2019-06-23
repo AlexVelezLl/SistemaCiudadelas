@@ -5,7 +5,6 @@
  */
 package Simulacro;
     import java.util.Scanner;
-    import Sesion.Residente;
     import java.time.LocalDateTime;
     import Sistema.Visitante;
     import Sesion.Residente;
