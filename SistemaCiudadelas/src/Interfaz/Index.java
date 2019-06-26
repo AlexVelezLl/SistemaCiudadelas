@@ -19,9 +19,18 @@ public class Index {
         //Implementacion de la Interfaz Principal
         Scanner sc = new Scanner(System.in);
         String opcion;
-        System.out.println("***********************************************");
-        System.out.println("*            SISTEMA DE CIUDADELAS            *");
-        System.out.println("***********************************************");
+        System.out.println("********************************************");
+        System.out.println("*         SISTEMA DE CIUDADELAS            *");
+        System.out.println("********************************************");
+        System.out.println("*      \\_/       .:'    .:'    .:'         *");
+        System.out.println("*    -=(_)=-  /\\||   /\\||   /\\||           *");
+        System.out.println("*      / \\   //\\\\|  //\\\\|  //\\\\|           *");
+        System.out.println("*           //  \\\\ //  \\\\ //  \\\\           *");
+        System.out.println("*          //    \\^/    \\^/    \\\\          *");
+        System.out.println("*          |[]  []|[]  []|[]  []|          *");
+        System.out.println("*         &|  ||  %  ||  |  ||  |%         *");
+        System.out.println("*      &%&--==--&%-==--%&\"\"\"\"\"%&%\"\"\"\"      *");
+        System.out.println("********************************************");
         do{
             System.out.println("Opciones: ");
             System.out.println("1.Iniciar Sesion");
