@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package Simulacro;
-
+import java.time.LocalTime;
+import java.time.LocalDate;
 /**
  *
  * @author Alex Velez
@@ -19,7 +20,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
 
     
     @Override
-    public boolean comprobarAcceso() {
+    public RegistroIngreso comprobarAcceso() {
         String modoacceso;
         System.out.print("Que opcion desea hacer?");
         System.out.println("1)Entrar como Peaton");
@@ -27,6 +28,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
         System.out.println("Otro: Salir");
         modoacceso = sc.nextLine();
         if (modoacceso.equals("1")) {
+            LocalTime t1= LocalTime.now(); //Instante en el que empieza a ingresar
             System.out.println("¡Bienvenido! Por favor ingrese su numero de cédula: ");
             String num_cedula = sc.nextLine();
             System.out.println("Ingrese su pin de acceso: ");
@@ -36,24 +38,35 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
                 pin = sc.nextLine();                
             }
             
-            for (Residente r: ciudadela.getResidentes()){
-                if ((num_cedula).equals(r.getID())&& pin.equals(r.getPinAcceso())){
-                    System.out.println("Acceso concedido");
-                    return true;                   
-                }               
-            }  
+            Residente residente = ObtenerResidente(num_cedula,pin);
+            if (residente != null) {
+                System.out.println("Acceso concedido");
+                LocalTime t2= LocalTime.now(); //instante en el que termina de ingresar el peaton.
+                //Si el ingreso es exitoso entonces se genera un RegistroIngreso
+                LocalDate fingreso = LocalDate.now();
+                double duracionIngreso = CalcularTiempo(t1,t2);
+                RegistroIngreso registro= new RegistroIngreso(fingreso,duracionIngreso,residente);
+                return registro;  
+            }                         
         }else if (modoacceso.equals("2")) {
-            System.out.println("Ingrese el numero de matricula del vehiculo: ");
+            LocalTime t1= LocalTime.now(); //Instante en el que empieza a ingresar el vehiculo
+            System.out.println("¡Bienvenido! Por favor ingrese el numero de matricula del vehiculo: ");
             String matricula = sc.nextLine();
-            for (Residente r : ciudadela.getResidentes()){              
-                if (r.getVehiculos().contains(matricula)){
-                    System.out.println("Acceso concedido");
-                    return true;
-                }
-            }
+            Residente residente = ObtenerResidente(matricula);
+            if (residente!= null){
+                System.out.println("Acceso concedido");
+                LocalTime t2= LocalTime.now(); //instante en el que termina de ingresar el vehiculo. 
+                //Si el ingreso es exitoso entonces se genera un RegistroIngreso
+                LocalDate fingreso = LocalDate.now();
+                double duracionIngreso = CalcularTiempo(t1,t2);
+                RegistroIngreso registro= new RegistroIngreso(fingreso,duracionIngreso,residente);
+                return registro;
+                
+                
+            }                                   
         }
         System.out.println("Acceso Denegado");
-        return false;
+        return null;
     }
     
 }
