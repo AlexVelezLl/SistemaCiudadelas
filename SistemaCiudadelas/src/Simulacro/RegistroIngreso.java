@@ -20,6 +20,40 @@ public class RegistroIngreso {
     private String villa;
     private String nomVisitante;
     private String matricula;
+
+    public LocalDate getFingreso() {
+        return fingreso;
+    }
+
+    public double getDuracionIngreso() {
+        return duracionIngreso;
+    }
+
+    public String getTipoingreso() {
+        return tipoingreso;
+    }
+
+    public String getNomResidente() {
+        return nomResidente;
+    }
+
+    public String getMz() {
+        return mz;
+    }
+
+    public String getVilla() {
+        return villa;
+    }
+
+    public String getNomVisitante() {
+        return nomVisitante;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+    
+    
     
     
     
