@@ -30,7 +30,7 @@ public class RegistroIngreso {
     }
 
     public String getTipoingreso() {
-        return tipoingreso;
+        return tipoIngreso;
     }
 
     public String getNomResidente() {
@@ -62,7 +62,7 @@ public class RegistroIngreso {
     public RegistroIngreso(LocalDate fingreso, double duracionIngreso, Residente residente){
         this.fingreso=fingreso;
         this.duracionIngreso=duracionIngreso;
-        this.tipoingreso="Residente.peaton";
+        this.tipoIngreso="Residente.peaton";
         nomResidente= residente.getNombre();
         mz=residente.getCasa().getManzana();
         villa=residente.getCasa().getVilla();
@@ -73,14 +73,14 @@ public class RegistroIngreso {
     //Constructor para crear el registro de Ingreso de un vehiculo Residente
     public RegistroIngreso(LocalDate fingreso, double duracionIngreso,Residente residente, String matricula){
         this(fingreso,duracionIngreso,residente);
-        this.tipoingreso="Residente.vehiculo";
+        this.tipoIngreso="Residente.vehiculo";
         this.matricula=matricula;
     }
     
     //Constructor para crear el registro de Ingreso de un visitante
     public RegistroIngreso(String nomVisitante, LocalDate fingreso, double duracionIngreso,Residente residente){
         this(fingreso,duracionIngreso,residente);
-        this.tipoingreso ="Visitante";
+        this.tipoIngreso ="Visitante";
         this.nomVisitante=nomVisitante;                
         
     } 
