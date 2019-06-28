@@ -88,7 +88,7 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
             String email= residente.getCorreo();
             System.out.println("Se ha enviado un correo al Residente("+email+")");
             Visitante visitante= new Visitante(nombre,id,correo,residente);
-            residente.registrarVisitante(visitante);
+            residente.registrarVisitante();
             System.out.println("Su codigo de acceso es: "+ visitante.getCodigoAcceso().getCodigo());
             resp="si";  
         }
