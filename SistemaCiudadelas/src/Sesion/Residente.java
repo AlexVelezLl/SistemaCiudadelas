@@ -61,33 +61,14 @@ private String nombre;
         return codigosAcceso;
     }
 
-
-    public Residente(String nombre, String correo, String ID, String telefono, Casa casa, String username, String password) {
-        super(username,password);
-        this.nombre = nombre;
-        this.correo = correo;
-        this.ID = ID;
-        this.telefono = telefono;
-        this.casa = casa;
-        visitantes = new ArrayList() ;
-        vehiculos = new ArrayList();
-        codigosAcceso = new ArrayList();
-        pinAcceso= "";
-        Random rnd= new Random();
-        for (int i = 0; i < 4; i++) {
-            pinAcceso+=(int)(rnd.nextInt(9));
-            
-        }
-    }
     public Residente(){
     }
 
-    public Residente(String nombre, String correo, String ID, String pinAcceso, String telefono, Casa casa) {
+    public Residente(String nombre, String correo, String ID, String telefono, Casa casa) {
         super();
         this.nombre = nombre;
         this.correo = correo;
         this.ID = ID;
-        this.pinAcceso = pinAcceso;
         this.telefono = telefono;
         this.casa = casa;
         visitantes = new ArrayList() ;
