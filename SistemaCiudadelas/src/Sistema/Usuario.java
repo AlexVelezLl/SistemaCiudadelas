@@ -14,8 +14,21 @@ import java.util.Random;
 public class Usuario {
     protected String username; 
     protected String password;
-    public Usuario(){}
-    public Usuario(ArrayList<Usuario>users){
+    
+    public Usuario(){
+    String credencial="";
+    Random rnd=new Random();
+            for(int i=0;i<4;i++){
+                credencial +=(char)(rnd.nextInt(26)+65);
+            }
+            for(int i=0;i<4;i++){
+                credencial +=(int)(rnd.nextInt(9));
+            }
+            username = credencial;
+            password = credencial;
+    }
+   
+    public Usuario(ArrayList<Usuario>users){ //para cuando se registran nuevos tipos
         ArrayList<String> usernames= new ArrayList<>();
         for(Usuario user:users){//Obteniendo todos los usernames para comprobar si el que se genero ya existe
             usernames.add(user.getUsername());
@@ -35,11 +48,11 @@ public class Usuario {
         }while(usernames.contains(credencial));
     }
     
-    public Usuario(String username, String password) {
+    public Usuario(String username, String password) { //usado no mas para el superadmin
         this.username = username;
         this.password = password;
     }
-
+    
     public String getUsername() {
         return username;
     }
