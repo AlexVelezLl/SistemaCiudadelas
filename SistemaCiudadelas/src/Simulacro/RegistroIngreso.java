@@ -25,7 +25,7 @@ public class RegistroIngreso {
         return fingreso;
     }
 
-    public double getDuracionIngreso() {
+    public double getTiempoIngreso() {
         return duracionIngreso;
     }
 
