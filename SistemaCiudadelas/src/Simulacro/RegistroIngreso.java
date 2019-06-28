@@ -21,7 +21,7 @@ public class RegistroIngreso {
     private String nomVisitante;
     private String matricula;
 
-    public LocalDate getFingreso() {
+    public LocalDate getFIngreso() {
         return fingreso;
     }
 
@@ -29,7 +29,7 @@ public class RegistroIngreso {
         return duracionIngreso;
     }
 
-    public String getTipoingreso() {
+    public String getTipoIngreso() {
         return tipoIngreso;
     }
 
