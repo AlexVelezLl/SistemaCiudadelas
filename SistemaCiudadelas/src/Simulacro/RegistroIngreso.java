@@ -14,7 +14,7 @@ import Sesion.Residente;
 public class RegistroIngreso {
     private LocalDate fingreso;
     private double duracionIngreso;
-    private String tipoingreso;
+    private String tipoIngreso;
     private String nomResidente;
     private String mz;
     private String villa;
