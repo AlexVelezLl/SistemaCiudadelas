@@ -22,7 +22,8 @@ public class Visitante {
     
     }
     
-    public Visitante(String nombre, String id, String correo, Residente residenteAVisitar, CodigoAcceso codigoAcceso) {
+    public Visitante(String nombre, String id, String correo, CodigoAcceso codigoAcceso, Residente residenteAVisitar) {
+
         this.nombre = nombre;
         this.id = id;
         this.correo = correo;
@@ -30,7 +31,8 @@ public class Visitante {
         this.codigoAcceso = codigoAcceso;
     }
 
-    public Visitante(String nombre, String id, String correo, Residente residenteAVisitar) {
+    public Visitante(String nombre, String id, String correo,Residente residenteAVisitar) {
+
         this.nombre = nombre;
         this.id = id;
         this.correo = correo;
@@ -64,6 +66,5 @@ public class Visitante {
       public String toString() {
         return "nombre: " + nombre + ", id: " + id + ", correo: " + correo + ", residenteAVisitar: " + residenteAVisitar + ", codigoAcceso: " + codigoAcceso;
     }
-    
     
 }
