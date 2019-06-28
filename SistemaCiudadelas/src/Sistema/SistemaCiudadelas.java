@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package Sistema;
+import Sesion.AdministradorDeCiudadela;
 import Sesion.Residente;
 import java.util.ArrayList; 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -47,26 +49,23 @@ public SistemaCiudadelas(){
 
     public void inicializarSistema(){
     
-    LocalDate fInicio = LocalDate.of(2015, 12, 1);
-    AdministradorDeCiudadela adm1 = new AdministradorDeCiudadela("Lupita Lopez","luloppez@gmail.com",fInicio,"0901921921","ciudAdmin1","jUQ!$190");
+    LocalDateTime fInicio = LocalDateTime.of(2015, 12, 1,0,0);
+    LocalDateTime fFin = LocalDateTime.of(2020, 12, 1,0,0);
+    
+    //public AdministradorDeCiudadela(String nombre, String identificacion, String correo, LocalDateTime fInicio,LocalDateTime fFin){
+    AdministradorDeCiudadela adm1 = new AdministradorDeCiudadela("Lupita Lopez","0901921921","luloppez@gmail.com",fInicio,fFin);
     usuarios.add(adm1); 
-    Ciudadela c1 = new Ciudadela("Ciudad celeste","CORPACEL","0992426357001","SAMBORONDON , Via Samborondon",adm1);
+    //public Ciudadela(String nombre, String RazonSocial, String RUC, String ubicacion,AdministradorDeCiudadela admin,int numManzanas,int villasXManzana){
+
+    Ciudadela c1 = new Ciudadela("Ciudad celeste","CORPACEL","0992426357001","SAMBORONDON , Via Samborondon",adm1,8,10);
     ciudadelas.add(c1);  
-    
-    
-        for (int i = 0; i < 8; i++){
-            for (int j = 0; j < 10; j++) {
-                Casa c = new Casa(Integer.toString(i),Integer.toString(j));
-                c1.getCasas().add(c);
-                }     
-            }
-        
+   
     Residente resd1,resd2;
-    resd1= new Residente("Juan Perez","juanperez@gmail.com","0908204012","09599","2586589",c1.getCasas().get(0),"resd1C1","jLP#@121");
+    resd1= new Residente("Juan Perez","juanperez@gmail.com","0908204012","2586589",c1.getCasas().get(0));
     usuarios.add(resd1);
     c1.getCasas().get(0).setResidente(resd1);
   
-    resd2= new Residente("Juana Crespo","juanacrespo@gmail.com","0906080011","1235","2584586", c1.getCasas().get(1),"resd2C1","aQH%!087");
+    resd2= new Residente("Juana Crespo","juanacrespo@gmail.com","0906080011","2584586", c1.getCasas().get(1));
     usuarios.add(resd2);
     c1.getCasas().get(1).setResidente(resd2);
 
