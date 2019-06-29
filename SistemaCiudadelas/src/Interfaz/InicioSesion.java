@@ -9,6 +9,7 @@ import java.util.Scanner;
 import Sistema.Usuario;
 import Sesion.*;
 import Sistema.SistemaCiudadelas;
+import utilities.Persona;
 
 /**
  *
@@ -16,26 +17,25 @@ import Sistema.SistemaCiudadelas;
  */
 public class InicioSesion {
     Scanner sc = new Scanner(System.in);
-    public Usuario validarIngreso(String[] credenciales,ArrayList<Usuario> users,String tipoInicio){
-        Usuario u = new Usuario(credenciales[0],credenciales[1]);
+    public Persona validarIngreso(String[] credenciales,ArrayList<Persona> users,String tipoInicio){
         switch(tipoInicio){
             case "SuperAdmin":
-                for (Usuario user:users){
-                    if(u.equals(user)&&user.getPassword().equals(credenciales[1])&&(user instanceof AdministradorDeSistema)){//Verifica tambien si el usuario es del tiepo que el indico
+                for (Persona user:users){
+                    if(credenciales[0].equals(((Usuario)user).getUsername())&&credenciales[1].equals(((Usuario)user).getPassword())&&(user instanceof AdministradorDeSistema)){//Verifica tambien si el usuario es del tiepo que el indico
                         return user;
                     }
                
                 }
             case "CiudAdmin":
-                for (Usuario user:users){
-                    if(u.equals(user)&&user.getPassword().equals(credenciales[1])&&(user instanceof AdministradorDeCiudadela)){
+                for (Persona user:users){
+                    if(credenciales[0].equals(((Usuario)user).getUsername())&&credenciales[1].equals(((Usuario)user).getPassword())&&(user instanceof AdministradorDeCiudadela)){
                         return user;
                     }
                 }
             case "Residente":
                 
-                for (Usuario user:users){
-                    if(u.equals(user)&&user.getPassword().equals(credenciales[1])&&(user instanceof Residente)){
+                for (Persona user:users){
+                    if(credenciales[0].equals(((Usuario)user).getUsername())&&credenciales[1].equals(((Usuario)user).getPassword())&&(user instanceof Residente)){
                         return user;
                     }
                 }

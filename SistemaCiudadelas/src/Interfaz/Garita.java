@@ -18,7 +18,7 @@ public class Garita {
         sc = new Scanner(System.in);
     }
     public void iniciarSimulacro(ArrayList <Ciudadela> ciudadelas){
-        String nomCiud,hacer="", seguir="";
+        String nomCiud,hacer, seguir;
         Ciudadela c;
         RegistroIngreso r;
         PuntoAcceso d;
@@ -50,7 +50,7 @@ public class Garita {
                                 System.out.println("2)Regresar al menu principal");
                                 System.out.print("¿Que desea hacer?");
                                 seguir = sc.nextLine();
-                                if(seguir.equals("1")){
+                                if(seguir.equals("2")){
                                     hacer="3";
                                 }else if(!seguir.equals("1")&&!seguir.equals("2")){
                                     System.out.println("Por favor ingrese una opcion que este en el menu");

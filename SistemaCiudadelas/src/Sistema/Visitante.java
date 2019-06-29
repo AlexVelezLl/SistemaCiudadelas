@@ -5,12 +5,13 @@
  */
 package Sistema;
 import Sesion.Residente;
+import utilities.*;
 
 /**
  *
  * @author joangie
  */
-public class Visitante {
+public class Visitante implements Persona{
     private String nombre;
     private String id;
     private String correo;
@@ -19,7 +20,6 @@ public class Visitante {
     
     
     public Visitante(){
-    
     }
     
     public Visitante(String nombre, String id, String correo, CodigoAcceso codigoAcceso, Residente residenteAVisitar) {

@@ -63,32 +63,36 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
     
     @Override
     public RegistroIngreso comprobarAcceso() {
-        System.out.print("¡Bienvenido! ¿Tiene codigo acceso?: ");
-        String resp = sc.nextLine();
-        LocalTime t1= LocalTime.now();
-        while (resp.equals("no")){
+        LocalTime t1 = LocalTime.now();
+        String resp;
+        do{
+            System.out.print("¡Bienvenido! ¿Tiene codigo acceso?(si/no/SALIR: ");
+            resp = sc.nextLine();
+            if(resp.equals("SALIR")) return null;
+        }while(!resp.equals("si")||!resp.equals("no"));
+        if(resp.equals("no")){
+            String nombre, id, correo, nomResidente,mz,villa;
+            Residente residente;
             System.out.print("Ingrese su nombre: ");
-            String nombre= sc.nextLine();
+            nombre= sc.nextLine();
             System.out.print("Ingrese su identificacion: ");
-            String id= sc.nextLine(); 
-            System.out.println("Ingrese su correo: ");
-            String correo=sc.nextLine();
-            System.out.print("Ingrese el nombre del residente a visitar: ");
-            String nomResidente = sc.nextLine();
-            System.out.print("Ingrese la manzana del residente: ");
-            String mz = sc.nextLine();
-            System.out.print("Ingrese la villa del residente: ");
-            String villa = sc.nextLine(); 
-            Residente residente = ObtenerResidente(nomResidente,mz,villa);
-            while(residente== null){
-                System.out.println("El residente no existe, ingrese nuevamente los datos: ");
+            id= sc.nextLine(); 
+            System.out.println("Ingrese su correo");
+            correo = sc.nextLine();
+            do{
                 System.out.print("Ingrese el nombre del residente a visitar: ");
                 nomResidente = sc.nextLine();
+                if(nomResidente.equals("SALIR"))return null;
                 System.out.print("Ingrese la manzana del residente: ");
                 mz = sc.nextLine();
                 System.out.print("Ingrese la villa del residente: ");
-                villa = sc.nextLine();  
-            }                
+                villa = sc.nextLine();
+                residente = ObtenerResidente(nomResidente,mz,villa);
+                if(residente==null){
+                    System.out.println("Los datos ingresados no coinciden con ningun Residente, "
+                            + "por favor ingrese un residente valido. Si desea salir escriba \"SALIR\".");
+                }
+            }while(residente==null);
             String email= residente.getCorreo();
             System.out.println("Se ha enviado un correo al Residente("+email+")");
             Visitante visitante= new Visitante(nombre,id,correo,residente);
@@ -97,23 +101,23 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
             resp="si";  
         }
         
-            System.out.println("Ingrese su codigo de acceso: ");            
-            String cod_acceso= sc.nextLine();
-            while (cod_acceso.length()!= 4){
-                System.out.println("Ingresar un codigo de acceso valido (8 num)");                
-            }
-            boolean validez = comprobarCodigo(cod_acceso);
-            if (validez== true) {                
-                System.out.println("Acceso concedido");
-                LocalDate fingreso= LocalDate.now();
-                LocalTime t2= LocalTime.now();
-                double duracionIngreso = CalcularTiempo(t1,t2);
-                Residente residente = ObtenerResidenteporCodigo(cod_acceso);
-                Visitante visitante= ObtenerVisitante(cod_acceso);
-                RegistroIngreso registro = new RegistroIngreso(visitante.getNombre(),fingreso,duracionIngreso,residente);
-                return registro;
-                
-            }
+        System.out.println("Ingrese su codigo de acceso: ");            
+        String cod_acceso= sc.nextLine();
+        while (cod_acceso.length()!= 8){
+            System.out.println("Ingresar un codigo de acceso valido (8 num)");                
+        }
+        boolean validez = comprobarCodigo(cod_acceso);
+        if (validez== true) {                
+            System.out.println("Acceso concedido");
+            LocalDate fingreso= LocalDate.now();
+            LocalTime t2= LocalTime.now();
+            double duracionIngreso = CalcularTiempo(t1,t2);
+            Residente residente = ObtenerResidenteporCodigo(cod_acceso);
+            Visitante visitante= ObtenerVisitante(cod_acceso);
+            RegistroIngreso registro = new RegistroIngreso(visitante.getNombre(),fingreso,duracionIngreso,residente);
+            return registro;
+            
+        }
             
         System.out.println("Ingreso Denegado");
         return null;

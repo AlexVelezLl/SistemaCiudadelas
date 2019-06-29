@@ -7,11 +7,12 @@ package Sistema;
 import java.util.Scanner; 
 import java.util.ArrayList;
 import java.util.Random;
+import utilities.Persona;
 /**
  *
  * @author Alex Velez
  */
-public class Usuario {
+public abstract class Usuario implements Persona{
     protected String username; 
     protected String password;
     
@@ -70,33 +71,23 @@ public class Usuario {
     }
     
     @Override
-    public boolean equals(Object obj){
-        if(obj!=null && obj instanceof Usuario){
-           Usuario u= (Usuario)obj; 
-           if(username.equals(u.getUsername())){
-               return true;
-           }
-        }
-        return false;
-    }
-
-    @Override
     public String toString() {
         return "username: " + username + ", password: " + password;
     }
     
     
     
-    public void cambiarCredenciales(ArrayList<Usuario> usuarios){
+    public void cambiarCredenciales(ArrayList<Persona> usuarios){
         Scanner sc = new Scanner(System.in);
         String usernameN;
-        boolean used = false;
+        boolean used;
         
         do{
+            used = false;
             System.out.print("Ingrese nuevo username: ");
             usernameN= sc.nextLine();
-            for(Usuario u:usuarios){
-                if(usernameN.equals(u.getUsername())){
+            for(Persona u:usuarios){
+                if(usernameN.equals(((Usuario)u).getUsername())){
                     System.out.println("El username que usted ingreso ya se encuentra registrado, por favor ingrese uno nuevo");
                     used = true;
                 }
@@ -106,6 +97,7 @@ public class Usuario {
         System.out.print("Ingrese nueva password: ");
         String passwordN = sc.nextLine(); 
         password = passwordN;
+        System.out.println("Sus credenciales se han cambiado exitosamente!");
     }
   
 }

@@ -13,19 +13,20 @@ import Simulacro.RegistroIngreso;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import utilities.Validaciones;
 /**
  *
  * @author Alex Velez
  */
 public class AdministradorDeCiudadela extends Usuario{
-    private String nombre, identificacion, correo;
-    private LocalDateTime fInicio,fFin;
-    private Scanner sc;
+    private final String nombre, id, correo;
+    private final LocalDateTime fInicio,fFin;
+    private final Scanner sc;
 
     public AdministradorDeCiudadela(String nombre, String identificacion, String correo, LocalDateTime fInicio,LocalDateTime fFin){
     super();
     this.nombre = nombre;
-    this.identificacion = identificacion;
+    this.id = identificacion;
     this.correo = correo;
     this.fInicio = fInicio;
     this.fFin = fFin;
@@ -34,7 +35,7 @@ public class AdministradorDeCiudadela extends Usuario{
     public AdministradorDeCiudadela(String nombre, String identificacion, String correo, LocalDateTime fInicio,LocalDateTime fFin,String username, String password){
         super(username,password);
         this.nombre = nombre;
-        this.identificacion = identificacion;
+        this.id = identificacion;
         this.correo = correo;
         this.fInicio = fInicio;
         this.fFin = fFin;
@@ -44,8 +45,9 @@ public class AdministradorDeCiudadela extends Usuario{
         return nombre;
     }
 
-    public String getIdentificacion() {
-        return identificacion;
+    @Override
+    public String getId() {
+        return id;
     }
 
     public String getCorreo() {
@@ -97,15 +99,13 @@ public class AdministradorDeCiudadela extends Usuario{
     }
     public void registrarResidente(SistemaCiudadelas sist){
         ArrayList<Ciudadela> ciudadelas = sist.getCiudadelas();
-        String nombreR, correoR, id, telefono,mz,villa;
-        Casa casa;
+        String nombreR, correoR, idR, telefono,mz,villa;
         Ciudadela c = getMineCiud(ciudadelas);
+        idR = Validaciones.ValidarId(sist.getUsuarios(),"Residente");
         System.out.print("Ingrese el nombre del residente: ");
         nombreR = sc.nextLine();
         System.out.print("Ingrese el correo del residente: ");
         correoR = sc.nextLine();
-        System.out.print("Ingrese el id del residente: ");
-        id = sc.nextLine();
         System.out.print("Ingrese el telefono del residente: ");
         telefono = sc.nextLine();
         System.out.println("Para la ciuadela "+c.getNombre()+" tenmos las siguientes casas disponibles: ");
@@ -130,7 +130,7 @@ public class AdministradorDeCiudadela extends Usuario{
                 System.out.println("Casa incorrecta, por favor elija una casa de entre las casas disponibles");
             }
         }while(casaResidente==null);
-        Residente resid = new Residente(nombreR,correoR,id,telefono,casaResidente);
+        Residente resid = new Residente(nombreR,correoR,idR,telefono,casaResidente);
         casaResidente.setResidente(resid);
         sist.agregarUsuario(resid);
         System.out.println("El residente se ha creado con exito, sus credenciales son: "+resid);
@@ -142,14 +142,5 @@ public class AdministradorDeCiudadela extends Usuario{
             }
         }
         return null;
-    }
-    @Override
-    public boolean equals(Object obj){
-        if(obj!=null&&obj instanceof AdministradorDeCiudadela){
-            if(((AdministradorDeCiudadela)obj).getIdentificacion().equals(identificacion)&& ((AdministradorDeCiudadela)obj).getCorreo().equals(correo)){
-                return true;
-            }
-        }
-        return false;
     }
 }

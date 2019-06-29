@@ -8,6 +8,7 @@ import Sesion.*;
 import java.util.ArrayList; 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import utilities.Persona;
 
 /**
  *
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
  */
 public class SistemaCiudadelas {
     private ArrayList<Ciudadela> ciudadelas; 
-    private ArrayList<Usuario> usuarios;
+    private ArrayList<Persona> usuarios;
     
 public SistemaCiudadelas(){
     ciudadelas= new ArrayList();
@@ -30,13 +31,10 @@ public SistemaCiudadelas(){
     public void setCiudadelas(ArrayList<Ciudadela> c){
         ciudadelas = c;
     }
-    public ArrayList<Usuario> getUsuarios() {
+    public ArrayList<Persona> getUsuarios() {
         return usuarios;
     }
     
-    public void setUsuarios(ArrayList<Usuario> users){
-        usuarios = users;
-    }
     public void agregarCiudadela(Ciudadela c){
         ciudadelas.add(c); 
     }

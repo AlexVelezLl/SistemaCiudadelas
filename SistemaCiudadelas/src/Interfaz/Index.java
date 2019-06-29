@@ -7,6 +7,7 @@ package Interfaz;
 import java.util.Scanner;
 import Sistema.SistemaCiudadelas;
 import Sesion.*;
+import utilities.Persona;
 /**
  *
  * @author Alex Velez
@@ -54,7 +55,8 @@ public class Index {
                             case "1":
                                 AdministradorDeSistema superAdmin;
                                 credenciales = inicio.preguntarCredenciales();
-                                superAdmin = (AdministradorDeSistema)inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"SuperAdmin");
+                                Persona superAdminP = inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"SuperAdmin");
+                                superAdmin =  (AdministradorDeSistema) superAdminP;
                                 if(superAdmin!= null){
                                     inicio.mostrarOpciones(superAdmin, sistCiud);
                                 }else{
@@ -63,8 +65,10 @@ public class Index {
                                 break;
                             case "2":
                                 AdministradorDeCiudadela ciudAdmin;
+                                Persona ciudAdminP;
                                 credenciales = inicio.preguntarCredenciales();
-                                ciudAdmin = (AdministradorDeCiudadela)inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"CiudAdmin");
+                                ciudAdminP = inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"CiudAdmin");
+                                ciudAdmin = (AdministradorDeCiudadela)ciudAdminP;
                                 if(ciudAdmin!= null){
                                     inicio.mostrarOpciones(ciudAdmin, sistCiud);
                                 }else{
@@ -73,8 +77,10 @@ public class Index {
                                 break;
                             case "3":
                                 Residente residente;
+                                Persona residenteP;
                                 credenciales = inicio.preguntarCredenciales();
-                                residente = (Residente)inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"Residente");
+                                residenteP = inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"Residente");
+                                residente = (Residente)residenteP;
                                 if(residente!= null){
                                     inicio.mostrarOpciones(residente, sistCiud);
                                 }else{

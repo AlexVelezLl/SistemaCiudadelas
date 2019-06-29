@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import Sesion.Residente;
 import Sistema.CodigoAcceso;
 import Sistema.Visitante;
+import utilities.Persona;
 /**
  *
  * @author Alex Velez
@@ -42,7 +43,7 @@ public abstract class PuntoAcceso {
     //Sobrecarga de metodos. Se puede acceder a un residente desde distintos atrbutos
     public Residente ObtenerResidente(String numCedula, String PinAcceso ){
         for (Residente r : ciudadela.getResidentes()){
-            if (r.getID().equals(numCedula)&& r.getPinAcceso().equals(PinAcceso)) {
+            if (r.getId().equals(numCedula)&& r.getPinAcceso().equals(PinAcceso)) {
                 return r;                
             }
         }
@@ -75,9 +76,9 @@ public abstract class PuntoAcceso {
     
     public Visitante ObtenerVisitante(String codigo){
         for(Residente r: ciudadela.getResidentes()){
-            for(Visitante v: r.getVisitantes()){
-                if (v.getCodigoAcceso().getCodigo().equals(codigo)) {
-                    return v;
+            for(Persona v: r.getVisitantes()){
+                if (((Visitante)v).getCodigoAcceso().getCodigo().equals(codigo)) {
+                    return ((Visitante)v);
                     
                 }
             }
