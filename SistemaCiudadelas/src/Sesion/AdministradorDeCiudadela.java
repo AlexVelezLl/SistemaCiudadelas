@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Sesion;
+import Sistema.Usuario;
 import Sistema.*;
 import java.time.LocalDateTime;
 import java.util.Scanner;

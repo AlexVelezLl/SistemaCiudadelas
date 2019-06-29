@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Sistema;
-import Sesion.Usuario;
 import Sesion.*;
 import java.util.ArrayList; 
 import java.time.LocalDate;
