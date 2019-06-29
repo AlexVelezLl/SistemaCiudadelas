@@ -60,13 +60,13 @@ public class AdministradorDeCiudadela extends Usuario{
         String nombreR, correoR, id, telefono,mz,villa;
         Casa casa;
         Ciudadela c = getMineCiud(ciudadelas);
-        System.out.println("Ingrese el nombre del residente: ");
+        System.out.print("Ingrese el nombre del residente: ");
         nombreR = sc.nextLine();
-        System.out.println("Ingrese el correo del residente: ");
+        System.out.print("Ingrese el correo del residente: ");
         correoR = sc.nextLine();
-        System.out.println("Ingrese el id del residente: ");
+        System.out.print("Ingrese el id del residente: ");
         id = sc.nextLine();
-        System.out.println("Ingrese el telefono del residente: ");
+        System.out.print("Ingrese el telefono del residente: ");
         telefono = sc.nextLine();
         System.out.println("Para la ciuadela "+c.getNombre()+" tenmos las siguientes casas disponibles: ");
         for (Casa ca:c.getCasas()){
@@ -77,9 +77,9 @@ public class AdministradorDeCiudadela extends Usuario{
         Casa casaResidente=null;
         do{
             System.out.println("Que casa desea elegir?: ");
-            System.out.println("Manzana: ");
+            System.out.print("Manzana: ");
             mz = sc.nextLine();
-            System.out.println("Villa: ");
+            System.out.print("Villa: ");
             villa = sc.nextLine();            
             for(Casa newCasa:c.getCasas()){
                 if(newCasa.getManzana().equals(mz)&&newCasa.getVilla().equals(villa)&&newCasa!=null){

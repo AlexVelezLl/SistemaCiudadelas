@@ -64,7 +64,7 @@ public class InicioSesion {
             System.out.println("2)Generar reporte de uso");
             System.out.println("3)Cambiar credenciales");
             System.out.println("4)Cerrar sesion");
-            System.out.println("¿Que desea hacer?");
+            System.out.print("¿Que desea hacer?");
             opcionHacer = sc.nextLine();
             switch(opcionHacer){
                 case "1":
@@ -91,11 +91,11 @@ public class InicioSesion {
             System.out.println("2)Generar reporte de visitas");
             System.out.println("3)Cambiar credenciales");
             System.out.println("4)Cerrar sesion");
-            System.out.println("¿Que desea hacer?");
+            System.out.print("¿Que desea hacer?");
             opcionHacer = sc.nextLine();
             switch(opcionHacer){
                 case "1":
-                    ciudAdmin.registrarResidente(sist.getCiudadelas());
+                    ciudAdmin.registrarResidente(sist);
                     break;
                 case "2":
                     ciudAdmin.generarReporteVisitas(sist.getCiudadelas());
@@ -106,12 +106,11 @@ public class InicioSesion {
                 default:
                     System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
-        }while(!opcionHacer.equals("4"));
-        System.out.println("opcionHacer = " + opcionHacer);   
+        }while(!opcionHacer.equals("4")); 
     }
     public void mostrarOpciones(Residente residente,SistemaCiudadelas sist){
     String opcionHacer;
-    System.out.println("Hola! "+residente.getNombre()+" estas son las opciones que puedes realizar");
+    System.out.println("Hola! "+residente.getNombre()+" estas son las opciones que puedes realizar:  ");
         do{
             System.out.println("Opciones: ");
             System.out.println("1)Registrar a un visitante");
@@ -121,7 +120,7 @@ public class InicioSesion {
             System.out.println("5)Ver listado de visitantes");
             System.out.println("6)Cambiar Credenciales");
             System.out.println("7)Cerrar sesion");
-            System.out.println("¿Que desea hacer?");
+            System.out.print("¿Que desea hacer?");
             opcionHacer = sc.nextLine();
             switch(opcionHacer){
                 case "1":
@@ -134,9 +133,9 @@ public class InicioSesion {
                 case "4":
                     residente.borrarVisitante();
                 case "5":
-                    residente.verListadoDeVisitantes();
+                    residente.verListaDeVisitantes();
                 case "6":
-                    residente.cambiarCredenciales(sis.getUsuarios());
+                    residente.cambiarCredenciales(sist.getUsuarios());
                 case "7":
                     System.out.println("Sesion cerrada");
                 default:

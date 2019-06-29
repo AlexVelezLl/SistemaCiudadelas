@@ -45,7 +45,7 @@ public class AdministradorDeSistema extends Usuario{
             }
             promRes = tiempoRes/numRes;
             promVis = tiempoVis/numVis;
-            System.out.println("Nombre de la Ciudadela: "+nombre+", Razon Social: "+razonSocial);
+            System.out.println("Nombre de la Ciudadela: "+nombreCiud+", Razon Social: "+razonSocial);
             System.out.println("Numero ingreso visitantes: "+numVis+", Tiempo ingreso promedio visitantes: "+promVis);
             System.out.println("Numero ingreso residentes: "+numVis+", Tiempo ingreso promedios residentes: "+promRes+"\n");
         }  
@@ -56,44 +56,43 @@ public class AdministradorDeSistema extends Usuario{
         LocalDateTime fInicioAdmin,fFinAdmin;
         AdministradorDeCiudadela ciudAdmin;
         ArrayList<Usuario> users;
-        System.out.println("Ingrese el nombre de la Ciudadela: ");
+        System.out.print("Ingrese el nombre de la Ciudadela: ");
         nombreC = sc.nextLine();
-        System.out.println("Ingrese la Razon Social: ");
+        System.out.print("Ingrese la Razon Social: ");
         razonSocial = sc.nextLine();
-        System.out.println("Ingrese el RUC: ");
+        System.out.print("Ingrese el RUC: ");
         RUC = sc.nextLine();
-        System.out.println("Ingrese la ubicacion de la ciudadela: ");
+        System.out.print("Ingrese la ubicacion de la ciudadela: ");
         ubicacion = sc.nextLine();
-        System.out.println("Ingrese el nombre del administrador: ");
+        System.out.print("Ingrese el nombre del administrador: ");
         nomAdmin = sc.nextLine();
-        System.out.println("Ingrese el correo del administrador: ");
+        System.out.print("Ingrese el correo del administrador: ");
         correoAdmin = sc.nextLine();
-        System.out.println("Ingrese el id del admin: ");
+        System.out.print("Ingrese el id del admin: ");
         idAdmin = sc.nextLine();
         //Obetniendo fecha de inicio de administracion
-        System.out.println("Ingrese la fecha de inicio de la administracion del Admin: ");
+        System.out.print("Ingrese la fecha de inicio de la administracion del Admin: ");
         fInicioAdmin = consultarFecha();
-        System.out.println("Ingrese la fecha de fin de la administracion del Admin: ");
+        System.out.print("Ingrese la fecha de fin de la administracion del Admin: ");
         fFinAdmin = consultarFecha();
-        System.out.println("Ingrese el numero de manzanas que tiene la ciudadela: ");
+        System.out.print("Ingrese el numero de manzanas que tiene la ciudadela: ");
         numManzanas = sc.nextLine();
         while(!validar(numManzanas)){
-            System.out.println("Ingrese el numero de manzanas que tiene su ciudadela: ");
+            System.out.print("Ingrese el numero de manzanas que tiene su ciudadela: ");
             numManzanas = sc.nextLine();
         }
-        System.out.println("Ingrese el numero de villas que tiene cada manzana de la ciudadela: ");
+        System.out.print("Ingrese el numero de villas que tiene cada manzana de la ciudadela: ");
         villasXManzana = sc.nextLine();
         while(!validar(villasXManzana)){
-            System.out.println("Ingrese el numero de manzanas que tiene su ciudadela: ");
+            System.out.print("Ingrese el numero de manzanas que tiene su ciudadela: ");
             villasXManzana = sc.nextLine();
         }
         ciudAdmin=new AdministradorDeCiudadela(nomAdmin, idAdmin, correoAdmin, fInicioAdmin,fFinAdmin);
         Usuario u = ciudAdmin;
-        Ciudadela c = new Ciudadela(nombre, razonSocial, RUC, ubicacion,ciudAdmin,Integer.parseInt(numManzanas),Integer.parseInt(villasXManzana));
-        ArrayList<Ciudadela> ciuds= sistema.getCiudadelas();
+        Ciudadela c = new Ciudadela(nombreC, razonSocial, RUC, ubicacion,ciudAdmin,Integer.parseInt(numManzanas),Integer.parseInt(villasXManzana));
         sistema.agregarCiudadela(c);
         sistema.agregarUsuario(u);
-        System.out.println("Se ha registrado la ciudadela "+nombre+", y las credenciales del administrador de la ciudadela son: ");
+        System.out.println("Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela son: ");
         System.out.println("Username: "+ciudAdmin.getUsername());
         System.out.println("Password: "+ciudAdmin.getPassword());
     }

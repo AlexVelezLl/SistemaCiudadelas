@@ -88,13 +88,13 @@ private String nombre;
         String year, month, day,hour;
         LocalDateTime time;
         do{
-            System.out.println("Año: ");
+            System.out.print("Año: ");
             year = sc.nextLine();
-            System.out.println("Mes: ");
+            System.out.print("Mes: ");
             month = sc.nextLine();
-            System.out.println("Dia: ");
+            System.out.print("Dia: ");
             day= sc.nextLine();
-            System.out.println("Hora: ");
+            System.out.print("Hora: ");
             hour= sc.nextLine();
             try{
                 time = LocalDateTime.of(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day),Integer.parseInt(hour),0);
@@ -138,17 +138,17 @@ private String nombre;
 
     public void registrarVisitante(){
         Scanner sc = new Scanner(System.in); 
-        System.out.println("Nombre: ");
+        System.out.print("Nombre: ");
         String nomV= sc.nextLine();
-        System.out.println("ID: ");
+        System.out.print("ID: ");
         String idV= sc.nextLine();
-        System.out.println("Correo: ");
+        System.out.print("Correo: ");
         String correoV= sc.nextLine(); 
         Residente residenteV= this;
-            for (Visitante visita : this.getVisitantes()){
+            for (Visitante visita : visitantes){
                 String v_id= visita.getId();
                 if(v_id.equals(idV)==false){
-                    System.out.println("Registrando visitante ... ");
+                    System.out.println("Registrando visitante... ");
                     CodigoAcceso cd= generarCodigoAcceso();
                     Visitante a= new Visitante(nomV,idV,correoV,cd,residenteV); 
                     getVisitantes().add(a);
@@ -162,7 +162,7 @@ private String nombre;
     
     public void registrarVehiculo(){
         Scanner sc= new Scanner(System.in);
-        System.out.println("Ingrese la matricula que desea agregar: ");
+        System.out.print("Ingrese la matricula que desea agregar: ");
         String matricula= sc.nextLine();
         for (String v :this.getVehiculos()){
             boolean verificarV= v.equals(matricula);
@@ -185,7 +185,7 @@ private String nombre;
     
     public void borrarVisitante(){
         Scanner sc= new Scanner(System.in);
-        System.out.println("Ingrese codigo de acceso: ");
+        System.out.print("Ingrese codigo de acceso: ");
         String id= sc.nextLine(); 
         
         for(Visitante vis : this.getVisitantes()){

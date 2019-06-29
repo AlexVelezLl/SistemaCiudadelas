@@ -18,38 +18,68 @@ public class Garita {
         sc = new Scanner(System.in);
     }
     public void iniciarSimulacro(ArrayList <Ciudadela> ciudadelas){
-        String nomCiud,hacer="";
-        System.out.println("Escriba el nombre de la Ciudadela: ");
-        nomCiud = sc.nextLine();
+        String nomCiud,hacer="", seguir="";
         Ciudadela c;
         RegistroIngreso r;
+        PuntoAcceso d;
+        System.out.print("Escriba el nombre de la Ciudadela: ");
+        nomCiud = sc.nextLine();
         do{
             c = buscarCiud(nomCiud,ciudadelas);
             if(c!=null){
                 do{
-                    System.out.println("Que desea hacer?");
+                    System.out.println("Opciones: ");
                     System.out.println("1)Ingresar por el punto de acceso de Residente");
                     System.out.println("2)Ingresar por el punto de acceso de Visitante");
                     System.out.println("3)Salir");
+                    System.out.print("¿Que desea hacer?: ");
                     hacer = sc.nextLine();
                     switch(hacer){
                         case "1":
-                            PuntoAcceso d = c.getPuntosAcceso()[0];
+                            d = c.getPuntosAcceso()[0];
                             r = d.comprobarAcceso();
                             if(r!=null){
-                                c.setIngresos(c.getIngresos().add(r));
+                                ArrayList<RegistroIngreso> reg =c.getIngresos();//Se la crea para poner un nuevo registro
+                                reg.add(r);
+                                c.setIngresos(reg);
                             }else{
                                 System.out.println("No se ha completado el ingreso con exito");
                             }
+                            do{
+                                System.out.println("Opciones:");
+                                System.out.println("1)Simular otro dato");
+                                System.out.println("2)Regresar al menu principal");
+                                System.out.print("¿Que desea hacer?");
+                                seguir = sc.nextLine();
+                                if(seguir.equals("1")){
+                                    hacer="3";
+                                }else if(!seguir.equals("1")&&!seguir.equals("2")){
+                                    System.out.println("Por favor ingrese una opcion que este en el menu");
+                                }
+                            }while(!seguir.equals("1")&&!seguir.equals("2"));
                             break;
                         case "2":
-                            PuntoAcceso d = c.getPuntosAcceso()[1];
+                            d = c.getPuntosAcceso()[1];
                             r = d.comprobarAcceso();
                             if(r!=null){
-                                c.setIngresos(c.getIngresos().add(r));
+                                ArrayList<RegistroIngreso> reg =c.getIngresos();
+                                reg.add(r);
+                                c.setIngresos(reg);
                             }else{
                                 System.out.println("No se ha completado el ingreso con exito");
                             }
+                            do{
+                                System.out.println("Opciones: ");
+                                System.out.println("1)Simular otro dato");
+                                System.out.println("2)Regresar al menu principal");
+                                System.out.print("¿Que desea hacer?");
+                                seguir = sc.nextLine();
+                                if(seguir.equals("1")){
+                                    hacer="3";
+                                }else if(!seguir.equals("1")&&!seguir.equals("2")){
+                                    System.out.println("Por favor ingrese una opcion que este en el menu");
+                                }
+                            }while(!seguir.equals("1")&&!seguir.equals("2"));
                             break;
                         case "3":
                             System.out.println("Saliendo...");

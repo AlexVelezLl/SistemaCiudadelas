@@ -12,10 +12,10 @@ import Sesion.*;
  * @author Alex Velez
  */
 public class Index {
-    static SistemaCiudadelas sistCiud = new SistemaCiudadelas();
-    static InicioSesion inicio = new InicioSesion();
-    static Garita gar = new Garita();
     public static void main(String[] args){
+        SistemaCiudadelas sistCiud = new SistemaCiudadelas();
+        InicioSesion inicio = new InicioSesion();
+        Garita gar = new Garita();
         //Implementacion de la Interfaz Principal
         Scanner sc = new Scanner(System.in);
         String opcion;
