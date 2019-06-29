@@ -163,7 +163,7 @@ private String nombre;
                     System.out.println("Registrando visitante... ");
                     CodigoAcceso cd= generarCodigoAcceso();
                     Visitante a= new Visitante(nomV,idV,correoV,cd,residenteV); 
-                    getVisitantes().add(a);
+                    visitantes.add(a);
                 }
             
             }
@@ -176,10 +176,10 @@ private String nombre;
         Scanner sc= new Scanner(System.in);
         System.out.print("Ingrese la matricula que desea agregar: ");
         String matricula= sc.nextLine();
-        for (String v :this.getVehiculos()){
+        for (String v :vehiculos){
             boolean verificarV= v.equals(matricula);
             if (verificarV==false){
-                this.getVehiculos().add(matricula); 
+                vehiculos.add(matricula); 
             }
         }
         
@@ -200,10 +200,10 @@ private String nombre;
         System.out.print("Ingrese codigo de acceso: ");
         String id= sc.nextLine(); 
         
-        for(Visitante vis : this.getVisitantes()){
+        for(Visitante vis : visitantes){
             String codigo_v= vis.getCodigoAcceso().getCodigo();
             if(id.equals(codigo_v)){
-                this.getVisitantes().remove(vis);
+                visitantes.remove(vis);
             }
         }
     }
