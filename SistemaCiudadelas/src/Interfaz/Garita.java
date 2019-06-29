@@ -22,16 +22,17 @@ public class Garita {
         Ciudadela c;
         RegistroIngreso r;
         PuntoAcceso d;
-        System.out.print("Escriba el nombre de la Ciudadela: ");
-        nomCiud = sc.nextLine();
+        
         do{
+            System.out.print("Escriba el nombre de la Ciudadela: ");
+            nomCiud = sc.nextLine();
             c = buscarCiud(nomCiud,ciudadelas);
             if(c!=null){
                 do{
                     System.out.println("Opciones: ");
                     System.out.println("1)Ingresar por el punto de acceso de Residente");
                     System.out.println("2)Ingresar por el punto de acceso de Visitante");
-                    System.out.println("3)Salir");
+                    System.out.println("3)Regresar");
                     System.out.print("¿Que desea hacer?: ");
                     hacer = sc.nextLine();
                     switch(hacer){

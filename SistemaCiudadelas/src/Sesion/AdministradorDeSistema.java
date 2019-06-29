@@ -110,9 +110,7 @@ public class AdministradorDeSistema extends Usuario{
         Ciudadela c = new Ciudadela(nombreC, razonSocial, RUC, ubicacion,ciudAdmin,Integer.parseInt(numManzanas),Integer.parseInt(villasXManzana));
         sistema.agregarCiudadela(c);
         sistema.agregarUsuario(u);
-        System.out.println("Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela son: ");
-        System.out.println("Username: "+ciudAdmin.getUsername());
-        System.out.println("Password: "+ciudAdmin.getPassword());
+        System.out.println("Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela son: "+u);
     }
     private boolean validar(String cadena){
 	boolean a;

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Sistema;
+import Sesion.Usuario;
 import Sesion.*;
 import java.util.ArrayList; 
 import java.time.LocalDate;
@@ -59,11 +60,11 @@ public SistemaCiudadelas(){
         ciudadelas.add(c1);  
 
         Residente resd1,resd2;
-        resd1= new Residente("Juan Perez","juanperez@gmail.com","0908204012","2586589",c1.getCasas().get(0));
+        resd1= new Residente("Juan Perez","juanperez@gmail.com","0908204012","2586589",c1.getCasas().get(0),"JUAN");
         usuarios.add(resd1);
         c1.getCasas().get(0).setResidente(resd1);
 
-        resd2= new Residente("Juana Crespo","juanacrespo@gmail.com","0906080011","2584586", c1.getCasas().get(1));
+        resd2= new Residente("Juana Crespo","juanacrespo@gmail.com","0906080011","2584586", c1.getCasas().get(1),"ABCD");
         usuarios.add(resd2);
         c1.getCasas().get(1).setResidente(resd2);
 

@@ -6,7 +6,7 @@
 package Interfaz;
 import java.util.ArrayList;
 import java.util.Scanner;
-import Sistema.Usuario;
+import Sesion.Usuario;
 import Sesion.*;
 import Sistema.SistemaCiudadelas;
 

@@ -81,6 +81,10 @@ private String nombre;
             
         }
     }
+    public Residente(String nombre, String correo, String ID, String telefono, Casa casa,String pinAcceso) {
+        this(nombre,correo,ID,telefono,casa);
+        this.pinAcceso = pinAcceso;
+    }
     
     
     private static LocalDateTime consultarFecha(){
@@ -199,7 +203,7 @@ private String nombre;
     
     public void verListaDeVisitantes(){
         for(Visitante v: visitantes){
-            if(v.getCodigoAcceso().isUsed()==false){
+            if(!v.getCodigoAcceso().isUsed()){
             System.out.println(v);
             }
     }

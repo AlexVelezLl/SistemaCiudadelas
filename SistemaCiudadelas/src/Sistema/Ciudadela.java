@@ -78,9 +78,6 @@ public class Ciudadela {
         this.ubicacion = ubicacion;
         residentes = new ArrayList(); 
         ingresos= new ArrayList();
-        puntosAcceso = new PuntoAcceso[2];
-        puntosAcceso[0]= new PuntoAccesoResidentes(); 
-        puntosAcceso[1]= new PuntoAccesoVisitantes();
         this.adm= admin; 
         casas = new ArrayList<>();
         for(int i=1;i<=numManzanas;i++){
@@ -88,6 +85,9 @@ public class Ciudadela {
                 casas.add(new Casa(Integer.toString(i),Integer.toString(j)));
             }
         }
+        puntosAcceso = new PuntoAcceso[2];
+        puntosAcceso[0]= new PuntoAccesoResidentes(this); 
+        puntosAcceso[1]= new PuntoAccesoVisitantes(this);
         
     }
     

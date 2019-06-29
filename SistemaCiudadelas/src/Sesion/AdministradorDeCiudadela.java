@@ -93,9 +93,7 @@ public class AdministradorDeCiudadela extends Usuario{
         Residente resid = new Residente(nombreR,correoR,id,telefono,casaResidente);
         casaResidente.setResidente(resid);
         sist.agregarUsuario(resid);
-        System.out.println("El residente se ha creado con exito, sus credenciales son: ");
-        System.out.println("Username: "+resid.getUsername());
-        System.out.println("Password: "+resid.getPassword());
+        System.out.println("El residente se ha creado con exito, sus credenciales son: "+resid);
     }
     private Ciudadela getMineCiud(ArrayList<Ciudadela> ciuds){
         for(Ciudadela c : ciuds){

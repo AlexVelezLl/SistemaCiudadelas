@@ -9,6 +9,7 @@ package Simulacro;
     import Sistema.Visitante;
     import Sesion.Residente;
     import Sistema.CodigoAcceso;
+    import Sistema.Ciudadela;
     import java.time.LocalTime;
     import java.time.LocalDate;
 /**
@@ -18,6 +19,9 @@ package Simulacro;
 public class PuntoAccesoVisitantes extends PuntoAcceso{
     Scanner sc = new Scanner(System.in);
     
+    public PuntoAccesoVisitantes(Ciudadela ciudadela){
+        super(ciudadela);
+    }
 
 
   

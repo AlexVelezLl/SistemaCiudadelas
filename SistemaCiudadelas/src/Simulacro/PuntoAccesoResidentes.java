@@ -12,9 +12,14 @@ import java.time.LocalDate;
  */
 
 import Sesion.Residente;
+import Sistema.Ciudadela;
 import java.util.Scanner;
 public class PuntoAccesoResidentes extends PuntoAcceso{
     Scanner sc= new Scanner(System.in);
+
+    public PuntoAccesoResidentes(Ciudadela ciudadela) {
+        super(ciudadela);
+    }
 
     
 
@@ -23,7 +28,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
     public RegistroIngreso comprobarAcceso() {
         String modoacceso;
         do{
-            System.out.print("Opciones");
+            System.out.println("Opciones");
             System.out.println("1)Entrar como Peaton");
             System.out.println("2)Entrar como vehiculo");
             System.out.println("3)Salir");
@@ -49,7 +54,8 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
                     double duracionIngreso = CalcularTiempo(t1,t2);
                     RegistroIngreso registro= new RegistroIngreso(fingreso,duracionIngreso,residente);
                     return registro;  
-                }                         
+                } 
+                System.out.println("Acceso denegado");
             }else if (modoacceso.equals("2")) {
                 LocalTime t1= LocalTime.now(); //Instante en el que empieza a ingresar el vehiculo
                 System.out.print("¡Bienvenido! Por favor ingrese el numero de matricula del vehiculo: ");
@@ -63,7 +69,8 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
                     double duracionIngreso = CalcularTiempo(t1,t2);
                     RegistroIngreso registro= new RegistroIngreso(fingreso,duracionIngreso,residente);
                     return registro;
-                }                                   
+                }
+                System.out.println("Acceso denegado");
             }else if(!modoacceso.equals("3")){
                 System.out.print("Por favor ingrese una opcion valida");
             }

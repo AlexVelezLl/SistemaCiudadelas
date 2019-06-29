@@ -19,6 +19,9 @@ public abstract class PuntoAcceso {
     
     
     public abstract RegistroIngreso comprobarAcceso();
+    public PuntoAcceso(Ciudadela ciudadela){
+        this.ciudadela = ciudadela;
+    }
     
     //funcion que permita calcular el tiempo en segundos entre dos instantes.
     public double CalcularTiempo(LocalTime t1, LocalTime t2  ){
