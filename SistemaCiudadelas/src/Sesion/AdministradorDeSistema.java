@@ -8,6 +8,8 @@ import Sistema.*;
 import java.util.ArrayList;
 import Simulacro.RegistroIngreso;
 import Sistema.SistemaCiudadelas;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.time.LocalDateTime;
 /**
@@ -28,34 +30,50 @@ public class AdministradorDeSistema extends Usuario{
         String nombreCiud,razonSocial;
         int numVis=0, numRes=0, tiempoVis=0,tiempoRes=0;
         float promRes, promVis;
-        System.out.println("**************************************");
-        System.out.println("*           REPORTE DE USO           *");
-        System.out.println("**************************************");
-        for(Ciudadela c:ciudadelas){
-            nombreCiud = c.getNombre();
-            razonSocial = c.getRazonSocial();
-            for(RegistroIngreso ingreso: c.getIngresos()){//Obteniendo datos de registros
-                if(ingreso.getTipoIngreso().contains("Residente")){
-                    numRes++;
-                    tiempoRes += ingreso.getTiempoIngreso();
+        String Archivo= "RegistroDeUsos";
+        LocalDateTime today= LocalDateTime.now(); 
+        Archivo= Archivo+ today.getYear()+ today.getMonth()+ today.getDayOfMonth()+ today.getHour()+today.getMinute()+ today.getSecond()+".csv";
+        
+        try{
+            FileWriter fw = new FileWriter(Archivo);
+            for(Ciudadela c:ciudadelas){
+                nombreCiud = c.getNombre();
+                razonSocial = c.getRazonSocial();
+                for(RegistroIngreso ingreso: c.getIngresos()){//Obteniendo datos de registros
+                    if(ingreso.getTipoIngreso().contains("Residente")){
+                        numRes++;
+                        tiempoRes += ingreso.getTiempoIngreso();
+                    }else{
+                        numVis++;
+                        tiempoVis += ingreso.getTiempoIngreso();
+                    }  
+                }
+                if(numRes == 0){
+                    promRes = 0;
                 }else{
-                    numVis++;
-                    tiempoVis += ingreso.getTiempoIngreso();
-                }  
+                    promRes = tiempoRes/numRes;
+                }
+                if(numVis == 0){
+                    promVis = 0;
+                }else{
+                    promVis = tiempoVis/numVis;
+                }
+                
+                fw.append("Nombre De Ciudadela,Razon Social,Numero Ingreso Visitantes,Tiempo Ingreso Promedios Visitantes,Numero Ingreso Residentes, Tiempo Ingreso Promedios Visitantes\n");       
+                fw.append(nombreCiud+","+nombreCiud+","+razonSocial+","+numVis+","+promVis+","+numRes+","+promRes+"\n");
+                
             }
-            promRes = tiempoRes/numRes;
-            promVis = tiempoVis/numVis;
-            System.out.println("Nombre de la Ciudadela: "+nombreCiud+", Razon Social: "+razonSocial);
-            System.out.println("Numero ingreso visitantes: "+numVis+", Tiempo ingreso promedio visitantes: "+promVis);
-            System.out.println("Numero ingreso residentes: "+numVis+", Tiempo ingreso promedios residentes: "+promRes+"\n");
-        }  
+            fw.flush();
+            fw.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
     public void registrarCiudadela(SistemaCiudadelas sistema){
         String nombreC, razonSocial, RUC, ubicacion, nomAdmin, correoAdmin, idAdmin,yeari,monthi,dayi,yearf,monthf,dayf;
         String numManzanas, villasXManzana;
         LocalDateTime fInicioAdmin,fFinAdmin;
         AdministradorDeCiudadela ciudAdmin;
-        ArrayList<Usuario> users;
         System.out.print("Ingrese el nombre de la Ciudadela: ");
         nombreC = sc.nextLine();
         System.out.print("Ingrese la Razon Social: ");
@@ -125,4 +143,5 @@ public class AdministradorDeSistema extends Usuario{
         }while(time==null);
         return time;
     }
+      
 }
