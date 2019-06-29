@@ -30,6 +30,15 @@ public class AdministradorDeCiudadela extends Usuario{
     this.fFin = fFin;
     sc = new Scanner(System.in);
     }
+    public AdministradorDeCiudadela(String nombre, String identificacion, String correo, LocalDateTime fInicio,LocalDateTime fFin,String username, String password){
+        super(username,password);
+        this.nombre = nombre;
+        this.identificacion = identificacion;
+        this.correo = correo;
+        this.fInicio = fInicio;
+        this.fFin = fFin;
+        sc = new Scanner(System.in);
+    }
     public String getNombre() {
         return nombre;
     }

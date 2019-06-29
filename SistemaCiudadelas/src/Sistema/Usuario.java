@@ -69,6 +69,7 @@ public class Usuario {
         this.password = password;
     }
     
+    @Override
     public boolean equals(Object obj){
         if(obj!=null && obj instanceof Usuario){
            Usuario u= (Usuario)obj; 
@@ -88,24 +89,23 @@ public class Usuario {
     
     public void cambiarCredenciales(ArrayList<Usuario> usuarios){
         Scanner sc = new Scanner(System.in);
-        //Se preguntan el usuario antiguo
-        System.out.println("Ingrese username a cambiar: ");
-        String pastUsername= sc.nextLine();
-        System.out.println("Ingrese password a cambiar: ");
-        String pastPassword= sc.nextLine();
-        Usuario pastUser= new Usuario(pastUsername,pastPassword);
+        String usernameN;
+        boolean used = false;
         
-        for(Usuario u: usuarios){
-            if(u.equals(pastUser)){
-                System.out.println("Ingrese nuevo username: ");
-                String username= sc.nextLine(); 
-                setUsername(username); 
-                System.out.println("Ingrese nueva password: ");
-                String password = sc.nextLine(); 
-                setPassword(password);
-            
+        do{
+            System.out.print("Ingrese nuevo username: ");
+            usernameN= sc.nextLine();
+            for(Usuario u:usuarios){
+                if(usernameN.equals(u.getUsername())){
+                    System.out.println("El username que usted ingreso ya se encuentra registrado, por favor ingrese uno nuevo");
+                    used = true;
+                }
             }
-        }                     
+        }while(used);
+        username = usernameN;
+        System.out.print("Ingrese nueva password: ");
+        String passwordN = sc.nextLine(); 
+        password = passwordN;
     }
   
 }

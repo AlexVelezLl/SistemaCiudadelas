@@ -21,21 +21,21 @@ public class InicioSesion {
         switch(tipoInicio){
             case "SuperAdmin":
                 for (Usuario user:users){
-                    if(user.equals(u)&&(user instanceof AdministradorDeSistema)){
+                    if(u.equals(user)&&user.getPassword().equals(credenciales[1])&&(user instanceof AdministradorDeSistema)){//Verifica tambien si el usuario es del tiepo que el indico
                         return user;
                     }
                
                 }
             case "CiudAdmin":
                 for (Usuario user:users){
-                    if(user.equals(u)&&(user instanceof AdministradorDeCiudadela)){
+                    if(u.equals(user)&&user.getPassword().equals(credenciales[1])&&(user instanceof AdministradorDeCiudadela)){
                         return user;
                     }
                 }
             case "Residente":
                 
                 for (Usuario user:users){
-                    if(user.equals(u)&&(user instanceof Residente)){
+                    if(u.equals(user)&&user.getPassword().equals(credenciales[1])&&(user instanceof Residente)){
                         return user;
                     }
                 }
@@ -64,7 +64,7 @@ public class InicioSesion {
             System.out.println("2)Generar reporte de uso");
             System.out.println("3)Cambiar credenciales");
             System.out.println("4)Cerrar sesion");
-            System.out.print("¿Que desea hacer?");
+            System.out.print("¿Que desea hacer?: ");
             opcionHacer = sc.nextLine();
             switch(opcionHacer){
                 case "1":
@@ -72,10 +72,13 @@ public class InicioSesion {
                     break;
                 case "2":
                     superAdmin.generarReporteUso(sist.getCiudadelas());
+                    break;
                 case "3":
                     superAdmin.cambiarCredenciales(sist.getUsuarios());
+                    break;
                 case "4":
                     System.out.println("Sesion Cerrada");
+                    break;
                 default:
                     System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
@@ -91,7 +94,7 @@ public class InicioSesion {
             System.out.println("2)Generar reporte de visitas");
             System.out.println("3)Cambiar credenciales");
             System.out.println("4)Cerrar sesion");
-            System.out.print("¿Que desea hacer?");
+            System.out.print("¿Que desea hacer?: ");
             opcionHacer = sc.nextLine();
             switch(opcionHacer){
                 case "1":
@@ -99,10 +102,13 @@ public class InicioSesion {
                     break;
                 case "2":
                     ciudAdmin.generarReporteVisitas(sist.getCiudadelas());
+                    break;
                 case "3":
                     ciudAdmin.cambiarCredenciales(sist.getUsuarios());
+                    break;
                 case "4":
                     System.out.println("Sesion Cerrada");
+                    break;
                 default:
                     System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
@@ -120,7 +126,7 @@ public class InicioSesion {
             System.out.println("5)Ver listado de visitantes");
             System.out.println("6)Cambiar Credenciales");
             System.out.println("7)Cerrar sesion");
-            System.out.print("¿Que desea hacer?");
+            System.out.print("¿Que desea hacer?: ");
             opcionHacer = sc.nextLine();
             switch(opcionHacer){
                 case "1":
@@ -128,16 +134,22 @@ public class InicioSesion {
                     break;
                 case "2":
                     residente.registrarVehiculo();
+                    break;
                 case "3":
                     residente.cambiarPin();
+                    break;
                 case "4":
                     residente.borrarVisitante();
+                    break;
                 case "5":
                     residente.verListaDeVisitantes();
+                    break;
                 case "6":
                     residente.cambiarCredenciales(sist.getUsuarios());
+                    break;
                 case "7":
                     System.out.println("Sesion cerrada");
+                    break;
                 default:
                     System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }

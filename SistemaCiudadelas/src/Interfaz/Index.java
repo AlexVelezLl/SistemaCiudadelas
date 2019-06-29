@@ -82,6 +82,7 @@ public class Index {
                                 }
                                 break;
                             case "4":
+                                System.out.println("Regresando...");
                                 break;
                             default:
                                 System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");

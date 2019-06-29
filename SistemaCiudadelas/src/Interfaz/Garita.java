@@ -89,10 +89,10 @@ public class Garita {
                             System.out.println("No ha ingresado una opcion valida, por favor ingrese una opcion valida");
                     }
                 }while(!hacer.equals("3"));
-            }else{
+            }else if(!nomCiud.equals("SALIR")){
                 System.out.println("Ha ingresado una Ciudadela que no se encuentra en el sistema, por favor Ingrese una Ciudadela valida o escriba la palabra 'SALIR' para regresar");
             }
-        }while(c==null&&!hacer.equals("Salir"));
+        }while(c==null&&!nomCiud.equals("SALIR"));
         
     }
     private Ciudadela buscarCiud(String nombre, ArrayList <Ciudadela> ciudadelas){

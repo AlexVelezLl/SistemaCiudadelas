@@ -52,18 +52,18 @@ public SistemaCiudadelas(){
         LocalDateTime fInicio = LocalDateTime.of(2015, 12, 1,0,0);
         LocalDateTime fFin = LocalDateTime.of(2020, 12, 1,0,0);
 
-        AdministradorDeCiudadela adm1 = new AdministradorDeCiudadela("Lupita Lopez","0901921921","luloppez@gmail.com",fInicio,fFin);
+        AdministradorDeCiudadela adm1 = new AdministradorDeCiudadela("Lupita Lopez","0901921921","luloppez@gmail.com",fInicio,fFin,"CiudAdmin","CiudAdmin");
         usuarios.add(adm1); 
 
         Ciudadela c1 = new Ciudadela("Ciudad celeste","CORPACEL","0992426357001","SAMBORONDON , Via Samborondon",adm1,2,4);
         ciudadelas.add(c1);  
 
         Residente resd1,resd2;
-        resd1= new Residente("Juan Perez","juanperez@gmail.com","0908204012","2586589",c1.getCasas().get(0),"JUAN");
+        resd1= new Residente("Juan Perez","juanperez@gmail.com","0908204012","2586589",c1.getCasas().get(0),"JUAN","Residente1","Residente1");
         usuarios.add(resd1);
         c1.getCasas().get(0).setResidente(resd1);
 
-        resd2= new Residente("Juana Crespo","juanacrespo@gmail.com","0906080011","2584586", c1.getCasas().get(1),"ABCD");
+        resd2= new Residente("Juana Crespo","juanacrespo@gmail.com","0906080011","2584586", c1.getCasas().get(1),"ABCD","Residente2","Residente2");
         usuarios.add(resd2);
         c1.getCasas().get(1).setResidente(resd2);
 

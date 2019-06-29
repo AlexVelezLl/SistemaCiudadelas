@@ -66,7 +66,6 @@ private String nombre;
     }
 
     public Residente(String nombre, String correo, String ID, String telefono, Casa casa) {
-        super();
         this.nombre = nombre;
         this.correo = correo;
         this.ID = ID;
@@ -82,8 +81,16 @@ private String nombre;
             
         }
     }
-    public Residente(String nombre, String correo, String ID, String telefono, Casa casa,String pinAcceso) {
-        this(nombre,correo,ID,telefono,casa);
+    public Residente(String nombre, String correo, String ID, String telefono, Casa casa,String pinAcceso,String username, String password) {
+        super(username,password);
+        this.nombre = nombre;
+        this.correo = correo;
+        this.ID = ID;
+        this.telefono = telefono;
+        this.casa = casa;
+        visitantes = new ArrayList() ;
+        vehiculos = new ArrayList();
+        codigosAcceso = new ArrayList();
         this.pinAcceso = pinAcceso;
     }
     
