@@ -132,7 +132,7 @@ public class AdministradorDeCiudadela extends Usuario{
                         lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+",-,"+r.getMatricula()+"\n";
                         break;
                     case "Visitante":
-                        lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+","+r.getVisitante()+",-\n";       
+                        lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+","+r.getNomVisitante()+",-\n";       
                         break;
                 }
                 fw.append(lineaCSV);
