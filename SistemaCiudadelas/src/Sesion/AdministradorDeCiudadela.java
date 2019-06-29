@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 import java.util.ArrayList;
 import Simulacro.RegistroIngreso;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 /**
@@ -62,7 +63,36 @@ public class AdministradorDeCiudadela extends Usuario{
     public void generarReporteVisitas(ArrayList<Ciudadela> ciuds){
         Ciudadela c = getMineCiud(ciuds);
         ArrayList<RegistroIngreso> registros = c.getIngresos();
-        crearArchivoCSV(registros);
+        String nomArchivo= "ReporteVisitas";
+        LocalDateTime today= LocalDateTime.now(); 
+        nomArchivo= nomArchivo+ today.getYear()+ today.getMonth()+ today.getDayOfMonth()+"-"+ today.getHour()+today.getMinute()+ today.getSecond()+".csv";
+        try {
+            File directorio=new File("Reportes"); 
+            directorio.mkdir();
+            FileWriter fw = new FileWriter("Reportes/"+nomArchivo);
+            fw.append("Fecha Ingreso,TipoDeIngreso,Nombre del residente,Manzana,Villa,Nombre del visitante, Matricula");
+            for(RegistroIngreso r: registros){
+                String lineaCSV ="";
+                switch(r.getTipoIngreso()){
+                    case "Residente.Peaton":
+                            lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+",-,-\n";
+                        break;
+                    case "Residente.Vehiculo":
+                        lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+",-,"+r.getMatricula()+"\n";
+                        break;
+                    case "Visitante":
+                        lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+","+r.getNomVisitante()+",-\n";       
+                        break;
+                }
+                fw.append(lineaCSV);
+            }
+            fw.flush();
+            fw.close();
+            System.out.println("Su ha generado el reporte con exito! Su nombre es \"" + nomArchivo+"\" y se encuentra en la carpeta reportes");   
+            
+        }catch (IOException e){
+            e.printStackTrace();
+        }
        
     }
     public void registrarResidente(SistemaCiudadelas sist){
@@ -121,38 +151,5 @@ public class AdministradorDeCiudadela extends Usuario{
             }
         }
         return false;
-    }
-    
-    private void crearArchivoCSV(ArrayList <RegistroIngreso> registros){
-        String nomArchivo= "RegistroVisitas";
-        LocalDateTime today= LocalDateTime.now(); 
-        nomArchivo= nomArchivo+ today.getYear()+ today.getMonth()+ today.getDayOfMonth()+ today.getHour()+today.getMinute()+ today.getSecond()+".csv";
-        try {
-            FileWriter fw = new FileWriter(nomArchivo);
-            fw.append("Fecha Ingreso,TipoDeIngreso,Nombre del residente,Manzana,Villa,Nombre del visitante, Matricula");
-            for(RegistroIngreso r: registros){
-                String lineaCSV ="";
-                switch(r.getTipoIngreso()){
-                    case "Residente.Peaton":
-                            lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+",-,-\n";
-                        break;
-                    case "Residente.Vehiculo":
-                        lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+",-,"+r.getMatricula()+"\n";
-                        break;
-                    case "Visitante":
-                        lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+","+r.getNomVisitante()+",-\n";       
-                        break;
-                }
-                fw.append(lineaCSV);
-            }
-            fw.flush();
-            fw.close();
-            System.out.println("Su archivo se ha creato y se llama: " + nomArchivo);   
-            
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        
-      
     }
 }

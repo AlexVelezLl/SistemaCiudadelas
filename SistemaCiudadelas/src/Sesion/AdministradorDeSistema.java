@@ -9,6 +9,7 @@ import Sistema.*;
 import java.util.ArrayList;
 import Simulacro.RegistroIngreso;
 import Sistema.SistemaCiudadelas;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -30,13 +31,15 @@ public class AdministradorDeSistema extends Usuario{
     public void generarReporteUso(ArrayList<Ciudadela> ciudadelas){
         String nombreCiud,razonSocial;
         int numVis=0, numRes=0, tiempoVis=0,tiempoRes=0;
-        float promRes, promVis;
-        String Archivo= "RegistroDeUsos";
+        float promRes, promVis; 
+        String archivo= "ReporteDeUsos";
         LocalDateTime today= LocalDateTime.now(); 
-        Archivo= Archivo+ today.getYear()+ today.getMonth()+ today.getDayOfMonth()+ today.getHour()+today.getMinute()+ today.getSecond()+".csv";
+        archivo= archivo+ today.getYear()+ today.getMonth()+ today.getDayOfMonth()+"-"+ today.getHour()+today.getMinute()+ today.getSecond()+".csv";
         
         try{
-            FileWriter fw = new FileWriter(Archivo);
+            File directorio=new File("Reportes"); 
+            directorio.mkdir();
+            FileWriter fw = new FileWriter("Reportes/"+archivo);
             for(Ciudadela c:ciudadelas){
                 nombreCiud = c.getNombre();
                 razonSocial = c.getRazonSocial();
@@ -66,6 +69,7 @@ public class AdministradorDeSistema extends Usuario{
             }
             fw.flush();
             fw.close();
+            System.out.println("Se ha generado el reporte con exito! Su nombre es: \""+archivo+"\" y se encuentra en la carpeta reportes");
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -90,10 +94,15 @@ public class AdministradorDeSistema extends Usuario{
         System.out.print("Ingrese el id del admin: ");
         idAdmin = sc.nextLine();
         //Obetniendo fecha de inicio de administracion
-        System.out.print("Ingrese la fecha de inicio de la administracion del Admin: ");
-        fInicioAdmin = consultarFecha();
-        System.out.print("Ingrese la fecha de fin de la administracion del Admin: ");
-        fFinAdmin = consultarFecha();
+        do{
+            System.out.println("Ingrese la fecha de inicio de la administracion del Admin: ");
+            fInicioAdmin = consultarFecha();
+            System.out.println("Ingrese la fecha de fin de la administracion del Admin: ");
+            fFinAdmin = consultarFecha();
+            if(fFinAdmin.isBefore(fInicioAdmin)){
+                System.out.println("Su fecha de fin es menor a su fecha de inicio, por favor ingrese 2 fechas validas");
+            }
+        }while(fFinAdmin.isBefore(fInicioAdmin));
         System.out.print("Ingrese el numero de manzanas que tiene la ciudadela: ");
         numManzanas = sc.nextLine();
         while(!validar(numManzanas)){
@@ -127,11 +136,11 @@ public class AdministradorDeSistema extends Usuario{
         String year, month, day;
         LocalDateTime time;
         do{
-            System.out.println("Año: ");
+            System.out.print("Año: ");
             year = sc.nextLine();
-            System.out.println("Mes: ");
+            System.out.print("Mes: ");
             month = sc.nextLine();
-            System.out.println("Dia: ");
+            System.out.print("Dia: ");
             day= sc.nextLine();
             try{
                 time = LocalDateTime.of(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day),0,0);
