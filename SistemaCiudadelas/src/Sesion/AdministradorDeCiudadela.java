@@ -70,7 +70,7 @@ public class AdministradorDeCiudadela extends Usuario{
             File directorio=new File("Reportes"); 
             directorio.mkdir();
             FileWriter fw = new FileWriter("Reportes/"+nomArchivo);
-            fw.append("Fecha Ingreso,TipoDeIngreso,Nombre del residente,Manzana,Villa,Nombre del visitante, Matricula");
+            fw.append("Fecha Ingreso,TipoDeIngreso,Nombre del residente,Manzana,Villa,Nombre del visitante, Matricula\n");
             for(RegistroIngreso r: registros){
                 String lineaCSV ="";
                 switch(r.getTipoIngreso()){

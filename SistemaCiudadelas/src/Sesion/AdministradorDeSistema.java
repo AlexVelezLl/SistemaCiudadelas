@@ -40,6 +40,7 @@ public class AdministradorDeSistema extends Usuario{
             File directorio=new File("Reportes"); 
             directorio.mkdir();
             FileWriter fw = new FileWriter("Reportes/"+archivo);
+            fw.append("Nombre De Ciudadela,Razon Social,Numero Ingreso Visitantes,Tiempo Ingreso Promedios Visitantes,Numero Ingreso Residentes, Tiempo Ingreso Promedios Visitantes\n");
             for(Ciudadela c:ciudadelas){
                 nombreCiud = c.getNombre();
                 razonSocial = c.getRazonSocial();
@@ -63,8 +64,8 @@ public class AdministradorDeSistema extends Usuario{
                     promVis = tiempoVis/numVis;
                 }
                 
-                fw.append("Nombre De Ciudadela,Razon Social,Numero Ingreso Visitantes,Tiempo Ingreso Promedios Visitantes,Numero Ingreso Residentes, Tiempo Ingreso Promedios Visitantes\n");       
-                fw.append(nombreCiud+","+nombreCiud+","+razonSocial+","+numVis+","+promVis+","+numRes+","+promRes+"\n");
+                       
+                fw.append(nombreCiud+","+razonSocial+","+numVis+","+promVis+","+numRes+","+promRes+"\n");
                 
             }
             fw.flush();

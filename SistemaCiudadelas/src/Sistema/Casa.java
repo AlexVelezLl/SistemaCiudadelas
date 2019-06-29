@@ -14,7 +14,7 @@ public class Casa {
     private String manzana;
     private String villa;
     private Residente residente;
-    
+    private Ciudadela ciudadela;
     
 
     public String getManzana() {
@@ -33,19 +33,21 @@ public class Casa {
         return "Manzana: "+manzana+"Villa: "+villa+"Residente: "+residente; 
     }
 
-    public Casa(String manzana, String villa, Residente residente) {
+    public Casa(String manzana, String villa, Ciudadela ciudadela, Residente residente) {
         this.manzana = manzana;
         this.villa = villa;
         this.residente = residente;
+        this.ciudadela = ciudadela;
     }
-    public Casa(String manzana,String villa){
-        this(manzana,villa,null);
+    public Casa(String manzana,String villa, Ciudadela ciudadela){
+        this(manzana,villa,ciudadela,null);
     }
     
     public Casa(){
     }
   
     public void setResidente(Residente r){
+        ciudadela.addResidente(r);
         residente= r;
     }
     

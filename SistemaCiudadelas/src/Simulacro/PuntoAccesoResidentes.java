@@ -35,6 +35,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
             System.out.print("¿Que desea hacer?: ");
             modoacceso = sc.nextLine();
             if (modoacceso.equals("1")) {
+                System.out.println(ciudadela.getResidentes());
                 LocalTime t1= LocalTime.now(); //Instante en el que empieza a ingresar
                 System.out.print("¡Bienvenido! Por favor ingrese su numero de cédula: ");
                 String num_cedula = sc.nextLine();

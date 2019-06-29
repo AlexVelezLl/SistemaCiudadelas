@@ -40,9 +40,7 @@ public class Garita {
                             d = c.getPuntosAcceso()[0];
                             r = d.comprobarAcceso();
                             if(r!=null){
-                                ArrayList<RegistroIngreso> reg =c.getIngresos();//Se la crea para poner un nuevo registro
-                                reg.add(r);
-                                c.setIngresos(reg);
+                                c.addIngreso(r);
                             }else{
                                 System.out.println("No se ha completado el ingreso con exito");
                             }
@@ -63,9 +61,7 @@ public class Garita {
                             d = c.getPuntosAcceso()[1];
                             r = d.comprobarAcceso();
                             if(r!=null){
-                                ArrayList<RegistroIngreso> reg =c.getIngresos();
-                                reg.add(r);
-                                c.setIngresos(reg);
+                                c.addIngreso(r);
                             }else{
                                 System.out.println("No se ha completado el ingreso con exito");
                             }

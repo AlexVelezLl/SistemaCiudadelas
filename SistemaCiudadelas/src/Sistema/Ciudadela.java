@@ -59,9 +59,12 @@ public class Ciudadela {
         return ingresos;
     }
     
-    public void setIngresos(ArrayList<RegistroIngreso> ingresos){
-        this.ingresos = ingresos;
+    public void addIngreso(RegistroIngreso ingreso){
+        ingresos.add(ingreso);
         
+    }
+    public void addResidente(Residente residente){
+        residentes.add(residente);
     }
     public String toString() {
         return "Nombre de ciudadela: " + nombre + ", Razon Social: " + RazonSocial + ", RUC: " + RUC + ", ubicacion: " + ubicacion + ", Administrador de Ciudadela: " + adm + ", casas: " + casas + ", residentes: " + residentes + ", ingresos: " + ingresos;
@@ -82,7 +85,7 @@ public class Ciudadela {
         casas = new ArrayList<>();
         for(int i=1;i<=numManzanas;i++){
             for(int j=1;j<=villasXManzana;j++){
-                casas.add(new Casa(Integer.toString(i),Integer.toString(j)));
+                casas.add(new Casa(Integer.toString(i),Integer.toString(j),this));
             }
         }
         puntosAcceso = new PuntoAcceso[2];
