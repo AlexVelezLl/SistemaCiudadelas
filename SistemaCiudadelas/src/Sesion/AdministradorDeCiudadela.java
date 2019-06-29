@@ -137,6 +137,8 @@ public class AdministradorDeCiudadela extends Usuario{
                 }
                 fw.append(lineaCSV);
             }
+            fw.flush();
+            fw.close();
             System.out.println("Su archivo se ha creato y se llama: " + nomArchivo);   
             
         }catch (IOException e){
