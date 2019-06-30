@@ -9,6 +9,7 @@ import java.util.Scanner;
 import Sistema.Usuario;
 import Sesion.*;
 import Sistema.SistemaCiudadelas;
+import javax.swing.JOptionPane;
 import utilities.Persona;
 
 /**
@@ -17,7 +18,7 @@ import utilities.Persona;
  */
 public class InicioSesion {
     Scanner sc = new Scanner(System.in);
-    public Persona validarIngreso(String[] credenciales,ArrayList<Persona> users,String tipoInicio){
+    public Persona validarIngreso(String[] credenciales,ArrayList<Persona> users,String tipoInicio){//Validando que las credenciales ingresadas pertenezcan a quien se indico
         switch(tipoInicio){
             case "SuperAdmin":
                 for (Persona user:users){
@@ -77,10 +78,10 @@ public class InicioSesion {
                     superAdmin.cambiarCredenciales(sist.getUsuarios());
                     break;
                 case "4":
-                    System.out.println("Sesion Cerrada");
+                    JOptionPane.showMessageDialog(null,"Sesion Cerrada");
                     break;
                 default:
-                    System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
+                    JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
         }while(!opcionHacer.equals("4"));
     }
@@ -107,10 +108,10 @@ public class InicioSesion {
                     ciudAdmin.cambiarCredenciales(sist.getUsuarios());
                     break;
                 case "4":
-                    System.out.println("Sesion Cerrada");
+                    JOptionPane.showMessageDialog(null,"Sesion Cerrada");
                     break;
                 default:
-                    System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
+                    JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
         }while(!opcionHacer.equals("4")); 
     }
@@ -133,7 +134,7 @@ public class InicioSesion {
                     residente.registrarVisitante();
                     break;
                 case "2":
-                    residente.registrarVehiculo();
+                    residente.registrarVehiculo(sist.getCiudadelas());
                     break;
                 case "3":
                     residente.cambiarPin();
@@ -148,10 +149,10 @@ public class InicioSesion {
                     residente.cambiarCredenciales(sist.getUsuarios());
                     break;
                 case "7":
-                    System.out.println("Sesion cerrada");
+                    JOptionPane.showMessageDialog(null,"Sesion cerrada");
                     break;
                 default:
-                    System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
+                    JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
         }while(!opcionHacer.equals("7"));
         System.out.println("opcionHacer = " + opcionHacer);   

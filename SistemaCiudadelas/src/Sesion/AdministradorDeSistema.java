@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
 import utilities.*;
 /**
  *
@@ -80,7 +81,7 @@ public class AdministradorDeSistema extends Usuario{
             }
             fw.flush();
             fw.close();
-            System.out.println("Se ha generado el reporte con exito! Su nombre es: \""+archivo+"\" y se encuentra en la carpeta reportes");
+            JOptionPane.showMessageDialog(null,"Se ha generado el reporte con exito! Su nombre es: \""+archivo+"\" y se encuentra en la carpeta reportes");
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -110,27 +111,29 @@ public class AdministradorDeSistema extends Usuario{
             System.out.println("Ingrese la fecha de fin de la administracion del Admin: ");
             fFinAdmin = Validaciones.consultarFecha();
             if(fFinAdmin.isBefore(fInicioAdmin)){
-                System.out.println("Su fecha de fin es menor a su fecha de inicio, por favor ingrese 2 fechas validas");
+                JOptionPane.showMessageDialog(null,"Su fecha de fin es menor a su fecha de inicio, por favor ingrese 2 fechas validas");
             }
         }while(fFinAdmin.isBefore(fInicioAdmin));
-        System.out.print("Ingrese el numero de manzanas que tiene la ciudadela: ");
-        numManzanas = sc.nextLine();
-        while(!Validaciones.isNumeric(numManzanas)){
-            System.out.print("Ingrese el numero de manzanas que tiene su ciudadela: ");
+        do{
+            System.out.print("Ingrese el numero de manzanas que tiene la ciudadela: ");
             numManzanas = sc.nextLine();
-        }
-        System.out.print("Ingrese el numero de villas que tiene cada manzana de la ciudadela: ");
-        villasXManzana = sc.nextLine();
-        while(!Validaciones.isNumeric(villasXManzana)){
-            System.out.print("Ingrese el numero de manzanas que tiene su ciudadela: ");
+            if(!Validaciones.isNumeric(numManzanas)){
+                JOptionPane.showMessageDialog(null,"Por favor ingrese un numero valido");
+            }
+        }while(!Validaciones.isNumeric(numManzanas));
+        do{       
+            System.out.print("Ingrese el numero de villas que tiene cada manzana de la ciudadela: ");
             villasXManzana = sc.nextLine();
-        }
+            if(!Validaciones.isNumeric(villasXManzana)){
+                JOptionPane.showMessageDialog(null,"Por favor ingrese un numero valido");
+            }
+        }while(!Validaciones.isNumeric(villasXManzana));
         ciudAdmin=new AdministradorDeCiudadela(nomAdmin, idAdmin, correoAdmin, fInicioAdmin,fFinAdmin);
         Usuario u = ciudAdmin;
         Ciudadela c = new Ciudadela(nombreC, razonSocial, RUC, ubicacion,ciudAdmin,Integer.parseInt(numManzanas),Integer.parseInt(villasXManzana));
         sistema.agregarCiudadela(c);
         sistema.agregarUsuario(u);
-        System.out.println("Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela son: "+u);
+        JOptionPane.showMessageDialog(null,"Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela son: "+u+", y se las ha enviado a su correo");
     }
           
 }

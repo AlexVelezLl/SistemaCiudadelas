@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import Simulacro.*;
 import Sistema.Ciudadela;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Alex Velez
@@ -42,7 +43,7 @@ public class Garita {
                             if(r!=null){
                                 c.addIngreso(r);
                             }else{
-                                System.out.println("No se ha completado el ingreso con exito");
+                                JOptionPane.showMessageDialog(null,"No se ha completado el ingreso con exito");
                             }
                             do{
                                 System.out.println("Opciones:");
@@ -53,7 +54,7 @@ public class Garita {
                                 if(seguir.equals("2")){
                                     hacer="3";
                                 }else if(!seguir.equals("1")&&!seguir.equals("2")){
-                                    System.out.println("Por favor ingrese una opcion que este en el menu");
+                                    JOptionPane.showMessageDialog(null,"Por favor ingrese una opcion que este en el menu");
                                 }
                             }while(!seguir.equals("1")&&!seguir.equals("2"));
                             break;
@@ -63,7 +64,7 @@ public class Garita {
                             if(r!=null){
                                 c.addIngreso(r);
                             }else{
-                                System.out.println("No se ha completado el ingreso con exito");
+                                JOptionPane.showMessageDialog(null,"No se ha completado el ingreso con exito");
                             }
                             do{
                                 System.out.println("Opciones: ");
@@ -74,7 +75,7 @@ public class Garita {
                                 if(seguir.equals("1")){
                                     hacer="3";
                                 }else if(!seguir.equals("1")&&!seguir.equals("2")){
-                                    System.out.println("Por favor ingrese una opcion que este en el menu");
+                                    JOptionPane.showMessageDialog(null,"Por favor ingrese una opcion que este en el menu");
                                 }
                             }while(!seguir.equals("1")&&!seguir.equals("2"));
                             break;
@@ -82,11 +83,11 @@ public class Garita {
                             System.out.println("Saliendo...");
                             break;
                         default:
-                            System.out.println("No ha ingresado una opcion valida, por favor ingrese una opcion valida");
+                            JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor ingrese una opcion valida");
                     }
                 }while(!hacer.equals("3"));
             }else if(!nomCiud.equals("SALIR")){
-                System.out.println("Ha ingresado una Ciudadela que no se encuentra en el sistema, por favor Ingrese una Ciudadela valida o escriba la palabra 'SALIR' para regresar");
+                JOptionPane.showMessageDialog(null,"Ha ingresado una Ciudadela que no se encuentra en el sistema, por favor Ingrese una Ciudadela valida o escriba la palabra 'SALIR' para regresar");
             }
         }while(c==null&&!nomCiud.equals("SALIR"));
         

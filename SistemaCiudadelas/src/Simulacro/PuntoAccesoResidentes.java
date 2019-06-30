@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import Sesion.Residente;
 import Sistema.Ciudadela;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 public class PuntoAccesoResidentes extends PuntoAcceso{
     Scanner sc= new Scanner(System.in);
 
@@ -48,7 +49,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
 
                 Residente residente = ObtenerResidente(num_cedula,pin);
                 if (residente != null) {
-                    System.out.println("Acceso concedido");
+                    JOptionPane.showMessageDialog(null,"Acceso concedido");
                     LocalTime t2= LocalTime.now(); //instante en el que termina de ingresar el peaton.
                     //Si el ingreso es exitoso entonces se genera un RegistroIngreso
                     LocalDate fingreso = LocalDate.now();
@@ -56,14 +57,14 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
                     RegistroIngreso registro= new RegistroIngreso(fingreso,duracionIngreso,residente);
                     return registro;  
                 } 
-                System.out.println("Acceso denegado");
+                JOptionPane.showMessageDialog(null,"Acceso denegado");
             }else if (modoacceso.equals("2")) {
                 LocalTime t1= LocalTime.now(); //Instante en el que empieza a ingresar el vehiculo
                 System.out.print("¡Bienvenido! Por favor ingrese el numero de matricula del vehiculo: ");
                 String matricula = sc.nextLine();
                 Residente residente = ObtenerResidente(matricula);
                 if (residente!= null){
-                    System.out.println("Acceso concedido");
+                    JOptionPane.showMessageDialog(null,"Acceso concedido");
                     LocalTime t2= LocalTime.now(); //instante en el que termina de ingresar el vehiculo. 
                     //Si el ingreso es exitoso entonces se genera un RegistroIngreso
                     LocalDate fingreso = LocalDate.now();
@@ -71,12 +72,12 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
                     RegistroIngreso registro= new RegistroIngreso(fingreso,duracionIngreso,residente);
                     return registro;
                 }
-                System.out.println("Acceso denegado");
+                JOptionPane.showMessageDialog(null,"Acceso denegado");
             }else if(!modoacceso.equals("3")){
-                System.out.print("Por favor ingrese una opcion valida");
+                JOptionPane.showMessageDialog(null,"Por favor ingrese una opcion valida");
             }
         }while(!modoacceso.equals("3"));
-        System.out.println("Acceso Denegado");
+        JOptionPane.showMessageDialog(null,"Acceso Denegado");
         return null;
     }
     

@@ -7,6 +7,7 @@ package Interfaz;
 import java.util.Scanner;
 import Sistema.SistemaCiudadelas;
 import Sesion.*;
+import javax.swing.JOptionPane;
 import utilities.Persona;
 /**
  *
@@ -60,7 +61,7 @@ public class Index {
                                 if(superAdmin!= null){
                                     inicio.mostrarOpciones(superAdmin, sistCiud);
                                 }else{
-                                    System.out.println("Usuario o contraseña incorrecta");
+                                    JOptionPane.showMessageDialog(null,"Usuario o contraseña incorrectos");
                                 }
                                 break;
                             case "2":
@@ -72,7 +73,7 @@ public class Index {
                                 if(ciudAdmin!= null){
                                     inicio.mostrarOpciones(ciudAdmin, sistCiud);
                                 }else{
-                                    System.out.println("Usuario o contraseña incorrecta");
+                                    JOptionPane.showMessageDialog(null,"Usuario o contraseña incorrectos");
                                 }
                                 break;
                             case "3":
@@ -84,14 +85,14 @@ public class Index {
                                 if(residente!= null){
                                     inicio.mostrarOpciones(residente, sistCiud);
                                 }else{
-                                    System.out.println("Usuario o contraseña incorrecta");
+                                    JOptionPane.showMessageDialog(null,"Usuario o contraseña incorrectos");
                                 }
                                 break;
                             case "4":
                                 System.out.println("Regresando...");
                                 break;
                             default:
-                                System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
+                                JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
                         }
                     }while(!opcionInicio.equals("4"));
                     
@@ -103,7 +104,7 @@ public class Index {
                     System.out.println("Saliendo... Tenga un buen dia.");
                     break;
                 default:
-                    System.out.println("No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
+                    JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
         
         

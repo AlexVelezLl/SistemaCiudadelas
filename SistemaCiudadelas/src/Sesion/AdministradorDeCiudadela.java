@@ -13,6 +13,7 @@ import Simulacro.RegistroIngreso;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.JOptionPane;
 import utilities.Validaciones;
 /**
  *
@@ -90,7 +91,7 @@ public class AdministradorDeCiudadela extends Usuario{
             }
             fw.flush();
             fw.close();
-            System.out.println("Su ha generado el reporte con exito! Su nombre es \"" + nomArchivo+"\" y se encuentra en la carpeta reportes");   
+            JOptionPane.showMessageDialog(null,"Su ha generado el reporte con exito! Su nombre es \"" + nomArchivo+"\" y se encuentra en la carpeta reportes");   
             
         }catch (IOException e){
             e.printStackTrace();
@@ -99,7 +100,10 @@ public class AdministradorDeCiudadela extends Usuario{
     }
     public void registrarResidente(SistemaCiudadelas sist){
         ArrayList<Ciudadela> ciudadelas = sist.getCiudadelas();
-        String nombreR, correoR, idR, telefono,mz,villa;
+        String nombreR, correoR, idR, telefono,mz,villa,pinAcceso,matricula,prop;
+        Vehiculo v;
+        String [] pin;
+        boolean pinValido;
         Ciudadela c = getMineCiud(ciudadelas);
         idR = Validaciones.ValidarId(sist.getUsuarios(),"Residente");
         System.out.print("Ingrese el nombre del residente: ");
@@ -108,7 +112,7 @@ public class AdministradorDeCiudadela extends Usuario{
         correoR = sc.nextLine();
         System.out.print("Ingrese el telefono del residente: ");
         telefono = sc.nextLine();
-        System.out.println("Para la ciuadela "+c.getNombre()+" tenmos las siguientes casas disponibles: ");
+        JOptionPane.showMessageDialog(null,"Para la ciuadela "+c.getNombre()+" tenmos las siguientes casas disponibles: ");
         for (Casa ca:c.getCasas()){
             if(ca.getResidente()==null){
                 System.out.println("Casa de la Manzana "+ca.getManzana()+", villa " + ca.getVilla());
@@ -127,13 +131,38 @@ public class AdministradorDeCiudadela extends Usuario{
                 }
             }
             if(casaResidente==null){
-                System.out.println("Casa incorrecta, por favor elija una casa de entre las casas disponibles");
+                JOptionPane.showMessageDialog(null,"Casa incorrecta, por favor elija una casa de entre las casas disponibles");
             }
         }while(casaResidente==null);
-        Residente resid = new Residente(nombreR,correoR,idR,telefono,casaResidente);
+        do{
+            pinValido=false;
+            System.out.println("Ingrese su pin de Acceso(4 Digitos)");
+            pinAcceso = sc.nextLine();
+            if(pinAcceso.length()==4){
+                pinValido = true;
+                pin = pinAcceso.split("");
+                for(String digito:pin){
+                    pinValido = pinValido & (Validaciones.isNumeric(digito)||digito.equals("0"));
+                }
+            }
+            if(!pinValido){
+                JOptionPane.showMessageDialog(null,"Pin invalido, por favor asegurese de ingrese un pin de 4 digitos ");
+            }
+        }while (pinValido);
+        do{
+            System.out.print("Ingrese la matricula de su vehiculo: ");
+            matricula = sc.nextLine();
+            if(!Validaciones.matriculaValida(matricula,getMineCiud(sist.getCiudadelas()))){
+                JOptionPane.showMessageDialog(null,"La matricula que usted ingreso es incorrecta, o esta siendo usada por otro residente, por favor ingrese una matricula valida");
+            }
+        }while(!Validaciones.matriculaValida(villa,getMineCiud(sist.getCiudadelas())));
+        System.out.print("Ingrese el nombre del propietario del vehiculo: ");
+        prop = sc.nextLine();
+        v = new Vehiculo(matricula,prop);
+        Residente resid = new Residente(nombreR,correoR,idR,telefono,casaResidente,pinAcceso,v);
         casaResidente.setResidente(resid);
         sist.agregarUsuario(resid);
-        System.out.println("El residente se ha creado con exito, sus credenciales son: "+resid);
+        JOptionPane.showMessageDialog(null,"El residente se ha creado con exito, sus credenciales son: "+resid+"Y se le ha enviado a su e-mail");
     }
     private Ciudadela getMineCiud(ArrayList<Ciudadela> ciuds){
         for(Ciudadela c : ciuds){

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Random; 
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import utilities.*;
 /**
  *
@@ -24,8 +25,9 @@ private String nombre;
     private String telefono;
     private Casa casa;
     private ArrayList<Persona> visitantes;
-    private ArrayList<String> vehiculos;
+    private ArrayList<Vehiculo> vehiculos;
     private ArrayList<CodigoAcceso> codigosAcceso;
+    private Scanner sc;
 
     public String getNombre() {
         return nombre;
@@ -56,7 +58,7 @@ private String nombre;
         return visitantes;
     }
 
-    public ArrayList<String> getVehiculos() {
+    public ArrayList<Vehiculo> getVehiculos() {
         return vehiculos;
     }
 
@@ -67,23 +69,22 @@ private String nombre;
     public Residente(){
     }
 
-    public Residente(String nombre, String correo, String ID, String telefono, Casa casa) {
+    public Residente(String nombre, String correo, String ID, String telefono, Casa casa,String pinAcceso,Vehiculo vehiculo) {
         this.nombre = nombre;
         this.correo = correo;
         this.id = ID;
         this.telefono = telefono;
         this.casa = casa;
+        this.pinAcceso = pinAcceso;
         visitantes = new ArrayList<>() ;
         vehiculos = new ArrayList<>();
+        vehiculos.add(vehiculo);
         codigosAcceso = new ArrayList<>();
-        pinAcceso= "";
-        Random rnd= new Random();
-        for (int i = 0; i < 4; i++) {
-            pinAcceso+=(int)(rnd.nextInt(9));
+        sc = new Scanner(System.in);
             
-        }
+        
     }
-    public Residente(String nombre, String correo, String ID, String telefono, Casa casa,String pinAcceso,String username, String password) {
+    public Residente(String nombre, String correo, String ID, String telefono, Casa casa,String pinAcceso,Vehiculo vehiculo,String username, String password) {
         super(username,password);
         this.nombre = nombre;
         this.correo = correo;
@@ -92,17 +93,19 @@ private String nombre;
         this.casa = casa;
         visitantes = new ArrayList<>() ;
         vehiculos = new ArrayList<>();
+        vehiculos.add(vehiculo);
         codigosAcceso = new ArrayList<>();
         this.pinAcceso = pinAcceso;
+        sc = new Scanner(System.in);
     }
     
      
-    public CodigoAcceso generarCodigoAcceso(){
+    private CodigoAcceso generarCodigoAcceso(){
         LocalDateTime fIngreso;
         do{
             fIngreso= Validaciones.consultarFecha();
             if(fIngreso.isBefore(LocalDateTime.now())){
-                System.out.println("Usted ha ingresado una fecha pasada, por favor ingrese una fecha valida");
+                JOptionPane.showMessageDialog(null,"Usted ha ingresado una fecha pasada, por favor ingrese una fecha valida");
             }
         }while(fIngreso.isBefore(LocalDateTime.now()));
         String cod= "";
@@ -128,7 +131,6 @@ private String nombre;
     
 
     public void registrarVisitante(){
-        Scanner sc = new Scanner(System.in);
         String idV, nomV, correoV;
         Residente residenteV;
         CodigoAcceso c;
@@ -140,37 +142,39 @@ private String nombre;
         residenteV= this;
         c = generarCodigoAcceso();
         visitantes.add(new Visitante(nomV,idV,correoV,c,residenteV));
-        System.out.println("Se ha registrado al visitante exitosamente, el codigo de acceso ha sido enviado a su correo");
+        JOptionPane.showMessageDialog(null,"Se ha registrado al visitante exitosamente, el codigo de acceso ha sido enviado a su correo");
     }
         
        
     
     
-    public void registrarVehiculo(){
-        Scanner sc= new Scanner(System.in);
-        System.out.print("Ingrese la matricula que desea agregar: ");
-        String matricula= sc.nextLine();
-        for (String v :vehiculos){
-            boolean verificarV= v.equals(matricula);
-            if (verificarV==false){
-                vehiculos.add(matricula); 
+    public void registrarVehiculo(ArrayList<Ciudadela> ciuds){
+        Ciudadela ciud = getMineCiud(ciuds);
+        String matricula,prop;
+        do{
+            System.out.print("Por favor, ingrese la matricula de su vehiculo: ");  
+            matricula = sc.nextLine();
+            if(!Validaciones.matriculaValida(matricula, ciud)){
+                JOptionPane.showMessageDialog(null,"La matricula que usted ingreso es incorrecta, o esta siendo usada por otro residente, por favor ingrese una matricula valida");
             }
-        }
-        
+        }while(!Validaciones.matriculaValida(matricula, ciud));
+        System.out.print("Ingrese el nombre del propietario del vehiculo: ");
+        prop = sc.nextLine();
+        vehiculos.add(new Vehiculo(matricula,prop));
+        JOptionPane.showMessageDialog(null,"Su vehiculo se ha registrado exitosamente");
     }
 
     public void cambiarPin() {
-        Scanner sc= new Scanner(System.in);
         System.out.println("Ingrese pin: ");
         boolean verificarPin= sc.hasNextInt();
         String pinNuevo= sc.nextLine(); 
-            if(verificarPin==true&& pinNuevo.length()==4){
-                this.pinAcceso = pinNuevo;
+        if(verificarPin==true&& pinNuevo.length()==4){
+            this.pinAcceso = pinNuevo;
         }
+        JOptionPane.showMessageDialog(null, "Su pin se ha cambiado con exito");
     }
     
     public void borrarVisitante(){
-        Scanner sc= new Scanner(System.in);
         System.out.print("Ingrese codigo de acceso: ");
         String idV; 
         idV = sc.nextLine();
@@ -181,6 +185,7 @@ private String nombre;
                 visitantes.remove(vis);
             }
         }
+        JOptionPane.showMessageDialog(null,"Se ha borrado al visitante");
     }
 
     
@@ -189,6 +194,15 @@ private String nombre;
             if(!((Visitante)v).getCodigoAcceso().isUsed()){
             System.out.println(v);
             }
+        }
     }
-}
+    
+    public Ciudadela getMineCiud(ArrayList<Ciudadela> ciuds){
+        for(Ciudadela ciud : ciuds){
+            if (ciud.getResidentes().contains(this)){
+                return ciud;
+            }
+        }
+        return null;
+    }
 }

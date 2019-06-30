@@ -7,6 +7,7 @@ package Sistema;
 import java.util.Scanner; 
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.JOptionPane;
 import utilities.Persona;
 /**
  *
@@ -97,7 +98,7 @@ public abstract class Usuario implements Persona{
         System.out.print("Ingrese nueva password: ");
         String passwordN = sc.nextLine(); 
         password = passwordN;
-        System.out.println("Sus credenciales se han cambiado exitosamente!");
+        JOptionPane.showMessageDialog(null,"Sus credenciales se han cambiado exitosamente!");
     }
   
 }

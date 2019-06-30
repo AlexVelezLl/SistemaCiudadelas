@@ -7,10 +7,10 @@ package utilities;
 
 import java.util.ArrayList;
 import Sesion.*;
-import Sistema.Visitante;
 import java.time.LocalDateTime;
-
+import Sistema.*;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,19 +29,19 @@ public class Validaciones {
                 switch(tipo){
                     case "CiudAdmin":
                         if((persona instanceof AdministradorDeCiudadela)&&id.equals(((AdministradorDeCiudadela)persona).getId())){
-                            System.out.println("Usted ha ingresado un id que ya esta registrado en el sistema, por favor ingrese otro id.");
+                            JOptionPane.showMessageDialog(null,"Usted ha ingresado un id que ya esta registrado en el sistema, por favor ingrese otro id.");
                             idUnico =false;
                         }
                         break;
                     case "Residente":
                         if((persona instanceof Residente)&&id.equals(((Residente)persona).getId())){
-                            System.out.println("Usted ha ingresado un id que ya esta registrado en el sistema, por favor ingrese otro id.");
+                            JOptionPane.showMessageDialog(null,"Usted ha ingresado un id que ya esta registrado en el sistema, por favor ingrese otro id.");
                             idUnico =false;
                         }
                         break;
                     case "Visitante":
                         if((persona instanceof Visitante)&&id.equals(((Visitante)persona).getId())){
-                            System.out.println("Usted ha ingresado un id que ya esta registrado en el sistema, por favor ingrese otro id.");
+                            JOptionPane.showMessageDialog(null,"Usted ha ingresado un id que ya esta registrado en el sistema, por favor ingrese otro id.");
                             idUnico =false;
                         }
                         break;
@@ -67,7 +67,7 @@ public class Validaciones {
             try{
                 time = LocalDateTime.of(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day),Integer.parseInt(hour),0);
             }catch(Exception e){
-                System.out.println("Usted ha ingresado una fecha invalida, por favor ingrese una fecha valida.");
+                JOptionPane.showMessageDialog(null,"Usted ha ingresado una fecha invalida, por favor ingrese una fecha valida.");
                 time = null;
             }
         }while(time==null);
@@ -84,4 +84,43 @@ public class Validaciones {
 	}
         return a && (Integer.parseInt(cadena)>0);
     }
+    
+    public static boolean matriculaValida(String matricula,Ciudadela ciud){
+        boolean a,b;
+        a = false;
+        b = false;
+        String [] matr = matricula.split("-");
+        ArrayList<String> alfa = new ArrayList<>();
+        for (char i=65;i<91;i++){
+            alfa.add(String.valueOf(i));
+        }
+        if(matr.length==2){
+            if(matr[0].length() == 3 && (matr[1].length()==4||matr[1].length()==3)){
+                b = true;
+                a=true;
+                String[] cars = matr[0].split("");
+                String[] digs = matr[1].split("");
+                for(String c : cars){
+                    a = a && alfa.contains(c);
+                }
+                for(String d : digs){
+                    b = b && (isNumeric(d)||d.equals("0"));
+                }
+            }
+        }
+  
+        if(a&&b){
+            Vehiculo vehi = new Vehiculo(matricula,"Jose");//Se crea vehiculo con un nombre ficticio solo para comparar
+            for(Residente r: ciud.getResidentes()){
+                ArrayList<Vehiculo> vehiculos = r.getVehiculos();
+                for(Vehiculo v: vehiculos){
+                    if(vehi.equals(v))return false;
+                }
+            }
+            return true;
+        }
+        return false;
+        
+    }
+    
 }
