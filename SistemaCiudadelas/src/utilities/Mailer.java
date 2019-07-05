@@ -53,10 +53,3 @@ public void enviarCorreo(String correo_d){
 }
     
 
-
-    
-
-            
-    
-    
-
