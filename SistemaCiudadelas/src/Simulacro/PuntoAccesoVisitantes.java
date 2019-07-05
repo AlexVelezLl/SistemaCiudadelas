@@ -69,16 +69,17 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
             System.out.print("¡Bienvenido! ¿Tiene codigo acceso?(si/no/SALIR: ");
             resp = sc.nextLine();
             if(resp.equals("SALIR")) return null;
+            if (!resp.equals("si")||!resp.equals("no")){
+                System.out.println("Ingrese una respuesta valida");
+            }             
         }while(!resp.equals("si")||!resp.equals("no"));
         if(resp.equals("no")){
-            String nombre, id, correo, nomResidente,mz,villa;
+            String nombre, id, nomResidente,mz,villa;
             Residente residente;
             System.out.print("Ingrese su nombre: ");
             nombre= sc.nextLine();
             System.out.print("Ingrese su identificacion: ");
-            id= sc.nextLine(); 
-            System.out.println("Ingrese su correo");
-            correo = sc.nextLine();
+            id= sc.nextLine();            
             do{
                 System.out.print("Ingrese el nombre del residente a visitar: ");
                 nomResidente = sc.nextLine();
@@ -94,11 +95,8 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
                 }
             }while(residente==null);
             String email= residente.getCorreo();
-            System.out.println("Se ha enviado un correo al Residente("+email+")");
-            Visitante visitante= new Visitante(nombre,id,correo,residente);
-            residente.registrarVisitante();
-            System.out.println("Su codigo de acceso es: "+ visitante.getCodigoAcceso().getCodigo());
-            resp="si";  
+            System.out.println("Se ha enviado un correo al Residente("+email+")");            
+            residente.registrarVisitante(nombre,id);                       
         }
         
         System.out.println("Ingrese su codigo de acceso: ");            
