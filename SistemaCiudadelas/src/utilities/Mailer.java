@@ -19,7 +19,7 @@ public class Mailer {
     private final String clave= "poo2019123"; 
     
     
-public void enviarCorreo(String correo_d){
+public void enviarCorreo(String correo_d, String message){
     
     String destino= correo_d;
     
@@ -36,18 +36,20 @@ public void enviarCorreo(String correo_d){
     
     try{
         mensaje.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
-        mensaje.setSubject("Credenciales"); 
-        mensaje.setText("Hola mundo");
+        mensaje.setSubject("No-reply"); 
+        mensaje.setText(message);
         Transport transport = session.getTransport("smtp"); 
         transport.connect("smtp.gmail.com",remitente,clave); 
         transport.sendMessage(mensaje, mensaje.getAllRecipients());
         transport.close();  
         System.out.println("Correo Enviado");
     }catch(Exception e){
-        e.printStackTrace(); 
+        System.out.println("Ha ingresado un correo no valido");; 
     
     }
 }
+
+
 
   
 }
