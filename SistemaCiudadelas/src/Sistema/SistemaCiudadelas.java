@@ -11,39 +11,63 @@ import java.time.LocalDateTime;
 import utilities.Persona;
 
 /**
- *
- * @author Alex Velez
+ *Clase que se modela como un sistema de ciudadelas
+ * @author joangie
  */
+
 public class SistemaCiudadelas {
     private ArrayList<Ciudadela> ciudadelas; 
     private ArrayList<Persona> usuarios;
-    
+
+    /**
+     * constructor vacio de ciudadelas
+     */
 public SistemaCiudadelas(){
     ciudadelas= new ArrayList();
     usuarios= new ArrayList();
     inicializarSistema(); 
 }
-
+    /**
+     * Obtiene un ArrayList de las ciudadelas
+     * @return ArrayList del tipo Ciudadela
+     */
     public ArrayList<Ciudadela> getCiudadelas() {
         return ciudadelas;
     }
-
+    /**
+     * Cambia el ArrayList de ciudadelas por otro
+     * @param c 
+     */
     public void setCiudadelas(ArrayList<Ciudadela> c){
         ciudadelas = c;
     }
+    /**
+     * Obtiene usuarios del sistema
+     * @return un Arraylist de usuarios del sistema
+     */
     public ArrayList<Persona> getUsuarios() {
         return usuarios;
     }
     
+    /**
+     * Agrega una ciudadela a la lista de ciudadelas
+     * @param c Objeto tipo Ciudadela que sera agregada
+     */
     public void agregarCiudadela(Ciudadela c){
         ciudadelas.add(c); 
     }
     
+    /**
+     * Agrega un usuario a la lista de usuarios
+     * @param u Objeto tipo Usuario que sera agregado
+     */
     public void agregarUsuario(Usuario u){
         usuarios.add(u); 
     }
 
-
+/**
+ * Inicializa el sistema con un superAdmin, un administrador de ciudadela, una ciudadela, 2 residentes y 5 casas
+ */
     public void inicializarSistema(){
         AdministradorDeSistema superAdmin = new AdministradorDeSistema();
         Residente resd1,resd2;
