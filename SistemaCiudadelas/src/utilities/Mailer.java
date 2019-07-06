@@ -18,10 +18,14 @@ public class Mailer {
     private final String remitente = "sistemaciudadelas@gmail.com";
     private final String clave= "poo2019123"; 
     
+
+/**
+ * Método que permitirá enviar correos 
+ * @param correo_d String que será el correo destino
+ * @param message  String con el mensaje que se enviará al correo destino
+ */    
+public void enviarCorreo(String destino, String message){
     
-public void enviarCorreo(String correo_d, String message){
-    
-    String destino= correo_d;
     
     Properties props= new Properties(); 
     props.put("mail.smtp.host","smtp.gmail.com"); //Servidor gmail
@@ -44,7 +48,7 @@ public void enviarCorreo(String correo_d, String message){
         transport.close();  
         System.out.println("Correo Enviado");
     }catch(Exception e){
-        System.out.println("Ha ingresado un correo no valido");; 
+        System.out.println("Ha ingresado un correo no valido"); 
     
     }
 }
