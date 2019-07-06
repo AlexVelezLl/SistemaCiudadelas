@@ -9,12 +9,14 @@ import Sistema.SistemaCiudadelas;
 import Sesion.*;
 import javax.swing.JOptionPane;
 import utilities.Persona;
+import java.time.LocalDateTime;
 /**
  * Clase Interfaz de usuario principal de Sistema Ciudadelas
  * @author Alex Velez
  */
 public class Index {
     public static void main(String[] args){
+        JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
         SistemaCiudadelas sistCiud = new SistemaCiudadelas();
         InicioSesion inicio = new InicioSesion();
         Garita gar = new Garita();
@@ -68,9 +70,13 @@ public class Index {
                                 Persona ciudAdminP;
                                 credenciales = inicio.preguntarCredenciales();
                                 ciudAdminP = inicio.validarIngreso(credenciales,sistCiud.getUsuarios(),"CiudAdmin");
-                                ciudAdmin = (AdministradorDeCiudadela)ciudAdminP;
-                                if(ciudAdmin!= null){
-                                    inicio.mostrarOpciones(ciudAdmin, sistCiud);
+                                ciudAdmin = (AdministradorDeCiudadela)ciudAdminP;                                                            
+                                if(ciudAdmin!= null){                  
+                                    if (LocalDateTime.now().isBefore(ciudAdmin.getfFin()) && LocalDateTime.now().isAfter(ciudAdmin.getfInicio())) {
+                                        inicio.mostrarOpciones(ciudAdmin, sistCiud);                                        
+                                    }else{
+                                        JOptionPane.showMessageDialog(null,"El usuario no se encuentra dentro del periodo de administracion");
+                                    }
                                 }else{
                                     JOptionPane.showMessageDialog(null,"Usuario o contraseña incorrectos");
                                 }
