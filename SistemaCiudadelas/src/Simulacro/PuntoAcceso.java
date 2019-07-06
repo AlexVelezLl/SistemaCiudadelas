@@ -12,24 +12,44 @@ import Sistema.CodigoAcceso;
 import Sistema.Visitante;
 import utilities.Persona;
 /**
- *
+ * Clase usada para definir el comportamiento basico de punto acceso
+ * @author Valeria Barzola
  * @author Alex Velez
  */
 public abstract class PuntoAcceso {
     protected Ciudadela ciudadela;
     
-    
+    /**
+     * Metodo abstracto
+     */
     public abstract RegistroIngreso comprobarAcceso();
+    
+    /**
+     * Constructor de un punto de acceso de una ciudadela
+     * @param ciudadela 
+     */
     public PuntoAcceso(Ciudadela ciudadela){
         this.ciudadela = ciudadela;
     }
-    
-    //funcion que permita calcular el tiempo en segundos entre dos instantes.
+    /**
+     * Metodo que calcula el tiempo entre dos instantes.
+     * @param t1 tiempo 1
+     * @param t2 tiempo 2
+     * @return tiempo transcurrido
+     */  
     public double CalcularTiempo(LocalTime t1, LocalTime t2  ){
         Duration duracion = Duration.between(t1,t2);
         return duracion.getSeconds();                                     
     }
     
+    
+    /**
+     * Metodo que busca un residente
+     * @param nombre
+     * @param manzana
+     * @param villa
+     * @return el residente con los atributos especificados
+     */
     public Residente ObtenerResidente(String nombre, String manzana, String villa){
         for (Residente r : ciudadela.getResidentes()){
         if(r.getNombre().equals(nombre) && r.getCasa().getManzana().equals(manzana) 
@@ -40,7 +60,12 @@ public abstract class PuntoAcceso {
         return null;
     }
     
-    //Sobrecarga de metodos. Se puede acceder a un residente desde distintos atrbutos
+    /**
+     * Sobrecarga de metodo. Obtiene el residente desde su id, numero de cedula
+     * @param numCedula
+     * @param PinAcceso
+     * @return residente con los atributos especificados
+     */
     public Residente ObtenerResidente(String numCedula, String PinAcceso ){
         for (Residente r : ciudadela.getResidentes()){
             if (r.getId().equals(numCedula)&& r.getPinAcceso().equals(PinAcceso)) {
@@ -50,7 +75,12 @@ public abstract class PuntoAcceso {
         return null;
     }
     
-    //Sobrecarga del metodo. Obtener el residente desde su vehiculo
+    
+    /**
+     * Sobrecarga del metodo. Obtiente el residente desde su vehiculo    
+     * @param matricula
+     * @return el residente con el atributo especificado
+     */
     public Residente ObtenerResidente(String matricula){
         for (Residente r : ciudadela.getResidentes()){
             if (r.getVehiculos().contains(matricula)){
@@ -61,7 +91,11 @@ public abstract class PuntoAcceso {
 
     }
     
-
+    /**
+     * Metodo para obtener un residente por el codigo
+     * @param codigo
+     * @return el residente con el atributo especificado
+     */
     public Residente ObtenerResidenteporCodigo(String codigo){
         for(Residente r: ciudadela.getResidentes()){
             for(CodigoAcceso c: r.getCodigosAcceso())
@@ -74,6 +108,12 @@ public abstract class PuntoAcceso {
         return null;
     }
     
+    
+    /**
+     * Metodo para obtener el visitante por el codigo 
+     * @param codigo
+     * @return el visitante con el atributo especificado
+     */
     public Visitante ObtenerVisitante(String codigo){
         for(Residente r: ciudadela.getResidentes()){
             for(Persona v: r.getVisitantes()){
