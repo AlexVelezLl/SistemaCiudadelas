@@ -21,7 +21,7 @@ public class Mailer {
 
 /**
  * Método que permitirá enviar correos 
- * @param correo_d String que será el correo destino
+ * @param destino String que será el correo destino
  * @param message  String con el mensaje que se enviará al correo destino
  */    
 public void enviarCorreo(String destino, String message){
@@ -53,9 +53,5 @@ public void enviarCorreo(String destino, String message){
     }
 }
 
-
-
-  
 }
     
-
