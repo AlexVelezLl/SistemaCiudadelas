@@ -13,10 +13,18 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author CORE i7 ULTIMATE
+ * Clase que contiene herramientas utiles que serviran a lo largo del desarrollo del programa.
+ * @author Alex Velez
  */
 public class Validaciones {
+    /**
+     * Metodo que pregunta el id y valida que no se encuentre en un grupo determinado de un arreglo de personas 
+     * Por ejemplo, si se llama ValidarId(personas, "CiudAdmin"), entonces validara el id que pregunte dentro de las personas
+     * que son Administradores de ciudadelas, tipo podra tomar 3 valores: "CiudAdmin" o "Residente" o "Visitante".
+     * @param personas ArrayList de Peronas.
+     * @param tipo String del tipo de Persona que debe validar el id.
+     * @return String con el id de la persona.
+     */
     public static String ValidarId(ArrayList<Persona> personas,String tipo){
         Scanner sc = new Scanner(System.in);
         boolean idUnico;
@@ -50,7 +58,10 @@ public class Validaciones {
         }while(!idUnico);
         return id;
     }
-    
+    /**
+     * Metodo que pregunta una fecha y hora, y valida que los valores ingresados sean correctos.
+     * @return LocalDateTime de la fecha que pregunto.
+     */
     public static LocalDateTime consultarFecha(){
         Scanner sc = new Scanner(System.in);
         String year, month, day,hour;
@@ -73,7 +84,11 @@ public class Validaciones {
         }while(time==null);
         return time;
     }
-    
+    /**
+     * Metodo que valida si una cadena es numero o no.
+     * @param cadena String a verificar si es numero o no.
+     * @return Valor de verdad, true si la cadena si es cadena.
+     */
     public static boolean isNumeric(String cadena){
 	boolean a;
         try {
@@ -84,7 +99,12 @@ public class Validaciones {
 	}
         return a && (Integer.parseInt(cadena)>0);
     }
-    
+    /**
+     * Metodo que pregunta por pantalla una matricula, y verifica que esta sea valida, y ademas de que no este ingresada ya.
+     * @param matricula String con la matricula del vehiculo.
+     * @param ciud Ciudadela en la cual se va a verificar si esta o no registrada esa matricula.
+     * @return valor de verdad. true si la matricula es valida y no esta registrada en la ciudadela que se le envio.
+     */
     public static boolean matriculaValida(String matricula,Ciudadela ciud){
         boolean a,b;
         a = false;
@@ -109,7 +129,7 @@ public class Validaciones {
             }
         }
   
-        if(a&&b){
+        if(a&&b){//Si la matricula es valida, verificamos que esta no este registrada en la ciudadela
             Vehiculo vehi = new Vehiculo(matricula,"Jose");//Se crea vehiculo con un nombre ficticio solo para comparar
             for(Residente r: ciud.getResidentes()){
                 ArrayList<Vehiculo> vehiculos = r.getVehiculos();
