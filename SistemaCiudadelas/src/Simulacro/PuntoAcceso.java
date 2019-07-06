@@ -4,12 +4,10 @@
  * and open the template in the editor.
  */
 package Simulacro;
-import Sistema.Ciudadela;
+import Sistema.*;
 import java.time.Duration;
 import java.time.LocalTime;
 import Sesion.Residente;
-import Sistema.CodigoAcceso;
-import Sistema.Visitante;
 import utilities.Persona;
 /**
  * Clase usada para definir el comportamiento basico de punto acceso
@@ -18,15 +16,16 @@ import utilities.Persona;
  */
 public abstract class PuntoAcceso {
     protected Ciudadela ciudadela;
-    
+
     /**
-     * Metodo abstracto
+     * Metodo abstracto. Permitirá el acceso a la ciudadela, creando un registro del ingreso.
+     * @return un objeto RegistroIngreso con la informacion del ingreso realizado.
      */
     public abstract RegistroIngreso comprobarAcceso();
     
     /**
      * Constructor de un punto de acceso de una ciudadela
-     * @param ciudadela 
+     * @param ciudadela Objeto Ciudadela a la cual pertenecerá el Punto de Acceso.
      */
     public PuntoAcceso(Ciudadela ciudadela){
         this.ciudadela = ciudadela;
@@ -44,10 +43,10 @@ public abstract class PuntoAcceso {
     
     
     /**
-     * Metodo que busca un residente
-     * @param nombre
-     * @param manzana
-     * @param villa
+     * Metodo para obtener un residente con los parámetros nombre, manzana y villa.
+     * @param nombre String nombre con el nombre del residente
+     * @param manzana String manzana con la manzana de la casa del residente a ingresar/visitar.
+     * @param villa String villa con la villa de la casa del residente a ingresar/visitar.
      * @return el residente con los atributos especificados
      */
     public Residente ObtenerResidente(String nombre, String manzana, String villa){
@@ -62,8 +61,8 @@ public abstract class PuntoAcceso {
     
     /**
      * Sobrecarga de metodo. Obtiene el residente desde su id, numero de cedula
-     * @param numCedula
-     * @param PinAcceso
+     * @param numCedula String con el numero de cedula del Residente
+     * @param PinAcceso String con el pin de acceso del residente.
      * @return residente con los atributos especificados
      */
     public Residente ObtenerResidente(String numCedula, String PinAcceso ){
@@ -78,22 +77,23 @@ public abstract class PuntoAcceso {
     
     /**
      * Sobrecarga del metodo. Obtiente el residente desde su vehiculo    
-     * @param matricula
+     * @param matricula String con la mtricula del vehiculo del residente.
      * @return el residente con el atributo especificado
      */
     public Residente ObtenerResidente(String matricula){
         for (Residente r : ciudadela.getResidentes()){
-            if (r.getVehiculos().contains(matricula)){
-                return r;                
+            for(Vehiculo v: r.getVehiculos()){
+                if(v.getMatricula().equals(matricula)){
+                    return r;
+                } 
             }
         }
         return null;
-
     }
     
     /**
      * Metodo para obtener un residente por el codigo
-     * @param codigo
+     * @param codigo String con el codigo de acceso pertenecientes a un residente.
      * @return el residente con el atributo especificado
      */
     public Residente ObtenerResidenteporCodigo(String codigo){
@@ -111,8 +111,8 @@ public abstract class PuntoAcceso {
     
     /**
      * Metodo para obtener el visitante por el codigo 
-     * @param codigo
-     * @return el visitante con el atributo especificado
+     * @param codigo String con el codigo por el cual se accederá al visitante
+     * @return  visitante con el atributo especificado
      */
     public Visitante ObtenerVisitante(String codigo){
         for(Residente r: ciudadela.getResidentes()){
