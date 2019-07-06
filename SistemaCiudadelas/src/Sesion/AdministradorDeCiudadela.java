@@ -123,7 +123,7 @@ public class AdministradorDeCiudadela extends Usuario{
         }while(!op.equals("1")||!op.equals("2")||!op.equals("3"));
         
         for(RegistroIngreso reg : registros){//Filtrando la informacion
-            if(reg.getFIngreso().isAfter(f1) && reg.getFIngreso.isBefore(f2)){
+            if(reg.getFIngreso().isAfter(f1) && reg.getFIngreso().isBefore(f2)){
                 switch(op){
                     case "1":
                         if(reg.getTipoIngreso().contains("Residente")){
