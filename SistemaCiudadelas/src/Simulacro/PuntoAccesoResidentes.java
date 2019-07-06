@@ -7,14 +7,19 @@ package Simulacro;
 import java.time.LocalTime;
 import java.time.LocalDate;
 /**
+ * 
+ * 
  *
- * @author Alex Velez
  */
 
 import Sesion.Residente;
 import Sistema.Ciudadela;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+/**
+ * subClase que define el comportamiento del punto de acceso de un residente.
+ * @author Valeria Barzola
+ */
 public class PuntoAccesoResidentes extends PuntoAcceso{
     Scanner sc= new Scanner(System.in);
 
@@ -24,7 +29,10 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
 
     
 
-    
+    /**
+     * Metodo que permite el ingreso a la Ciudadela y crea un registro de este ingreso.
+     * @return registroIngreso en caso de ingresar.
+     */
     @Override
     public RegistroIngreso comprobarAcceso() {
         String modoacceso;
