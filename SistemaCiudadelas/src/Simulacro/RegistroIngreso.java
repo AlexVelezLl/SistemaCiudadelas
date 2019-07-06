@@ -8,8 +8,8 @@ import java.time.LocalDate;
 import Sesion.Residente;
 
 /**
- *
- * @author Alex Velez
+ * Clase que contiene la información del registro creado al ingresar.
+ * @author Valeria Barzola
  */
 public class RegistroIngreso {
     private LocalDate fingreso;
@@ -21,44 +21,79 @@ public class RegistroIngreso {
     private String nomVisitante;
     private String matricula;
 
+    
+   /**
+    * Metodo para obtener la fecha de ingreso.
+    * @return la fecha de ingreso.
+    */
     public LocalDate getFIngreso() {
         return fingreso;
     }
 
+    /**
+     * Metodo para obtener el tiempo que duró el proceso de ingreso.
+     * @return tiempo transcurrido en el ingreso.
+     */
     public double getTiempoIngreso() {
         return duracionIngreso;
     }
 
+    /**
+     * Metodo para obtener el tipo de ingreso (Residente peaton, residente vehiculo, visitante)
+     * @return tipo de ingreso.
+     */
     public String getTipoIngreso() {
         return tipoIngreso;
     }
 
+    /**
+     * Metodo para obtener el nombre del residente que accedió a la ciudadela, o el residente a visitar.
+     * @return nombre del residente
+     */
     public String getNomResidente() {
         return nomResidente;
     }
 
+    /**
+     * Metodo para obtener la manzana a ingresar.
+     * @return manzana de la casa.
+     */
     public String getMz() {
         return mz;
     }
 
+    /**
+     * Metodo para obtener la villa a ingresar. 
+     * @return villa de la casa.
+     */
     public String getVilla() {
         return villa;
     }
+      
 
+    /**
+     * Metodo para obtener el nombre del visitante que ingresa
+     * @return nomobre del visitante
+     */
     public String getNomVisitante() {
         return nomVisitante;
     }
 
+    
+    /**
+     * Metodo para obtener la matricula del vehiculo del residente que ingresa.
+     * @return matricula del residente.
+     */
     public String getMatricula() {
         return matricula;
     }
     
-    
-    
-    
-    
-
-    //Constructor para crear el registro de Ingreso de un peaton que es Residente
+    /**
+     * Constructor para crear el registro de Ingreso de un peaton que es Residente
+     * @param fingreso
+     * @param duracionIngreso
+     * @param residente 
+     */
     public RegistroIngreso(LocalDate fingreso, double duracionIngreso, Residente residente){
         this.fingreso=fingreso;
         this.duracionIngreso=duracionIngreso;
@@ -70,14 +105,26 @@ public class RegistroIngreso {
         
     }
     
-    //Constructor para crear el registro de Ingreso de un vehiculo Residente
+    /**
+     * Constructor para crear el registro de Ingreso de un vehiculo Residente
+     * @param fingreso
+     * @param duracionIngreso
+     * @param residente
+     * @param matricula 
+     */
     public RegistroIngreso(LocalDate fingreso, double duracionIngreso,Residente residente, String matricula){
         this(fingreso,duracionIngreso,residente);
         this.tipoIngreso="Residente.vehiculo";
         this.matricula=matricula;
     }
     
-    //Constructor para crear el registro de Ingreso de un visitante
+    /**
+     * Constructor para crear el registro de Ingreso de un visitante
+     * @param nomVisitante
+     * @param fingreso
+     * @param duracionIngreso
+     * @param residente 
+     */
     public RegistroIngreso(String nomVisitante, LocalDate fingreso, double duracionIngreso,Residente residente){
         this(fingreso,duracionIngreso,residente);
         this.tipoIngreso ="Visitante";
