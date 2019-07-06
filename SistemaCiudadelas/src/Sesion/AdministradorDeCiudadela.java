@@ -16,14 +16,21 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 import utilities.Validaciones;
 /**
- *
+ * Clase hija de Usuario que modela a un administrador de ciudadela.
  * @author Alex Velez
- */
+ */ 
 public class AdministradorDeCiudadela extends Usuario{
     private final String nombre, id, correo;
     private final LocalDateTime fInicio,fFin;
     private final Scanner sc;
-
+    /**
+     * Constructor de AdministradordeCiudadela cuyas credenciales se generaran automaticamente.
+     * @param nombre String con el nombre del Administrador de la Ciudadela
+     * @param identificacion String con el numero de cedula del Administrador de la Ciudadela
+     * @param correo String con la direccion de correo electronico del Administrador de laCiudadela
+     * @param fInicio LocalDateTime de la fecha de inicio de la administradocion del Administrador de laCiudadela
+     * @param fFin LocalDateTime de la fecha de fin de la administradocion del Administrador de laCiudadela
+     */
     public AdministradorDeCiudadela(String nombre, String identificacion, String correo, LocalDateTime fInicio,LocalDateTime fFin){
     super();
     this.nombre = nombre;
@@ -33,6 +40,16 @@ public class AdministradorDeCiudadela extends Usuario{
     this.fFin = fFin;
     sc = new Scanner(System.in);
     }
+    /**
+     * Constructor de AdministradordeCiudadela cuyas credenciales las toma como parametros.
+     * @param nombre String con el nombre del Administrador de la Ciudadela
+     * @param identificacion String con el numero de cedula del Administrador de la Ciudadela
+     * @param correo String con la direccion de correo electronico del Administrador de laCiudadela
+     * @param fInicio LocalDateTime de la fecha de inicio de la administradocion del Administrador de laCiudadela
+     * @param fFin LocalDateTime de la fecha de fin de la administradocion del Administrador de laCiudadela
+     * @param username El nombre de usuario que tendra el Administrador de la Ciudadela en el sistema
+     * @param password La contraseña que tendra el Administrador de la ciudadela en el sistema
+     */
     public AdministradorDeCiudadela(String nombre, String identificacion, String correo, LocalDateTime fInicio,LocalDateTime fFin,String username, String password){
         super(username,password);
         this.nombre = nombre;
@@ -42,45 +59,103 @@ public class AdministradorDeCiudadela extends Usuario{
         this.fFin = fFin;
         sc = new Scanner(System.in);
     }
+    /**
+     * Obtiene el nombre del Administrador de la Ciudadela
+     * @return String con el nombre del Administrador de la Ciudadela
+     */
     public String getNombre() {
         return nombre;
     }
-
+    /**
+     * Obtiene la Identificacion del Administrador de la Ciudadela
+     * @return String con la Identificacion del administrador de la Ciudadela
+     */
     @Override
     public String getId() {
         return id;
     }
-
+    /**
+     * Obtiene la direccion de correo electronico del Administrador de la Ciudadela
+     * @return String con el correo del Administrador de la Ciudadela
+     */
     public String getCorreo() {
         return correo;
     }
-
+    /**
+     * Obtiene la fecha de inicio de la administracion del Administrador de la Ciudadela
+     * @return LocalDateTime con la fecha de inicio la administracion del Administrador de la Ciudadela
+     */
     public LocalDateTime getfInicio() {
         return fInicio;
     }
-
+    /**
+     * Obtiene la fecha de fin de la administracion del Administrador de la Ciudadela
+     * @return LocalDateTime con la fecha de fin la administracion del Administrador de la Ciudadela
+     */
     public LocalDateTime getfFin() {
         return fFin;
     }
-    
+    /**
+     * Metodo que genera un archivo .csv con el reporte de las visitas que hayan hecho Personas en un determinado periodo.
+     * @param ciuds ArrayList con todas las ciudadelas que se encuentran registradas en el sistema
+     */
     public void generarReporteVisitas(ArrayList<Ciudadela> ciuds){
+        LocalDateTime f1,f2;
+        String op;
         Ciudadela c = getMineCiud(ciuds);
-        ArrayList<RegistroIngreso> registros = c.getIngresos();
+        ArrayList<RegistroIngreso> registros,registrosFilt;
+        registros = c.getIngresos();
+        registrosFilt = new ArrayList<>();
+        System.out.println("Ingrese la fecha de inicio del reporte: ");
+        f1 = Validaciones.consultarFecha();
+        System.out.println("Ingrese la fecha de fin del reporte:  ");
+        f2 = Validaciones.consultarFecha();
+        System.out.println("Tipos de ingreso: ");
+            System.out.println("1)Residente");
+            System.out.println("2)Visitante");
+            System.out.println("3)Todos");
+        do{
+            System.out.print("Que tipo de ingreso desea revisar?");
+            op = sc.nextLine();
+            if(!op.equals("1")||!op.equals("2")||!op.equals("3")){
+                JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor ingrese una valida");
+            }
+        }while(!op.equals("1")||!op.equals("2")||!op.equals("3"));
+        
+        for(RegistroIngreso reg : registros){//Filtrando la informacion
+            if(reg.getFIngreso().isAfter(f1) && reg.getFIngreso.isBefore(f2)){
+                switch(op){
+                    case "1":
+                        if(reg.getTipoIngreso().contains("Residente")){
+                            registrosFilt.add(reg);
+                        }
+                        break;
+                    case "2":
+                        if(reg.getTipoIngreso().equals("Visitante")){
+                            registrosFilt.add(reg);
+                        }
+                        break;
+                    default:
+                        registrosFilt.add(reg);
+                        break;
+                }
+            }
+        }
         String nomArchivo= "ReporteVisitas";
         LocalDateTime today= LocalDateTime.now(); 
         nomArchivo= nomArchivo+ today.getYear()+ today.getMonth()+ today.getDayOfMonth()+"-"+ today.getHour()+today.getMinute()+ today.getSecond()+".csv";
         try {
             File directorio=new File("Reportes"); 
-            directorio.mkdir();
+            directorio.mkdir();//Hace una nueva carpeta si Reportes aun no se ha creado
             FileWriter fw = new FileWriter("Reportes/"+nomArchivo);
             fw.append("Fecha Ingreso,TipoDeIngreso,Nombre del residente,Manzana,Villa,Nombre del visitante, Matricula\n");
-            for(RegistroIngreso r: registros){
+            for(RegistroIngreso r: registrosFilt){
                 String lineaCSV ="";
                 switch(r.getTipoIngreso()){
-                    case "Residente.Peaton":
+                    case "Residente.peaton":
                             lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+",-,-\n";
                         break;
-                    case "Residente.Vehiculo":
+                    case "Residente.vehiculo":
                         lineaCSV = r.getFIngreso()+",Residente,"+r.getNomResidente()+","+r.getMz()+","+r.getVilla()+",-,"+r.getMatricula()+"\n";
                         break;
                     case "Visitante":
@@ -98,6 +173,10 @@ public class AdministradorDeCiudadela extends Usuario{
         }
        
     }
+    /**
+     * Metodo que pregunta todos los datos de un residente para registrarlo en el sistema
+     * @param sist El sistema general de Sistema Ciudadelas
+     */
     public void registrarResidente(SistemaCiudadelas sist){
         ArrayList<Ciudadela> ciudadelas = sist.getCiudadelas();
         String nombreR, correoR, idR, telefono,mz,villa,pinAcceso,matricula,prop;
@@ -164,6 +243,11 @@ public class AdministradorDeCiudadela extends Usuario{
         sist.agregarUsuario(resid);
         JOptionPane.showMessageDialog(null,"El residente se ha creado con exito, sus credenciales son: "+resid+"Y se le ha enviado a su e-mail");
     }
+    /**
+     * Metodo que verifica cual es la ciudadela del administrador de ciudadela que lo invoque
+     * @param ciuds ArrayList con todas las ciudadelas que se encuentran registradas en el sistema
+     * @return La Ciudadela que tenga como administrador de ciudadela al administrador de ciudadela que invoque al metodo
+     */
     private Ciudadela getMineCiud(ArrayList<Ciudadela> ciuds){
         for(Ciudadela c : ciuds){
             if(c.getAdm().equals(this)){
