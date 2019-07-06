@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import utilities.Persona;
 
 /**
- *
+ * Clase de interfaz de usario cuando el usuario haya decidido iniciar sesion
  * @author Alex Velez
  */
 public class InicioSesion {
@@ -45,6 +45,10 @@ public class InicioSesion {
         }   
                     
     }
+    /**
+     * Metodo que pregunta por pantalla las credenciales del usuario
+     * @return Array de strings de 2 posiciones, en [0] usuario, y en [1] el password
+     */
     public String[] preguntarCredenciales(){
         String [] credenciales=new String[2];
         //Preguntando por las credenciales del Usuario:
@@ -55,7 +59,11 @@ public class InicioSesion {
         
         return credenciales;
     }  
-    
+    /**
+     * Muestra todas las opciones que puede hacer el Administrador del sistema, y ejectua la opcion que el usuario haya elegido hacer.
+     * @param superAdmin Persona que administra el sistema
+     * @param sist Sistema general de Sistema Ciudadelas
+     */
     public void mostrarOpciones(AdministradorDeSistema superAdmin, SistemaCiudadelas sist){
         String opcionHacer;
         System.out.println("Hola! "+superAdmin.getNombre()+" estas son las opciones que puedes realizar");
@@ -85,7 +93,11 @@ public class InicioSesion {
             }
         }while(!opcionHacer.equals("4"));
     }
-    
+    /**
+     * Muestra todas las opciones que puede hacer el Administrador de la ciudadela, y ejectua la opcion que el usuario haya elegido hacer.
+     * @param ciudAdmin Persona que administra la ciudadela
+     * @param sist Sistema general de Sistema Ciudadelas
+     */
     public void mostrarOpciones(AdministradorDeCiudadela ciudAdmin, SistemaCiudadelas sist){
     String opcionHacer;
     System.out.println("Hola! "+ciudAdmin.getNombre()+" estas son las opciones que puedes realizar");
@@ -115,6 +127,11 @@ public class InicioSesion {
             }
         }while(!opcionHacer.equals("4")); 
     }
+    /**
+     * Muestra todas las opciones que puede hacer el Residente, y ejectua la opcion que el usuario haya elegido hacer.
+     * @param residente Persona que es residente de alguna ciuadela
+     * @param sist Sistema general de Sistema Ciudadelas
+     */
     public void mostrarOpciones(Residente residente,SistemaCiudadelas sist){
     String opcionHacer;
     System.out.println("Hola! "+residente.getNombre()+" estas son las opciones que puedes realizar:  ");

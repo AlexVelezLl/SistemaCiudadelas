@@ -10,7 +10,7 @@ import Simulacro.*;
 import Sistema.Ciudadela;
 import javax.swing.JOptionPane;
 /**
- *
+ * Clase de interfaz de usuario cuando el usuario haya decidido hacer el simulacro de ingreso
  * @author Alex Velez
  */
 public class Garita {
@@ -92,6 +92,12 @@ public class Garita {
         }while(c==null&&!nomCiud.equals("SALIR"));
         
     }
+    /**
+     * Metodo para buscar la ciudadela por su nombre
+     * @param nombre String del nombre de la ciudadela
+     * @param ciudadelas ArrayList de todas las ciudadelas del sistema
+     * @return Ciudadela que tenga el mismo nombre del parametro
+     */
     private Ciudadela buscarCiud(String nombre, ArrayList <Ciudadela> ciudadelas){
         for(Ciudadela c: ciudadelas){
             if(c.getNombre().equals(nombre)){

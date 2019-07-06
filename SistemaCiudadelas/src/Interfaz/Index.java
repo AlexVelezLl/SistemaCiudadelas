@@ -10,7 +10,7 @@ import Sesion.*;
 import javax.swing.JOptionPane;
 import utilities.Persona;
 /**
- *
+ * Clase Interfaz de usuario principal de Sistema Ciudadelas
  * @author Alex Velez
  */
 public class Index {
@@ -18,7 +18,6 @@ public class Index {
         SistemaCiudadelas sistCiud = new SistemaCiudadelas();
         InicioSesion inicio = new InicioSesion();
         Garita gar = new Garita();
-        //Implementacion de la Interfaz Principal
         Scanner sc = new Scanner(System.in);
         String opcion;
         System.out.println("********************************************");
