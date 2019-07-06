@@ -28,6 +28,7 @@ private String nombre;
     private ArrayList<Vehiculo> vehiculos;
     private ArrayList<CodigoAcceso> codigosAcceso;
     private Scanner sc;
+    private Mailer mail; 
 
     public String getNombre() {
         return nombre;
@@ -81,6 +82,7 @@ private String nombre;
         vehiculos.add(vehiculo);
         codigosAcceso = new ArrayList<>();
         sc = new Scanner(System.in);
+        mail= new Mailer(); 
             
         
     }
@@ -97,9 +99,11 @@ private String nombre;
         codigosAcceso = new ArrayList<>();
         this.pinAcceso = pinAcceso;
         sc = new Scanner(System.in);
+        mail= new Mailer(); 
+
+        
     }
     
-     
     private CodigoAcceso generarCodigoAcceso(){
         LocalDateTime fIngreso;
         do{
@@ -129,6 +133,7 @@ private String nombre;
         return new CodigoAcceso(fIngreso,cod);
     }
     
+        
 
     public void registrarVisitante(){
         String idV, nomV, correoV;
@@ -142,11 +147,44 @@ private String nombre;
         residenteV= this;
         c = generarCodigoAcceso();
         visitantes.add(new Visitante(nomV,idV,correoV,c,residenteV));
+        String mensaje= "Saludos, estimado "+this.nombre+"/n"+"El codigo que se ha generado para su visita es el siguiente: "+c.getCodigo()+"/n"+"Equipo Sistema Ciudadelas"; 
+        mail.enviarCorreo(correo, mensaje);
         JOptionPane.showMessageDialog(null,"Se ha registrado al visitante exitosamente, el codigo de acceso ha sido enviado a su correo");
     }
+    public void registrarVisitante(String nombre, String cedula){
+        String correoV;
+        Residente residenteV; 
+        residenteV= this;
+        LocalDateTime fIngreso= LocalDateTime.now();
         
-       
+        String cod= "";
+        Random rnd=new Random();
+        boolean codUnic;
+        do{
+            codUnic = true;
+            for(int i=0;i<4;i++){
+                cod +=(char)(rnd.nextInt(26)+65);
+            }
+            for(int i=0;i<4;i++){
+                cod +=Integer.toString((int)(rnd.nextInt(9)));
+            }
+            for (CodigoAcceso a: codigosAcceso){
+                String code= a.getCodigo();
+                if(cod.equals(code)){
+                    codUnic = false;
+                }
+            }
+        }while(!codUnic);
+        
+        CodigoAcceso codi= new CodigoAcceso(fIngreso,cod);
     
+        visitantes.add(new Visitante(nombre,cedula,codi,residenteV));
+        String mensaje= "Saludos, estimado "+this.nombre+"/n"+"El codigo que se ha generado para su visita es el siguiente: "+codi.getCodigo()+"/n"+"Equipo Sistema Ciudadelas"; 
+        mail.enviarCorreo(residenteV.getCorreo(), mensaje); 
+        
+        
+    }
+       
     
     public void registrarVehiculo(ArrayList<Ciudadela> ciuds){
         Ciudadela ciud = getMineCiud(ciuds);
@@ -190,13 +228,14 @@ private String nombre;
 
     
     public void verListaDeVisitantes(){
+        System.out.println("Los visitantes activos hasta el momento: ");
         for(Persona v: visitantes){
             if(!((Visitante)v).getCodigoAcceso().isUsed()){
-            System.out.println(v);
+            System.out.println((Visitante)v);
             }
         }
     }
-    
+
     public Ciudadela getMineCiud(ArrayList<Ciudadela> ciuds){
         for(Ciudadela ciud : ciuds){
             if (ciud.getResidentes().contains(this)){
@@ -206,3 +245,4 @@ private String nombre;
         return null;
     }
 }
+
