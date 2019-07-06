@@ -147,7 +147,7 @@ private String nombre;
         residenteV= this;
         c = generarCodigoAcceso();
         visitantes.add(new Visitante(nomV,idV,correoV,c,residenteV));
-        String mensaje= "Saludos, estimado "+this.nombre+"/n"+"El codigo que se ha generado para su visita es el siguiente: "+c.getCodigo()+"/n"+"Equipo Sistema Ciudadelas"; 
+        String mensaje= "Saludos, estimado "+this.nombre+"\nEl codigo que se ha generado para su visita es el siguiente: "+c.getCodigo()+"\nAtentamente, \nEquipo Sistema Ciudadelas"; 
         mail.enviarCorreo(correo, mensaje);
         JOptionPane.showMessageDialog(null,"Se ha registrado al visitante exitosamente, el codigo de acceso ha sido enviado a su correo");
     }
@@ -179,7 +179,7 @@ private String nombre;
         CodigoAcceso codi= new CodigoAcceso(fIngreso,cod);
     
         visitantes.add(new Visitante(nombre,cedula,codi,residenteV));
-        String mensaje= "Saludos, estimado "+this.nombre+"/n"+"El codigo que se ha generado para su visita es el siguiente: "+codi.getCodigo()+"/n"+"Equipo Sistema Ciudadelas"; 
+        String mensaje= "Saludos, estimado "+this.nombre+"\n El codigo que se ha generado para su visita es el siguiente: "+codi.getCodigo()+"\nAtentamente, \nEquipo Sistema Ciudadelas"; 
         mail.enviarCorreo(residenteV.getCorreo(), mensaje); 
         
         
