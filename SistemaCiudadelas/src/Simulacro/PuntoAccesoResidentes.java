@@ -5,7 +5,7 @@
  */
 package Simulacro;
 import java.time.LocalTime;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 /**
  * 
  * 
@@ -31,7 +31,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
 
     /**
      * Metodo que permite el ingreso a la Ciudadela y crea un registro de este ingreso.
-     * @return registroIngreso en caso de ingresar.
+     * @return El registro de Ingreso generado con la infromacion del ingreso.
      */
     @Override
     public RegistroIngreso comprobarAcceso() {
@@ -60,7 +60,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
                     JOptionPane.showMessageDialog(null,"Acceso concedido");
                     LocalTime t2= LocalTime.now(); //instante en el que termina de ingresar el peaton.
                     //Si el ingreso es exitoso entonces se genera un RegistroIngreso
-                    LocalDate fingreso = LocalDate.now();
+                    LocalDateTime fingreso = LocalDateTime.now();
                     double duracionIngreso = CalcularTiempo(t1,t2);
                     RegistroIngreso registro= new RegistroIngreso(fingreso,duracionIngreso,residente);
                     return registro;  
@@ -75,7 +75,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
                     JOptionPane.showMessageDialog(null,"Acceso concedido");
                     LocalTime t2= LocalTime.now(); //instante en el que termina de ingresar el vehiculo. 
                     //Si el ingreso es exitoso entonces se genera un RegistroIngreso
-                    LocalDate fingreso = LocalDate.now();
+                    LocalDateTime fingreso = LocalDateTime.now();
                     double duracionIngreso = CalcularTiempo(t1,t2);
                     RegistroIngreso registro= new RegistroIngreso(fingreso,duracionIngreso,residente);
                     return registro;

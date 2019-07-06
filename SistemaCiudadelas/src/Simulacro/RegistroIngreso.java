@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Simulacro;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import Sesion.Residente;
 
 /**
@@ -12,7 +12,7 @@ import Sesion.Residente;
  * @author Valeria Barzola
  */
 public class RegistroIngreso {
-    private LocalDate fingreso;
+    private LocalDateTime fingreso;
     private double duracionIngreso;
     private String tipoIngreso;
     private String nomResidente;
@@ -26,7 +26,7 @@ public class RegistroIngreso {
     * Metodo para obtener la fecha de ingreso.
     * @return la fecha de ingreso.
     */
-    public LocalDate getFIngreso() {
+    public LocalDateTime getFIngreso() {
         return fingreso;
     }
 
@@ -94,7 +94,7 @@ public class RegistroIngreso {
      * @param duracionIngreso
      * @param residente 
      */
-    public RegistroIngreso(LocalDate fingreso, double duracionIngreso, Residente residente){
+    public RegistroIngreso(LocalDateTime fingreso, double duracionIngreso, Residente residente){
         this.fingreso=fingreso;
         this.duracionIngreso=duracionIngreso;
         this.tipoIngreso="Residente.peaton";
@@ -112,7 +112,7 @@ public class RegistroIngreso {
      * @param residente
      * @param matricula 
      */
-    public RegistroIngreso(LocalDate fingreso, double duracionIngreso,Residente residente, String matricula){
+    public RegistroIngreso(LocalDateTime fingreso, double duracionIngreso,Residente residente, String matricula){
         this(fingreso,duracionIngreso,residente);
         this.tipoIngreso="Residente.vehiculo";
         this.matricula=matricula;
@@ -125,7 +125,7 @@ public class RegistroIngreso {
      * @param duracionIngreso
      * @param residente 
      */
-    public RegistroIngreso(String nomVisitante, LocalDate fingreso, double duracionIngreso,Residente residente){
+    public RegistroIngreso(String nomVisitante, LocalDateTime fingreso, double duracionIngreso,Residente residente){
         this(fingreso,duracionIngreso,residente);
         this.tipoIngreso ="Visitante";
         this.nomVisitante=nomVisitante;                

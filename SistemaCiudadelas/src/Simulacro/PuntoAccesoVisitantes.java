@@ -25,7 +25,7 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
 
 
     /**
-     * Metodo que determina si un tiempo está entre cierto intervalo.
+     * Metodo que determina si un tiempo está entre cierto intervalo
      * @param time
      * @return valor de verdad 
      */
@@ -45,8 +45,8 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
         }
     
     /**
-     * Metodo que comprueba la validez de un código.
-     * @param codigoAcceso
+     * Metodo que comprueba la validez de un código
+     * @param codigoAcceso String del codigo de acceso que se verificará
      * @return valor de verdad
      */
     public boolean comprobarCodigo(String codigoAcceso){
@@ -64,8 +64,8 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
     }
     
     /**
-     * Metodo que permite el ingreso a la Ciudadela y crea un registro de este ingreso.
-     * @return registroIngreso en caso de ingresar.
+     * Metodo que permite el ingreso a la Ciudadela y crea un registro de este ingreso
+     * @return registroIngreso Objeto RegistroIngreso en caso de ingresar, con la informacion de ingreso.
      */
     
     @Override
@@ -114,7 +114,7 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
         boolean validez = comprobarCodigo(cod_acceso);
         if (validez== true) {                
             System.out.println("Acceso concedido");
-            LocalDate fingreso= LocalDate.now();
+            LocalDateTime fingreso= LocalDateTime.now();
             LocalTime t2= LocalTime.now();
             double duracionIngreso = CalcularTiempo(t1,t2);
             Residente residente = ObtenerResidenteporCodigo(cod_acceso);
