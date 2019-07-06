@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JOptionPane;
-import utilities.Validaciones;
+import utilities.*;
 /**
  * Clase hija de Usuario que modela a un administrador de ciudadela.
  * @author Alex Velez
@@ -179,16 +179,22 @@ public class AdministradorDeCiudadela extends Usuario{
      */
     public void registrarResidente(SistemaCiudadelas sist){
         ArrayList<Ciudadela> ciudadelas = sist.getCiudadelas();
-        String nombreR, correoR, idR, telefono,mz,villa,pinAcceso,matricula,prop;
+        String nombreR, correoR, idR, telefono,mz,villa,pinAcceso,matricula,prop,mensaje;
         Vehiculo v;
+        Mailer mail = new Mailer();
         String [] pin;
         boolean pinValido;
         Ciudadela c = getMineCiud(ciudadelas);
         idR = Validaciones.ValidarId(sist.getUsuarios(),"Residente");
         System.out.print("Ingrese el nombre del residente: ");
         nombreR = sc.nextLine();
-        System.out.print("Ingrese el correo del residente: ");
-        correoR = sc.nextLine();
+        do{
+            System.out.print("Ingrese el correo del residente: ");
+            correoR = sc.nextLine();
+            if(!correoR.contains("@")){
+                JOptionPane.showMessageDialog(null, "Usted ha ingresado un correo invalido, por favor ingrese un correo valido.");
+            }
+        }while(!correoR.contains("@"));
         System.out.print("Ingrese el telefono del residente: ");
         telefono = sc.nextLine();
         JOptionPane.showMessageDialog(null,"Para la ciuadela "+c.getNombre()+" tenmos las siguientes casas disponibles: ");
@@ -241,7 +247,10 @@ public class AdministradorDeCiudadela extends Usuario{
         Residente resid = new Residente(nombreR,correoR,idR,telefono,casaResidente,pinAcceso,v);
         casaResidente.setResidente(resid);
         sist.agregarUsuario(resid);
-        JOptionPane.showMessageDialog(null,"El residente se ha creado con exito, sus credenciales son: "+resid+"Y se le ha enviado a su e-mail");
+        mensaje = "Saludos! "+nombreR+".\nLe informamos que su registro a la ciudadela "+c.getNombre()+" se ha llevado con exito. "
+                + "Sus credenciales para ingresar al sistema sistema son: "+resid+".\n\nAtentamente,\nEquipo de SistemaCiudadelas.";
+        mail.enviarCorreo(correoR, mensaje);
+        JOptionPane.showMessageDialog(null,"El residente se ha creado con exito, sus credenciales se le ha enviado a su correo");
     }
     /**
      * Metodo que verifica cual es la ciudadela del administrador de ciudadela que lo invoque

@@ -88,7 +88,8 @@ public class AdministradorDeSistema extends Usuario{
     }
     public void registrarCiudadela(SistemaCiudadelas sistema){
         String nombreC, razonSocial, RUC, ubicacion, nomAdmin, correoAdmin, idAdmin;
-        String numManzanas, villasXManzana;
+        String numManzanas, villasXManzana,mensaje;
+        Mailer mail = new Mailer();
         LocalDateTime fInicioAdmin,fFinAdmin;
         AdministradorDeCiudadela ciudAdmin;
         System.out.print("Ingrese el nombre de la Ciudadela: ");
@@ -102,8 +103,13 @@ public class AdministradorDeSistema extends Usuario{
         idAdmin = Validaciones.ValidarId(sistema.getUsuarios(),"CiudAdmin");
         System.out.print("Ingrese el nombre del administrador: ");
         nomAdmin = sc.nextLine();
-        System.out.print("Ingrese el correo del administrador: ");
-        correoAdmin = sc.nextLine();
+        do{
+            System.out.print("Ingrese el correo del administrador: ");
+            correoAdmin = sc.nextLine();
+            if(!correoAdmin.contains("@")){
+                JOptionPane.showMessageDialog(null, "El correo que usted ingreso es invalido, por favor ingrese un correo valido");
+            }
+        }while(!correoAdmin.contains("@"));
         //Obetniendo fecha de inicio de administracion
         do{
             System.out.println("Ingrese la fecha de inicio de la administracion del Admin: ");
@@ -129,11 +135,12 @@ public class AdministradorDeSistema extends Usuario{
             }
         }while(!Validaciones.isNumeric(villasXManzana));
         ciudAdmin=new AdministradorDeCiudadela(nomAdmin, idAdmin, correoAdmin, fInicioAdmin,fFinAdmin);
-        Usuario u = ciudAdmin;
         Ciudadela c = new Ciudadela(nombreC, razonSocial, RUC, ubicacion,ciudAdmin,Integer.parseInt(numManzanas),Integer.parseInt(villasXManzana));
         sistema.agregarCiudadela(c);
-        sistema.agregarUsuario(u);
-        JOptionPane.showMessageDialog(null,"Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela son: "+u+", y se las ha enviado a su correo");
+        sistema.agregarUsuario(ciudAdmin);
+        mensaje = "Saludos! Estimado"+nomAdmin+".\nSe le informa que la cuidadela"+nombreC+" se ha registrado exitosamente en el sistema de SistemaCiudadelas. "
+                + "Las credenciales que se le ha asignado son: "+ciudAdmin+".\n\nAtentamente,\nEquipo de SistemaCiudadelas";
+        JOptionPane.showMessageDialog(null,"Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela se las ha enviado a su correo.");
     }
           
 }
