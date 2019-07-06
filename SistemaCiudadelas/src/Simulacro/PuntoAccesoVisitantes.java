@@ -13,8 +13,8 @@ package Simulacro;
     import java.time.LocalTime;
     import java.time.LocalDate;
 /**
- *
- * @author Alex Velez
+ * subClase que define el comportamiento del punto de acceso de un visitante.
+ * @author Valeria Barzola
  */
 public class PuntoAccesoVisitantes extends PuntoAcceso{
     Scanner sc = new Scanner(System.in);
@@ -24,8 +24,11 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
     }
 
 
-  
-
+    /**
+     * Metodo que determina si un tiempo está entre cierto intervalo.
+     * @param time
+     * @return valor de verdad 
+     */
     public boolean verificarHora(LocalDateTime time){
             LocalDateTime timeNow = LocalDateTime.now();
             timeNow=  LocalDateTime.of(timeNow.getYear(),timeNow.getMonth(),timeNow.getDayOfMonth(),timeNow.getHour(),0);
@@ -41,11 +44,11 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
             return false;
         }
     
-    
-        
-    
-    
-
+    /**
+     * Metodo que comprueba la validez de un código.
+     * @param codigoAcceso
+     * @return valor de verdad
+     */
     public boolean comprobarCodigo(String codigoAcceso){
         for (Residente r: ciudadela.getResidentes()){
             for (CodigoAcceso c: r.getCodigosAcceso()){
@@ -60,6 +63,10 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
         return false;
     }
     
+    /**
+     * Metodo que permite el ingreso a la Ciudadela y crea un registro de este ingreso.
+     * @return registroIngreso en caso de ingresar.
+     */
     
     @Override
     public RegistroIngreso comprobarAcceso() {
