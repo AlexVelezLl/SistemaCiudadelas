@@ -17,28 +17,43 @@ import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import utilities.*;
 /**
- *
+ * Clase hija de Usuario que modela a un administrador de ciudadela.
  * @author Alex Velez
  */
 public class AdministradorDeSistema extends Usuario{
     private final String nombre;
     private final String id;
+    Scanner sc;
     
-    @Override
-    public String getId(){
-        return id;
-    }
-    Scanner sc = new Scanner(System.in);
+    /**
+     * Constructor de la clase Administrador de sistema. Sus datos van a permanecer siempre constantes
+     */
     public AdministradorDeSistema(){
         super("SuperAdmin","SuperAdmin");
         nombre = "Rocio Mera";
         id = "0978654321";
+        sc = new Scanner(System.in);
+    }
+    /**
+     * Metodo que obtiene la identificacion del administrador del sistema
+     * @return String con el id del administrador
+     */
+    @Override
+    public String getId(){
+        return id;
     }
     
+    /**
+     * Metodo que obtiene el nombre del administrador del sistema
+     * @return String con el nombre del administrador del sistema
+     */
     public String getNombre(){
         return nombre;
     }
-    
+    /**
+     * Metodo que genera un archivo .csv con la informacion del tiempo de demora del acceso de residente y visitantes.
+     * @param ciudadelas ArrayList de todas las ciudadelas del sistema
+     */
     public void generarReporteUso(ArrayList<Ciudadela> ciudadelas){
         String nombreCiud,razonSocial;
         int numVis=0, numRes=0, tiempoVis=0,tiempoRes=0;
@@ -86,14 +101,23 @@ public class AdministradorDeSistema extends Usuario{
             e.printStackTrace();
         }
     }
+    /**
+     * Metodo en el que se pregunta por pantalla la informacion necesaria para registrar a una ciudadela.
+     * @param sistema Objeto que contiene al sistema general de sistema ciudadelas
+     */
     public void registrarCiudadela(SistemaCiudadelas sistema){
         String nombreC, razonSocial, RUC, ubicacion, nomAdmin, correoAdmin, idAdmin;
         String numManzanas, villasXManzana,mensaje;
         Mailer mail = new Mailer();
         LocalDateTime fInicioAdmin,fFinAdmin;
         AdministradorDeCiudadela ciudAdmin;
-        System.out.print("Ingrese el nombre de la Ciudadela: ");
-        nombreC = sc.nextLine();
+        do{
+            System.out.print("Ingrese el nombre de la Ciudadela: ");
+            nombreC = sc.nextLine();
+            if(verifiNomCiud(nombreC,sistema.getCiudadelas())){
+                JOptionPane.showMessageDialog(null,"El nombre de la ciudadela que usted ingreso ya se encuentra registrado en el sistema, por favor ingrese otro nombre");
+            }
+        }while(verifiNomCiud(nombreC,sistema.getCiudadelas()));
         System.out.print("Ingrese la Razon Social: ");
         razonSocial = sc.nextLine();
         System.out.print("Ingrese el RUC: ");
@@ -140,7 +164,19 @@ public class AdministradorDeSistema extends Usuario{
         sistema.agregarUsuario(ciudAdmin);
         mensaje = "Saludos! Estimado"+nomAdmin+".\nSe le informa que la cuidadela"+nombreC+" se ha registrado exitosamente en el sistema de SistemaCiudadelas. "
                 + "Las credenciales que se le ha asignado son: "+ciudAdmin+".\n\nAtentamente,\nEquipo de SistemaCiudadelas";
+        mail.enviarCorreo(correoAdmin, mensaje);
         JOptionPane.showMessageDialog(null,"Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela se las ha enviado a su correo.");
     }
-          
+    /**
+     * Metodo que verifica si el nombre de la ciuadela ya esta en uso por alguna otra ciudadela que este en el sistema.
+     * @param nom String del nombre de la ciudadela
+     * @param ciudadelas ArrayList de todas las ciudadelas del sistema
+     * @return Valor de verdad de la condicion, devuelve true si el nombre ya esta en uso
+     */
+    private boolean verifiNomCiud(String nom,ArrayList<Ciudadela>ciudadelas){
+        for(Ciudadela c: ciudadelas){
+            if(nom.equals(c.getNombre())) return true;
+        }
+        return false;
+    }
 }
