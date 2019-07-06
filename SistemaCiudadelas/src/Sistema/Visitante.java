@@ -31,14 +31,15 @@ public class Visitante implements Persona{
         this.codigoAcceso = codigoAcceso;
     }
 
-    public Visitante(String nombre, String id, String correo,Residente residenteAVisitar) {
+    
+    
+        public Visitante(String nombre, String id,CodigoAcceso cod,Residente residenteAVisitar) {
+            this.nombre = nombre;
+            this.id = id;
+            this.residenteAVisitar = residenteAVisitar;
+            this.codigoAcceso= cod; 
+        }
 
-        this.nombre = nombre;
-        this.id = id;
-        this.correo = correo;
-        this.residenteAVisitar = residenteAVisitar;
-        this.codigoAcceso= null; 
-    }
 
     public String getNombre() {
         return nombre;
@@ -68,3 +69,4 @@ public class Visitante implements Persona{
     }
     
 }
+
