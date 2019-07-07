@@ -72,7 +72,8 @@ public class InicioSesion {
             System.out.println("1)Registrar una nueva Ciudadela");
             System.out.println("2)Generar reporte de uso");
             System.out.println("3)Cambiar credenciales");
-            System.out.println("4)Cerrar sesion");
+            System.out.println("4)Mostrar informacion");
+            System.out.println("5)Cerrar sesion");
             System.out.print("¿Que desea hacer?: ");
             opcionHacer = sc.nextLine();
             switch(opcionHacer){
@@ -86,12 +87,15 @@ public class InicioSesion {
                     superAdmin.cambiarCredenciales(sist.getUsuarios());
                     break;
                 case "4":
+                    superAdmin.mostrarMiInformacion();
+                    break;
+                case "5":
                     JOptionPane.showMessageDialog(null,"Sesion Cerrada");
                     break;
                 default:
                     JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
-        }while(!opcionHacer.equals("4"));
+        }while(!opcionHacer.equals("5"));
     }
     /**
      * Muestra todas las opciones que puede hacer el Administrador de la ciudadela, y ejectua la opcion que el usuario haya elegido hacer.
@@ -106,7 +110,9 @@ public class InicioSesion {
             System.out.println("1)Registrar una nuevo Residente");
             System.out.println("2)Generar reporte de visitas");
             System.out.println("3)Cambiar credenciales");
-            System.out.println("4)Cerrar sesion");
+            System.out.println("4)Mostrar mi informacion");
+            System.out.println("5)Mostrar informacion de la ciudadela administrada");
+            System.out.println("6)Cerrar sesion");
             System.out.print("¿Que desea hacer?: ");
             opcionHacer = sc.nextLine();
             switch(opcionHacer){
@@ -120,12 +126,18 @@ public class InicioSesion {
                     ciudAdmin.cambiarCredenciales(sist.getUsuarios());
                     break;
                 case "4":
+                    ciudAdmin.mostrarMiInformacion();
+                    break;
+                case "5": 
+                    ciudAdmin.mostrarInfoCiudadela(sist.getCiudadelas());
+                    break;
+                case "6":
                     JOptionPane.showMessageDialog(null,"Sesion Cerrada");
                     break;
                 default:
                     JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
-        }while(!opcionHacer.equals("4")); 
+        }while(!opcionHacer.equals("6")); 
     }
     /**
      * Muestra todas las opciones que puede hacer el Residente, y ejectua la opcion que el usuario haya elegido hacer.
@@ -143,7 +155,8 @@ public class InicioSesion {
             System.out.println("4)Borrar visitante");
             System.out.println("5)Ver listado de visitantes");
             System.out.println("6)Cambiar Credenciales");
-            System.out.println("7)Cerrar sesion");
+            System.out.println("7)Mostrar mi informacion");
+            System.out.println("8)Cerrar sesion");
             System.out.print("¿Que desea hacer?: ");
             opcionHacer = sc.nextLine();
             switch(opcionHacer){
@@ -166,12 +179,14 @@ public class InicioSesion {
                     residente.cambiarCredenciales(sist.getUsuarios());
                     break;
                 case "7":
+                    residente.mostrarMiInformacion();
+                case "8":
                     JOptionPane.showMessageDialog(null,"Sesion cerrada");
                     break;
                 default:
                     JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
             }
-        }while(!opcionHacer.equals("7"));
+        }while(!opcionHacer.equals("8"));
         System.out.println("opcionHacer = " + opcionHacer);   
     }
 }
