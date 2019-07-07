@@ -36,7 +36,7 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
             timeNow=  LocalDateTime.of(timeNow.getYear(),timeNow.getMonth(),timeNow.getDayOfMonth(),timeNow.getHour(),0);
             time =  LocalDateTime.of(time.getYear(),time.getMonth(),time.getDayOfMonth(),time.getHour(),0);
             LocalDateTime timeD, timeA;
-            for(int i=1;i<=12;i++){
+            for(int i=0;i<=12;i++){
                 timeD = time.plusHours(i);
                 timeA = time.minusHours(i);
                 if(timeNow.equals(timeD)||timeNow.equals(timeA)){
@@ -116,6 +116,7 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
         
         System.out.print("Ingrese su codigo de acceso: ");            
         String cod_acceso= sc.nextLine();
+
         boolean validez = comprobarCodigo(cod_acceso);
         if (validez) {                
             System.out.println("Acceso concedido");
