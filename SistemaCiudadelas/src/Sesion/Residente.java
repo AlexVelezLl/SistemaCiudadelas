@@ -206,7 +206,7 @@ private String nombre;
         visitantes.add(new Visitante(nomV,idV,correoV,c,this));
         String mensaje= "Saludos, estimado "+this.nombre+"\nEl codigo que se ha generado para su visita es el siguiente: "+c.getCodigo()+"\nAtentamente, \nEquipo Sistema Ciudadelas"; 
         mail.enviarCorreo(correo, mensaje);
-        JOptionPane.showMessageDialog(null,"Se ha registrado al visitante exitosamente, el codigo de acceso ha sido enviado a su correo"+c.getCodigo());
+        JOptionPane.showMessageDialog(null,"Se ha registrado al visitante exitosamente, el codigo de acceso ha sido enviado a su correo");
     }
     
     /**

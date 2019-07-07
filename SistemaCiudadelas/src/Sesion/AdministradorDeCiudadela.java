@@ -251,7 +251,7 @@ public class AdministradorDeCiudadela extends Usuario{
         mensaje = "Saludos! "+nombreR+".\nLe informamos que su registro a la ciudadela "+c.getNombre()+" se ha llevado con exito. "
                 + "Sus credenciales para ingresar al sistema sistema son: "+resid+".\n\nAtentamente,\nEquipo de SistemaCiudadelas.";
         mail.enviarCorreo(correoR, mensaje);
-        JOptionPane.showMessageDialog(null,"El residente se ha creado con exito, sus credenciales se le ha enviado a su correo"+resid);
+        JOptionPane.showMessageDialog(null,"El residente se ha creado con exito, sus credenciales se le ha enviado a su correo");
     }
     /**
      * Metodo que verifica cual es la ciudadela del administrador de ciudadela que lo invoque

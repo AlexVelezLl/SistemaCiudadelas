@@ -58,7 +58,7 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
             for (Persona vis: r.getVisitantes()){
                 
                 c=((Visitante)vis).getCodigoAcceso();
-                if (c.getCodigo().equals(codigoAcceso)) {
+                if (codigoAcceso.equals(c.getCodigo())) {
                     boolean valido = verificarHora(c.getFechaIngreso());
                     if (valido) {
                         return true;                     
@@ -108,6 +108,8 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
                 }
             }while(residente==null);
             String email= residente.getCorreo();
+         
+       
             System.out.println("Se ha enviado un correo al Residente("+email+")");            
             residente.registrarVisitante(nombre,id);                       
         }

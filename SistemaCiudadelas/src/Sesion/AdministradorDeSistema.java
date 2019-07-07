@@ -166,7 +166,7 @@ public class AdministradorDeSistema extends Usuario{
         mensaje = "Saludos! Estimado"+nomAdmin+".\nSe le informa que la cuidadela"+nombreC+" se ha registrado exitosamente en el sistema de SistemaCiudadelas. "
                 + "Las credenciales que se le ha asignado son: "+ciudAdmin+".\n\nAtentamente,\nEquipo de SistemaCiudadelas";
         mail.enviarCorreo(correoAdmin, mensaje);
-        JOptionPane.showMessageDialog(null,"Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela se las ha enviado a su correo."+ciudAdmin);
+        JOptionPane.showMessageDialog(null,"Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela se las ha enviado a su correo.");
     }
     /**
      * Metodo que verifica si el nombre de la ciuadela ya esta en uso por alguna otra ciudadela que este en el sistema.
