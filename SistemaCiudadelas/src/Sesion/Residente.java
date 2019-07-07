@@ -333,7 +333,25 @@ private String nombre;
      * Metodo que muestra la informacion del residente
      */
     public void mostrarMiInformacion() {
-        //implementacion
+        System.out.println("Información de Residente");
+        System.out.println("Nombre: "+nombre);
+        System.out.println("Id: "+id);
+        System.out.println("Correo: "+correo);
+        System.out.println("pinAcceso: "+pinAcceso);
+        System.out.println("telefono: "+telefono);
+        System.out.println("Casa: "+casa);
+        System.out.println("Visitantes: ");
+        for (Persona v: visitantes){
+            System.out.println((Visitante)v);
+        }
+        System.out.println("Vehiculos: ");
+        for (Vehiculo c:vehiculos){
+            System.out.println(c);
+        }
+        System.out.println("Codigos de Acceso: ");
+        for (CodigoAcceso cod: codigosAcceso){
+            System.out.println(cod);
+        }
     }
 }
 
