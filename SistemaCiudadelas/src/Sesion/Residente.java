@@ -328,5 +328,12 @@ private String nombre;
         }
         return null;
     }
+    
+    /**
+     * Metodo que muestra la informacion del residente
+     */
+    public void mostrarMiInformacion() {
+        //implementacion
+    }
 }
 

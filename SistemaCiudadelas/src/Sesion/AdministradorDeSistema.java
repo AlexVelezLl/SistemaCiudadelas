@@ -179,4 +179,15 @@ public class AdministradorDeSistema extends Usuario{
         }
         return false;
     }
+    
+    @Override
+    /**
+     * Metodo que muestra por pantalla toda la informacion del administrador del sistema
+     */
+    public void mostrarMiInformacion() {  
+        System.out.println("\nInformacion del administrador de Sistema: ");
+        System.out.printf("%s: %-10s\n","Nombre",getNombre());
+        System.out.printf("%-6s: %-10s\n\n","Id",getId()); 
+    }
+
 }

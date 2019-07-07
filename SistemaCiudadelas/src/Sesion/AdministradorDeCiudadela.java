@@ -13,6 +13,7 @@ import Simulacro.RegistroIngreso;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JOptionPane;
 import utilities.*;
 /**
@@ -265,4 +266,37 @@ public class AdministradorDeCiudadela extends Usuario{
         }
         return null;
     }
+    
+    @Override
+    /**
+     * Metodo que muestra por pantalla toda la informacion perteneciente al administrador de ciudadela    
+     */
+    public void mostrarMiInformacion() {  
+        System.out.println();
+        String sfInicio = fInicio.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String sfFin = fFin.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        System.out.println("\nInformacion del administrador de ciudadelas: ");
+        System.out.printf("%s: %-10s\n","Nombre",getNombre());
+        System.out.printf("%-6s: %-10s\n","Id",getId());
+        System.out.printf("%s: %-10s\n","Correo",getCorreo());
+        System.out.println("Periodo de administracion   ");
+        System.out.printf("%-6s: %-10s\n","Desde",sfInicio);
+        System.out.printf("%-6s: %-10s\n\n","Hasta",sfFin);    
+    }
+    
+    /**
+     * Metodo que retorna toda la informacion de la ciudadela administrada por el administrador de ciudadelas
+     * @param ciuds ArrayList de Ciudadelas del sistema.
+     */
+    public void mostrarInfoCiudadela(ArrayList<Ciudadela> ciuds){
+        Ciudadela c= getMineCiud(ciuds);      
+        System.out.println("\nInformacion de la ciudadela: ");
+        System.out.printf("%s: %-10s\n","Nombre",c.getNombre());
+        System.out.printf("%-6s: %-10s\n","Razon Social",c.getRazonSocial());
+        System.out.printf("%s: %-10s\n","Ruc",c.getRUC());
+        System.out.printf("%s: %-10s\n","Ubicacion",c.getUbicacion());   
+        System.out.printf("%s: %-10d\n","Numero de casas:",c.getCasas().size()); 
+        System.out.printf("%s: %-10d\n\n","Numero de residentes",c.getResidentes().size());         
+    }
+
 }
