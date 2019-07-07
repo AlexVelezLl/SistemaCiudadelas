@@ -93,7 +93,10 @@ public abstract class Usuario implements Persona{
     public String toString() {
         return "username: " + username + ", password: " + password;
     }
-    
+    /**
+     * Metodo abstracto. Su implementacion mostrará la informacion dependiendo del usuario.
+     */
+    public abstract void mostrarMiInformacion();    
     /**
      * Cambiar credenciales de usuario, su username y password dependiendo de la opcion que escoja el usuario
      * @param usuarios ArrayList con todos los usuarios del sistema
