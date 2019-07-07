@@ -41,4 +41,14 @@ public class Vehiculo {
         }
         return false;
     }
+    
+    /**
+     * Metodo toString que mostrara por pantalla informacion del vehiculo
+     * @return String que contiene la matricula y nombre del propietario del vehiculo
+     */
+    @Override
+    public String toString() {
+        return  "matricula: " + matricula + ", nombre propietario: " + nomProp;
+    }
+    
 }
