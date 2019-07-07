@@ -72,7 +72,7 @@ public class Garita {
                                 System.out.println("2)Regresar al menu principal");
                                 System.out.print("¿Que desea hacer?");
                                 seguir = sc.nextLine();
-                                if(seguir.equals("1")){
+                                if(seguir.equals("2")){
                                     hacer="3";
                                 }else if(!seguir.equals("1")&&!seguir.equals("2")){
                                     JOptionPane.showMessageDialog(null,"Por favor ingrese una opcion que este en el menu");

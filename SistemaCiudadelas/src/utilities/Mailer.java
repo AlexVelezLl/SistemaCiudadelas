@@ -15,8 +15,8 @@ import javax.mail.internet.MimeMessage;
  * @author joangie
  */
 public class Mailer {
-    private final String remitente = "sistemaciudadelas@gmail.com";
-    private final String clave= "poo2019123"; 
+     private final String remitente = "sistemaciudadelas@gmail.com";
+     private final String clave= "poo2019123"; 
     
 
 /**

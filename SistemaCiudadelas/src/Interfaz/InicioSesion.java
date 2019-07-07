@@ -170,7 +170,7 @@ public class InicioSesion {
                     residente.cambiarPin();
                     break;
                 case "4":
-                    residente.borrarVisitante();
+                    boolean x = residente.borrarVisitante();
                     break;
                 case "5":
                     residente.verListaDeVisitantes();
@@ -180,6 +180,7 @@ public class InicioSesion {
                     break;
                 case "7":
                     residente.mostrarMiInformacion();
+                    break;
                 case "8":
                     JOptionPane.showMessageDialog(null,"Sesion cerrada");
                     break;

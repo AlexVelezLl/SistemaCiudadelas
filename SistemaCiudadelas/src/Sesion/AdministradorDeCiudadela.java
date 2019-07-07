@@ -118,10 +118,10 @@ public class AdministradorDeCiudadela extends Usuario{
         do{
             System.out.print("Que tipo de ingreso desea revisar?");
             op = sc.nextLine();
-            if(!op.equals("1")||!op.equals("2")||!op.equals("3")){
+            if(!op.equals("1")&&!op.equals("2")&&!op.equals("3")){
                 JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor ingrese una valida");
             }
-        }while(!op.equals("1")||!op.equals("2")||!op.equals("3"));
+        }while(!op.equals("1")&&!op.equals("2")&&!op.equals("3"));
         
         for(RegistroIngreso reg : registros){//Filtrando la informacion
             if(reg.getFIngreso().isAfter(f1) && reg.getFIngreso().isBefore(f2)){
@@ -234,14 +234,14 @@ public class AdministradorDeCiudadela extends Usuario{
             if(!pinValido){
                 JOptionPane.showMessageDialog(null,"Pin invalido, por favor asegurese de ingrese un pin de 4 digitos ");
             }
-        }while (pinValido);
+        }while (!pinValido);
         do{
             System.out.print("Ingrese la matricula de su vehiculo: ");
             matricula = sc.nextLine();
             if(!Validaciones.matriculaValida(matricula,getMineCiud(sist.getCiudadelas()))){
                 JOptionPane.showMessageDialog(null,"La matricula que usted ingreso es incorrecta, o esta siendo usada por otro residente, por favor ingrese una matricula valida");
             }
-        }while(!Validaciones.matriculaValida(villa,getMineCiud(sist.getCiudadelas())));
+        }while(!Validaciones.matriculaValida(matricula,getMineCiud(sist.getCiudadelas())));
         System.out.print("Ingrese el nombre del propietario del vehiculo: ");
         prop = sc.nextLine();
         v = new Vehiculo(matricula,prop);
@@ -251,7 +251,7 @@ public class AdministradorDeCiudadela extends Usuario{
         mensaje = "Saludos! "+nombreR+".\nLe informamos que su registro a la ciudadela "+c.getNombre()+" se ha llevado con exito. "
                 + "Sus credenciales para ingresar al sistema sistema son: "+resid+".\n\nAtentamente,\nEquipo de SistemaCiudadelas.";
         mail.enviarCorreo(correoR, mensaje);
-        JOptionPane.showMessageDialog(null,"El residente se ha creado con exito, sus credenciales se le ha enviado a su correo");
+        JOptionPane.showMessageDialog(null,"El residente se ha creado con exito, sus credenciales se le ha enviado a su correo"+resid);
     }
     /**
      * Metodo que verifica cual es la ciudadela del administrador de ciudadela que lo invoque

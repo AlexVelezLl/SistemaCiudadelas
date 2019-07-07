@@ -26,7 +26,6 @@ private String nombre;
     private Casa casa;
     private ArrayList<Persona> visitantes;
     private ArrayList<Vehiculo> vehiculos;
-    private ArrayList<CodigoAcceso> codigosAcceso;
     private Scanner sc;
     private Mailer mail; 
 
@@ -89,13 +88,6 @@ private String nombre;
         return vehiculos;
     }
 /**
- * Getter codigo de acceso
- * @return un arraylist del tipo codigo de acceso que tiene el residente
- */
-    public ArrayList<CodigoAcceso> getCodigosAcceso() {
-        return codigosAcceso;
-    }
-/**
  * Constructor vacio de residente
  */
     public Residente(){
@@ -120,7 +112,6 @@ private String nombre;
         visitantes = new ArrayList<>() ;
         vehiculos = new ArrayList<>();
         vehiculos.add(vehiculo);
-        codigosAcceso = new ArrayList<>();
         sc = new Scanner(System.in);
         mail= new Mailer(); 
             
@@ -148,7 +139,6 @@ private String nombre;
         visitantes = new ArrayList<>() ;
         vehiculos = new ArrayList<>();
         vehiculos.add(vehiculo);
-        codigosAcceso = new ArrayList<>();
         this.pinAcceso = pinAcceso;
         sc = new Scanner(System.in);
         mail= new Mailer(); 
@@ -162,6 +152,7 @@ private String nombre;
      * @return CodigoAcceso
      */
     private CodigoAcceso generarCodigoAcceso(){
+        System.out.println("Ingrese la fecha y hora que tiene planificada la visita: ");
         LocalDateTime fIngreso;
         do{
             fIngreso= Validaciones.consultarFecha();
@@ -180,8 +171,10 @@ private String nombre;
             for(int i=0;i<4;i++){
                 cod +=Integer.toString((int)(rnd.nextInt(9)));
             }
-            for (CodigoAcceso a: codigosAcceso){
-                String code= a.getCodigo();
+            for (Persona a: visitantes){
+                Visitante vis = (Visitante)a;
+                String code = vis.getCodigoAcceso().getCodigo();
+                
                 if(cod.equals(code)){
                     codUnic = false;
                 }
@@ -201,14 +194,19 @@ private String nombre;
         idV = Validaciones.ValidarId(visitantes, "Visitante");
         System.out.print("Nombre: ");
         nomV= sc.nextLine();
-        System.out.print("Correo: ");
-        correoV= sc.nextLine(); 
-        residenteV= this;
+        do{
+            System.out.print("Correo: ");
+            correoV= sc.nextLine(); 
+            if(!correoV.contains("@")){
+                JOptionPane.showMessageDialog(null, "El correo que usted ingreso es invalido, por favor ingrese un correo valido");
+            }
+        }while(!correoV.contains("@"));
+            
         c = generarCodigoAcceso();
-        visitantes.add(new Visitante(nomV,idV,correoV,c,residenteV));
+        visitantes.add(new Visitante(nomV,idV,correoV,c,this));
         String mensaje= "Saludos, estimado "+this.nombre+"\nEl codigo que se ha generado para su visita es el siguiente: "+c.getCodigo()+"\nAtentamente, \nEquipo Sistema Ciudadelas"; 
         mail.enviarCorreo(correo, mensaje);
-        JOptionPane.showMessageDialog(null,"Se ha registrado al visitante exitosamente, el codigo de acceso ha sido enviado a su correo");
+        JOptionPane.showMessageDialog(null,"Se ha registrado al visitante exitosamente, el codigo de acceso ha sido enviado a su correo"+c.getCodigo());
     }
     
     /**
@@ -218,9 +216,6 @@ private String nombre;
      * @param cedula String con el nombre de cedula de visitante
      */
     public void registrarVisitante(String nombre, String cedula){
-        String correoV;
-        Residente residenteV; 
-        residenteV= this;
         LocalDateTime fIngreso= LocalDateTime.now();
         
         String cod= "";
@@ -234,8 +229,10 @@ private String nombre;
             for(int i=0;i<4;i++){
                 cod +=Integer.toString((int)(rnd.nextInt(9)));
             }
-            for (CodigoAcceso a: codigosAcceso){
-                String code= a.getCodigo();
+           for (Persona a: visitantes){
+                Visitante vis = (Visitante)a;
+                String code = vis.getCodigoAcceso().getCodigo();
+                
                 if(cod.equals(code)){
                     codUnic = false;
                 }
@@ -244,15 +241,15 @@ private String nombre;
         
         CodigoAcceso codi= new CodigoAcceso(fIngreso,cod);
     
-        visitantes.add(new Visitante(nombre,cedula,codi,residenteV));
+        visitantes.add(new Visitante(nombre,cedula,codi,this));
         String mensaje= "Saludos, estimado "+this.nombre+"\n El codigo que se ha generado para su visita es el siguiente: "+codi.getCodigo()+"\nAtentamente, \nEquipo Sistema Ciudadelas"; 
-        mail.enviarCorreo(residenteV.getCorreo(), mensaje); 
-        
+        mail.enviarCorreo(correo, mensaje); 
+        JOptionPane.showMessageDialog(null,"Se ha registrado al visitante exitosamente, el codigo de acceso ha sido enviado a su correo"+codi.getCodigo());
         
     }
        /**
         * Registra un vehiculo por su placa y propietario 
-        * @param ciuds 
+        * @param ciuds ArrayList de todas las ciudadelas del sistema
         */
     
     public void registrarVehiculo(ArrayList<Ciudadela> ciuds){
@@ -275,44 +272,58 @@ private String nombre;
      * Cambia el pin de acceso que se le otorga al residente al registrarlo
      */
     public void cambiarPin() {
-        System.out.println("Ingrese pin: ");
-        boolean verificarPin= sc.hasNextInt();
-        String pinNuevo= sc.nextLine(); 
-        if(verificarPin==true&& pinNuevo.length()==4){
-            this.pinAcceso = pinNuevo;
+        String pin;
+        do{
+            System.out.println("Ingrese pin: ");
+            pin = sc.nextLine();
+            if(!pin.equals("SALIR")&&(!Validaciones.isNumeric(pin)||pin.length()!=4)){
+                JOptionPane.showMessageDialog(null, "Ha ingresado un pin incorrecto, por favor ingrese uno correcto, o escriba \"SALIR\" para salir ");
+            }
+        }while(!pin.equals("SALIR")&&(!Validaciones.isNumeric(pin)||pin.length()!=4));
+        if(!pin.equals("SALIR")){
+            JOptionPane.showMessageDialog(null,"Se ha cambiado el pin con exito");
         }
-        JOptionPane.showMessageDialog(null, "Su pin se ha cambiado con exito");
+             
     }
     
     /**
      * borra un visitante de la lita de visitantes 
      */
-    public void borrarVisitante(){
+    public boolean borrarVisitante(){
         System.out.print("Ingrese codigo de acceso: ");
         String idV; 
         idV = sc.nextLine();
+        boolean borrado=false;
         
         for(Persona vis : visitantes){
             String codigo_v= ((Visitante)vis).getCodigoAcceso().getCodigo();
-            if(id.equals(codigo_v)){
+            boolean used = ((Visitante)vis).getCodigoAcceso().isUsed();
+            if(idV.equals(codigo_v)&&!used){
                 visitantes.remove(vis);
+                JOptionPane.showMessageDialog(null,"Se ha borrado al visitante");
+                return true;
             }
         }
-        JOptionPane.showMessageDialog(null,"Se ha borrado al visitante");
+        JOptionPane.showMessageDialog(null,"No hay ningun visitante con ese codigo de acceso");
+        return false;
+        
     }
 
     /**
      * Se muestra por pantalla los visitantes activos hasta el momento
      */
     public void verListaDeVisitantes(){
-        System.out.println("Saludos estimado, "+nombre+"\nLos visitantes activos hasta el momento: ");
-        for(Persona v: visitantes){
-            if(!((Visitante)v).getCodigoAcceso().isUsed()){
-            System.out.println((Visitante)v);
+        if(visitantes.size()!=0){
+            System.out.println("Saludos estimado, "+nombre+"\nLos visitantes activos hasta el momento: ");
+            for(Persona v: visitantes){
+                if(!((Visitante)v).getCodigoAcceso().isUsed()){
+                System.out.println((Visitante)v);
+                }
             }
+        }else{
+             JOptionPane.showMessageDialog(null,"No tiene registrados visitantes activos");       
         }
     }
-    
     /**
      * Obtener mi ciudadela
      * Se obtiene la ciudadela en la que se encuentra registrado el residente
@@ -332,6 +343,7 @@ private String nombre;
     /**
      * Metodo que muestra la informacion del residente
      */
+    @Override
     public void mostrarMiInformacion() {
         System.out.println("Información de Residente");
         System.out.println("Nombre: "+nombre);
@@ -340,17 +352,9 @@ private String nombre;
         System.out.println("pinAcceso: "+pinAcceso);
         System.out.println("telefono: "+telefono);
         System.out.println("Casa: "+casa);
-        System.out.println("Visitantes: ");
-        for (Persona v: visitantes){
-            System.out.println((Visitante)v);
-        }
         System.out.println("Vehiculos: ");
         for (Vehiculo c:vehiculos){
             System.out.println(c);
-        }
-        System.out.println("Codigos de Acceso: ");
-        for (CodigoAcceso cod: codigosAcceso){
-            System.out.println(cod);
         }
     }
 }

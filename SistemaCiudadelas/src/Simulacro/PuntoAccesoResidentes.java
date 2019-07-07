@@ -44,7 +44,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
             System.out.print("¿Que desea hacer?: ");
             modoacceso = sc.nextLine();
             if (modoacceso.equals("1")) {
-                System.out.println(ciudadela.getResidentes());
+                
                 LocalTime t1= LocalTime.now(); //Instante en el que empieza a ingresar
                 System.out.print("¡Bienvenido! Por favor ingrese su numero de cédula: ");
                 String num_cedula = sc.nextLine();
@@ -77,7 +77,7 @@ public class PuntoAccesoResidentes extends PuntoAcceso{
                     //Si el ingreso es exitoso entonces se genera un RegistroIngreso
                     LocalDateTime fingreso = LocalDateTime.now();
                     double duracionIngreso = CalcularTiempo(t1,t2);
-                    RegistroIngreso registro= new RegistroIngreso(fingreso,duracionIngreso,residente);
+                    RegistroIngreso registro= new RegistroIngreso(fingreso,duracionIngreso,residente,matricula);
                     return registro;
                 }
                 JOptionPane.showMessageDialog(null,"Acceso denegado");

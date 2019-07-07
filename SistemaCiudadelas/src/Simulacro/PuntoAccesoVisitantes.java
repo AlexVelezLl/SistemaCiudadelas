@@ -11,7 +11,9 @@ package Simulacro;
     import Sistema.CodigoAcceso;
     import Sistema.Ciudadela;
     import java.time.LocalTime;
-    import java.time.LocalDate;
+import java.util.ArrayList;
+
+    import utilities.Persona;
 /**
  * subClase que define el comportamiento del punto de acceso de un visitante.
  * @author Valeria Barzola
@@ -50,13 +52,17 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
      * @return valor de verdad
      */
     public boolean comprobarCodigo(String codigoAcceso){
-        for (Residente r: ciudadela.getResidentes()){
-            for (CodigoAcceso c: r.getCodigosAcceso()){
+        CodigoAcceso c;
+        ArrayList<Residente> residentes = ciudadela.getResidentes();
+        for (Residente r: residentes){
+            for (Persona vis: r.getVisitantes()){
+                
+                c=((Visitante)vis).getCodigoAcceso();
                 if (c.getCodigo().equals(codigoAcceso)) {
-                boolean valido = verificarHora(c.getFechaIngreso());
-                if (valido== true) {
-                    return true;                     
-                }
+                    boolean valido = verificarHora(c.getFechaIngreso());
+                    if (valido) {
+                        return true;                     
+                    }
                 }
             }
         }
@@ -73,13 +79,13 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
         LocalTime t1 = LocalTime.now();
         String resp;
         do{
-            System.out.print("¡Bienvenido! ¿Tiene codigo acceso?(si/no/SALIR: ");
+            System.out.print("¡Bienvenido! ¿Tiene codigo acceso?(si/no/SALIR): ");
             resp = sc.nextLine();
             if(resp.equals("SALIR")) return null;
-            if (!resp.equals("si")||!resp.equals("no")){
+            if (!resp.equals("si")&&!resp.equals("no")){
                 System.out.println("Ingrese una respuesta valida");
             }             
-        }while(!resp.equals("si")||!resp.equals("no"));
+        }while(!resp.equals("si")&&!resp.equals("no"));
         if(resp.equals("no")){
             String nombre, id, nomResidente,mz,villa;
             Residente residente;
@@ -106,13 +112,10 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
             residente.registrarVisitante(nombre,id);                       
         }
         
-        System.out.println("Ingrese su codigo de acceso: ");            
+        System.out.print("Ingrese su codigo de acceso: ");            
         String cod_acceso= sc.nextLine();
-        while (cod_acceso.length()!= 8){
-            System.out.println("Ingresar un codigo de acceso valido (8 num)");                
-        }
         boolean validez = comprobarCodigo(cod_acceso);
-        if (validez== true) {                
+        if (validez) {                
             System.out.println("Acceso concedido");
             LocalDateTime fingreso= LocalDateTime.now();
             LocalTime t2= LocalTime.now();
@@ -126,6 +129,24 @@ public class PuntoAccesoVisitantes extends PuntoAcceso{
             
         System.out.println("Ingreso Denegado");
         return null;
+    }
+    
+    /**
+     * Metodo para obtener el visitante por el codigo 
+     * @param codigo String con el codigo por el cual se accederá al visitante
+     * @return  visitante con el atributo especificado
+     */
+    public Visitante ObtenerVisitante(String codigo){
+        for(Residente r: ciudadela.getResidentes()){
+            for(Persona v: r.getVisitantes()){
+                if (((Visitante)v).getCodigoAcceso().getCodigo().equals(codigo)) {
+                    return ((Visitante)v);
+                    
+                }
+            }
+        }
+        return null;
+        
     }
 
     

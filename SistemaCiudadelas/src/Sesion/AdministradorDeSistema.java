@@ -66,7 +66,7 @@ public class AdministradorDeSistema extends Usuario{
             File directorio=new File("Reportes"); 
             directorio.mkdir();
             FileWriter fw = new FileWriter("Reportes/"+archivo);
-            fw.append("Nombre De Ciudadela,Razon Social,Numero Ingreso Visitantes,Tiempo Ingreso Promedios Visitantes,Numero Ingreso Residentes, Tiempo Ingreso Promedios Visitantes\n");
+            fw.append("Nombre De Ciudadela,Razon Social,Numero Ingreso Visitantes,Tiempo Ingreso Promedios Visitantes(Segundos),Numero Ingreso Residentes, Tiempo Ingreso Promedios Residentes(Segundos)\n");
             for(Ciudadela c:ciudadelas){
                 nombreCiud = c.getNombre();
                 razonSocial = c.getRazonSocial();
@@ -124,6 +124,7 @@ public class AdministradorDeSistema extends Usuario{
         RUC = sc.nextLine();
         System.out.print("Ingrese la ubicacion de la ciudadela: ");
         ubicacion = sc.nextLine();
+        System.out.println("------Datosdel administrador------");
         idAdmin = Validaciones.ValidarId(sistema.getUsuarios(),"CiudAdmin");
         System.out.print("Ingrese el nombre del administrador: ");
         nomAdmin = sc.nextLine();
@@ -165,7 +166,7 @@ public class AdministradorDeSistema extends Usuario{
         mensaje = "Saludos! Estimado"+nomAdmin+".\nSe le informa que la cuidadela"+nombreC+" se ha registrado exitosamente en el sistema de SistemaCiudadelas. "
                 + "Las credenciales que se le ha asignado son: "+ciudAdmin+".\n\nAtentamente,\nEquipo de SistemaCiudadelas";
         mail.enviarCorreo(correoAdmin, mensaje);
-        JOptionPane.showMessageDialog(null,"Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela se las ha enviado a su correo.");
+        JOptionPane.showMessageDialog(null,"Se ha registrado la ciudadela "+nombreC+", y las credenciales del administrador de la ciudadela se las ha enviado a su correo."+ciudAdmin);
     }
     /**
      * Metodo que verifica si el nombre de la ciuadela ya esta en uso por alguna otra ciudadela que este en el sistema.

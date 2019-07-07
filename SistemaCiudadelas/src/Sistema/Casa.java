@@ -43,7 +43,7 @@ public class Casa {
      * @return String dque se mostrara por pantalla manzana, villa y si existe un residente
      */
     public String toString(){
-        return "Manzana: "+manzana+"Villa: "+villa+"Residente: "+residente; 
+        return "Manzana: "+manzana+" Villa: "+villa; 
     }
     /**
      * Constructor de casa 

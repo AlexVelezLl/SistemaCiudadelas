@@ -97,8 +97,11 @@ public abstract class PuntoAcceso {
      * @return el residente con el atributo especificado
      */
     public Residente ObtenerResidenteporCodigo(String codigo){
+        CodigoAcceso c = null;
         for(Residente r: ciudadela.getResidentes()){
-            for(CodigoAcceso c: r.getCodigosAcceso())
+            for(Persona vis: r.getVisitantes())
+                
+                c = ((Visitante)vis).getCodigoAcceso();
                 if (c.getCodigo().equals(codigo)) {
                     return r;
                     
@@ -108,25 +111,7 @@ public abstract class PuntoAcceso {
         return null;
     }
     
-    
-    /**
-     * Metodo para obtener el visitante por el codigo 
-     * @param codigo String con el codigo por el cual se accederá al visitante
-     * @return  visitante con el atributo especificado
-     */
-    public Visitante ObtenerVisitante(String codigo){
-        for(Residente r: ciudadela.getResidentes()){
-            for(Persona v: r.getVisitantes()){
-                if (((Visitante)v).getCodigoAcceso().getCodigo().equals(codigo)) {
-                    return ((Visitante)v);
-                    
-                }
-            }
-        }
-        return null;
-        
-    }
-    
+      
 }
     
         

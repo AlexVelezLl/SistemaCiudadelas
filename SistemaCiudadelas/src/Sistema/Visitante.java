@@ -115,7 +115,7 @@ public class Visitante implements Persona{
      * @return String que contendra nombre,id,correo, residente a visitar, codigo de acceso
      */
       public String toString() {
-        return "nombre: " + nombre + ", id: " + id + ", correo: " + correo + ", residenteAVisitar: " + residenteAVisitar.getNombre() + ", codigoAcceso: " + codigoAcceso;
+        return "Nombre: " + nombre + ", id: " + id + ", Correo: " + correo + ", Residente a visitar: " + residenteAVisitar.getNombre() + codigoAcceso;
     }
     
 }

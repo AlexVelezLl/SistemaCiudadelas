@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
  */
 public class Index {
     public static void main(String[] args){
-        JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida.");
         SistemaCiudadelas sistCiud = new SistemaCiudadelas();
         InicioSesion inicio = new InicioSesion();
         Garita gar = new Garita();

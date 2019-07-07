@@ -110,7 +110,7 @@ public abstract class Usuario implements Persona{
         boolean vieja;
         do{
             System.out.println("Opciones: ");
-            System.out.println("1. Cambiar username y password");
+            System.out.println("1.Cambiar username y password");
             System.out.println("2.Cambiar username");
             System.out.println("3.Cambiar password");
             System.out.println("4.Salir");
@@ -139,13 +139,13 @@ public abstract class Usuario implements Persona{
                         System.out.print("Ingrese nueva password: ");
                         String passwordN = sc.nextLine(); 
                         if(viejaPassword.equals(passwordN)){
-                                JOptionPane.showMessageDialog(null,"La password ingresada ha sido utilizada antes");
+                                System.out.println("La password ingresada ha sido utilizada antes");
                                 vieja= true; 
                         }
                         password= passwordN; 
                     }while(vieja); 
                      
-                     System.out.println("Sus credenciales se han cambiado exitosamente!");
+                    JOptionPane.showMessageDialog(null,"Sus credenciales se han cambiado exitosamente!");
                  break; 
 
                  
@@ -163,7 +163,7 @@ public abstract class Usuario implements Persona{
                     username = usernameN;
                     }while(used);
                     
-                    System.out.println("Su username se ha cambiado exitosamente!");
+                    JOptionPane.showMessageDialog(null,"Su username se ha cambiado exitosamente!");
                   break; 
 
                   
@@ -179,7 +179,7 @@ public abstract class Usuario implements Persona{
                         }
                     password= passwordN; 
                     }while(vieja); 
-                        System.out.println("Su clave se ha cambiado exitosamente!");
+                        JOptionPane.showMessageDialog(null,"Su clave se ha cambiado exitosamente!");
 
                 case "4":
                     
@@ -190,11 +190,9 @@ public abstract class Usuario implements Persona{
                     
                     
                 default:
-                    
-                    
                     JOptionPane.showMessageDialog(null,"No ha ingresado una opcion valida, por favor Ingrese una opcion valida."); 
             } 
-            }while(!opcion.equals("4"));
+            }while(!opcion.equals("4")&&!opcion.equals("3")&&!opcion.equals("2")&&!opcion.equals("1"));
 
     }
 }

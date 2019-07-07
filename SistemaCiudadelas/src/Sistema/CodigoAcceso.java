@@ -58,8 +58,14 @@ public class CodigoAcceso {
     public boolean isUsed() {
         return used;
     }
-    
-    
+    /**
+     * Metodo que retorna informacion de interes del codigo de acceso
+     * @return String con informacion del codigo de acces, la fecha para la que estuvo registrado ese codigo, y si esta usado o no.
+     */
+    @Override
+    public String toString(){
+        return "Codigo de acceso: "+codigo+", Fecha de ingreso: "+fechaIngreso+", Usado: "+used;
+    }
     
     
 }
